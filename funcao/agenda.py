@@ -15,15 +15,10 @@ def delete(id):
 def select(sql):
     con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
-    return resultado
 
-def mostrar(resultado):
-    for i in range(0, len(resultado)):
-        tabela = {
-            'id': f'{resultado[i][0]}',
-            'dataAgenda': f'{resultado[i][1]}',
-            'horarioAgenda': f'{resultado[i][2]}',
-            'cliente': f'{resultado[i][3]}'
-        }
-        
-        return f"{tabela['id']} | {tabela['dataAgenda']} | {tabela['horarioAgenda']} | {tabela['cliente']}"
+    coletar = ""
+
+    for r in resultado:
+       coletar += f"ID: {r[0]} | Data da consulta: {r[1]} | Horário da consulta: {r[2]} | "\
+                  f"Nome do cliente: {r[3]}"
+    return coletar

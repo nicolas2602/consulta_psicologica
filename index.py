@@ -16,11 +16,11 @@ telefone = "11996274701"
 # cl.delete(idCliente)
 
 # Exibir a tabela de cliente
-resultado_cliente = cl.select("select * from cliente")
-mostrar_cliente = cl.mostrar(resultado_cliente)
+resultado_cliente = cl.select("SELECT * FROM cliente")
 
-print("Tabela Cliente:")
-print(mostrar_cliente)
+print("\nTabela Cliente:")
+print("-"*85)
+print(resultado_cliente)
 
 ############### Tabela agenda #################
 
@@ -37,16 +37,16 @@ idCliente = 1
 sql = "SELECT IdAgenda, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, \
        TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda, \
        nomeCliente \
-       FROM agenda as ag \
-       INNER JOIN cliente as cl \
+       FROM agenda AS ag \
+       INNER JOIN cliente AS  cl \
        ON ag.fk_IdCliente = cl.IdCliente;"
 
 # Exibir a tabela de agendas
 resultado_agenda = ag.select(sql)
-mostrar_agenda = ag.mostrar(resultado_agenda)
 
-print("\nTabela Agenda:")
-print(mostrar_agenda)
+print("Tabela Agenda:")
+print("-"*85)
+print(resultado_agenda)
 
 ############### Tabela assunto #################
 
@@ -67,10 +67,10 @@ sql = "SELECT IdAssunto, descAssunto, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dat
 
 # Exibir a tabela de assuntos
 resultado_assunto = at.select(sql)
-mostrar_assunto = at.mostrar(resultado_assunto)
 
 print("\nTabela Assunto:")
-print(mostrar_assunto)
+print("-"*85)
+print(resultado_assunto)
 
 ############### Tabela pagamento ############### 
 
@@ -94,10 +94,10 @@ sql = "SELECT IdPagamento, valorPagamento, \
 
 # Exibir a tabela de pagamentos
 pagamento_resultado = pg.select(sql)
-mostrar_pagamento = pg.mostrar(pagamento_resultado)
 
-print("\nTabela Pagamento:")
-print(mostrar_pagamento)
+print("Tabela Pagamento:")
+print("-"*85)
+print(pagamento_resultado+"\n")
 
 # Fechar a conexão MySQL
 con.fechar()
