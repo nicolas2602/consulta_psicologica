@@ -16,3 +16,14 @@ def select(sql):
     con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
     return resultado
+
+def mostrar(resultado):
+    for i in range(0, len(resultado)):
+        tabela = {
+            'id': f'{resultado[i][0]}',
+            'nome': f'{resultado[i][1]}',
+            'email': f'{resultado[i][2]}',
+            'telefone': f'{resultado[i][3]}'
+        }
+        
+        return f"{tabela['id']} | {tabela['nome']} | {tabela['email']} | {tabela['telefone']}"

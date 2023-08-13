@@ -9,7 +9,6 @@ conexao = mysql.connector.connect(host=servidor, user=usuario, password=senha, d
 
 cursor = conexao.cursor()
 
-def insertCliente(nome, email, telefone):
-    cursor.execute(f"INSERT INTO cliente(nomeCliente, emailCliente, telefoneCliente) VALUES ('{nome}', '{email}', '{telefone}')")
-    conexao.commit()
-    
+def fechar():
+    cursor.close()
+    conexao.close()

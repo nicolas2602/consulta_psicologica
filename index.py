@@ -10,17 +10,17 @@ nome = "Eduardo"
 email = "eduardo_silva@gmail.com"
 telefone = "11996274701"
 
+### Inserir - Atualizar - Deletar ###
 # cl.insert(nome, email, telefone)
-
-# cl.update(id_cliente, nome, email, telefone)
-
+# cl.update(idCliente, nome, email, telefone)
 # cl.delete(idCliente)
 
-resultado = cl.select("select * from cliente")
+# Exibir a tabela de cliente
+resultado_cliente = cl.select("select * from cliente")
+mostrar_cliente = cl.mostrar(resultado_cliente)
 
 print("Tabela Cliente:")
-for i in resultado:
-    print(i)
+print(mostrar_cliente)
 
 ############### Tabela agenda #################
 
@@ -29,21 +29,24 @@ data = "2023-08-23"
 horario = "15:00:00"
 idCliente = 1
 
+### Inserir - Atualizar - Deletar ###
 # ag.insert(data, horario, idCliente)
-
 # ag.update(idAgenda, data, horario, idCliente)
-
 # ag.delete(idAgenda)
 
-sql = "select IdAgenda, DATE_FORMAT(dataAgenda, '%d/%m/%Y') as dataAgenda, \
-       TIME_FORMAT(horarioAgenda, '%H:%m') as horarioAgenda, fk_IdCliente \
-       from agenda"
+sql = "SELECT IdAgenda, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, \
+       TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda, \
+       nomeCliente \
+       FROM agenda as ag \
+       INNER JOIN cliente as cl \
+       ON ag.fk_IdCliente = cl.IdCliente;"
 
-resultado = ag.select(sql)
+# Exibir a tabela de agendas
+resultado_agenda = ag.select(sql)
+mostrar_agenda = ag.mostrar(resultado_agenda)
 
 print("\nTabela Agenda:")
-for i in resultado:
-    print(i)
+print(mostrar_agenda)
 
 ############### Tabela assunto #################
 
@@ -51,41 +54,50 @@ idAssunto = 3
 assunto = "Assunto 1"
 idAgenda = 1
 
+### Inserir - Atualizar - Deletar ###
 # at.insert(assunto, idAgenda)
-
-at.update(idAssunto, assunto, idAgenda)
-
+# at.update(idAssunto, assunto, idAgenda)
 # at.delete(idAssunto)
 
-sql = "SELECT * FROM assunto"
+sql = "SELECT IdAssunto, descAssunto, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, \
+              TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda \
+       FROM assunto AS an \
+       INNER JOIN agenda AS ag \
+       ON an.fk_IdAgenda = ag.IdAgenda;"
 
-resultado = at.select(sql)
+# Exibir a tabela de assuntos
+resultado_assunto = at.select(sql)
+mostrar_assunto = at.mostrar(resultado_assunto)
 
 print("\nTabela Assunto:")
-for i in resultado:
-    print(i)
+print(mostrar_assunto)
 
-############### Tabela pagamento #################
+############### Tabela pagamento ############### 
 
+# Inputs manuais
 idPag = 4
 valor = 50
 idAgenda = 1
 idStatus = 1
 
-# pg.insert(valor, idAgenda, idstatus)
-
-pg.update(idPag, valor, idAgenda, idStatus)
-
+### Inserir - Atualizar - Deletar ###
+# pg.insert(valor, idAgenda, idStatus)
+# pg.update(idPag, valor, idAgenda, idStatus)
 # pg.delete(idPag)
 
-sql = "SELECT * FROM pagamento"
+sql = "SELECT IdPagamento, valorPagamento, \
+       DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, \
+       TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda, descStatus \
+       FROM pagamento AS pg \
+       INNER JOIN agenda AS ag ON pg.fk_IdAgenda = ag.IdAgenda \
+       INNER JOIN status AS st ON pg.fk_IdStatus = st.IdStatus;"
 
-resultado = pg.select(sql)
+# Exibir a tabela de pagamentos
+pagamento_resultado = pg.select(sql)
+mostrar_pagamento = pg.mostrar(pagamento_resultado)
 
 print("\nTabela Pagamento:")
-for i in resultado:
-    print(i)
+print(mostrar_pagamento)
 
 # Fechar a conexão MySQL
-con.cursor.close()
-con.conexao.close()
+con.fechar()

@@ -1,3 +1,4 @@
+-- SQLBook: Code
 /* Criar o banco de dados consulta_psicologica */
 
 CREATE DATABASE consulta_psicologica;
@@ -150,3 +151,17 @@ UPDATE pagamento SET valorPagamento=45.00 WHERE IdPagamento=1;
 -- Excluir os dados da tabela pagamento
 
 DELETE FROM pagamento WHERE IdPagamento=1;
+
+-- Mostrar a tabela no geral
+SELECT IdAssunto, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda,
+        TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda,
+        nomeCliente, descAssunto, valorPagamento, descStatus
+FROM agenda AS ag
+inner join cliente as cl 
+on ag.fk_IdCliente = cl.IdCliente
+inner join assunto as an      
+on ag.IdAgenda = an.fk_IdAgenda
+inner join pagamento as pg
+on ag.IdAgenda = pg.fk_IdAgenda
+inner join status as st  
+on pg.fk_IdStatus = st.IdStatus;
