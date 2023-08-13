@@ -139,7 +139,8 @@ INSERT INTO pagamento(valorPagamento, fk_IdAgenda, fk_IdStatus) VALUES (50.00, 1
 
 -- Exibir os dados na tabela pagamento
 
-SELECT IdPagamento, valorPagamento, dataAgenda, horarioAgenda, descStatus
+SELECT IdPagamento, valorPagamento, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, 
+       TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda, descStatus
 FROM pagamento AS pg 
 INNER JOIN agenda AS ag ON pg.fk_IdAgenda = ag.IdAgenda
 INNER JOIN status AS st ON pg.fk_IdStatus = st.IdStatus;
@@ -167,7 +168,17 @@ INNER JOIN status AS st
 ON pg.fk_IdStatus = st.IdStatus;
 
 -- Campo de pesquisa
+# Cliente
 SELECT * FROM cliente 
 WHERE nomeCliente like '%Nicolas%' 
 OR emailCliente like '%nicolas%'
 OR telefoneCliente like '%11';
+
+# Agenda
+SELECT IdPagamento, valorPagamento, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, 
+       TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda, descStatus
+FROM pagamento AS pg 
+INNER JOIN agenda AS ag ON pg.fk_IdAgenda = ag.IdAgenda
+INNER JOIN status AS st ON pg.fk_IdStatus = st.IdStatus
+WHERE dataAgenda like '%2%' OR horarioAgenda like '%2%' OR
+      descStatus like '%Concluído%';
