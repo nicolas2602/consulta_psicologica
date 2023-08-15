@@ -1,4 +1,5 @@
-from Botao import *
+from Formulario import Formulario
+from Botao_Menu import *
 from Cadastro import *
 import flet as ft
 
@@ -27,28 +28,61 @@ def main(page: ft.Page):
     page.window_min_width = config_page['min_width']
     page.title = config_page['title']
 
+
+    form = Formulario()
+
+    
     #---- Funções de Cada botão ----
     def click1(e):
         print('Cadastro')
-        janela.controls[2].controls = cadastro(),
+        if (len(janela.controls) > 2):
+            janela.controls.pop(2)
+            janela.controls.append(form.get_desiner(e))
+
+        else:
+            janela.controls.append(form.get_desiner(e))
         page.update()
         
 
     def click2(e):
         print('Agendamento')
-        janela.controls[2].controls = ft.Text('Agendamento',color='#000000'),
+        if (len(janela.controls) > 2):
+            janela.controls.pop(2)
+            janela.controls.append(ft.Column(controls=[ft.Text('Agendamento',color='#000000')]))
+        
+        else:
+            janela.controls.append(ft.Column(controls=[ft.Text('Agendamento',color='#000000')]))
+
         page.update()
 
     
     def click3(e):
         print('Anotações')
-        janela.controls[2].controls = ft.Text('Anotações',color='#000000'),
+        if (len(janela.controls) > 2):
+            janela.controls.pop(2)
+            janela.controls.append(ft.Column(controls=[ft.Text('Anotações',color='#000000')]))
+        
+        else:
+            janela.controls.append(ft.Column(controls=[ft.Text('Anotações',color='#000000')]))
+
+        page.update()
+
+    def click4(e):
+        print('Pagamento')
+        if (len(janela.controls) > 2):
+            janela.controls.pop(2)
+            janela.controls.append(ft.Column(controls=[ft.Text('Pagamento',color='#000000')]))
+        
+        else:
+            janela.controls.append(ft.Column(controls=[ft.Text('Pagamento',color='#000000')]))
+
         page.update()
 
     #---- Criação dos botões----
     botao1 = menu_botao(config_botao['txt_botao1'],config_botao['icone_cadasto'],click1)
     botao2 = menu_botao(config_botao['txt_botao2'],config_botao['icone_agenda'],click2)
     botao3 = menu_botao(config_botao['txt_botao3'],config_botao['icone_anotacoes'],click3)
+    botao4 = menu_botao(config_botao['txt_botao4'],config_botao['icone_pagamento'],click4)
 
 
     # ---- Posicionamento dos itens da janela ----
@@ -60,6 +94,7 @@ def main(page: ft.Page):
                         botao1,
                         botao2,
                         botao3,
+                        botao4,
                         
                     ],              
                 ),
@@ -67,9 +102,9 @@ def main(page: ft.Page):
                 ft.VerticalDivider(color=ft.colors.GREEN_900),
                 
                 #---- body ----
-                ft.Column(controls=[ ft.Text("Body!",color="#000000")], alignment=ft.MainAxisAlignment.START, expand=True),
-            ],
-            expand=True,
+
+             ],
+             expand=True,
         )
     
     #print(janela.controls[2].controls)
