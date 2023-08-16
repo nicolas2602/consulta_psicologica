@@ -153,20 +153,6 @@ UPDATE pagamento SET valorPagamento=45.00 WHERE IdPagamento=1;
 
 DELETE FROM pagamento WHERE IdPagamento=1;
 
--- Mostrar a tabela no geral
-SELECT IdAssunto, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda,
-        TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda,
-        nomeCliente, descAssunto, valorPagamento, descStatus
-FROM agenda AS ag
-INNER JOIN cliente AS cl 
-ON ag.fk_IdCliente = cl.IdCliente
-INNER JOIN assunto AS an      
-ON ag.IdAgenda = an.fk_IdAgenda
-INNER JOIN pagamento AS pg
-ON ag.IdAgenda = pg.fk_IdAgenda
-INNER JOIN status AS st  
-ON pg.fk_IdStatus = st.IdStatus;
-
 -- Campo de pesquisa
 # Agenda em order alfabética
 SELECT IdAgenda, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda,
@@ -179,6 +165,27 @@ WHERE dataAgenda like '%%'
 OR horarioAgenda like '%%'
 OR nomeCliente like '%%'
 ORDER BY nomeCliente ASC;
+
+# Pesquisa em geral 
+SELECT IdAssunto, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda,
+        TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda,
+        nomeCliente, emailCliente, descAssunto, valorPagamento, descStatus
+FROM agenda AS ag
+INNER JOIN cliente AS cl 
+ON ag.fk_IdCliente = cl.IdCliente
+INNER JOIN assunto AS an      
+ON ag.IdAgenda = an.fk_IdAgenda
+INNER JOIN pagamento AS pg
+ON ag.IdAgenda = pg.fk_IdAgenda
+INNER JOIN status AS st  
+ON pg.fk_IdStatus = st.IdStatus
+WHERE nomeCliente like '%Nicolas%'
+    OR emailCliente like '%%'
+    OR descAssunto like '%%'
+    OR valorPagamento like '%%'
+    OR descStatus like '%%'
+    OR dataAgenda like '%%'
+    OR horarioAgenda like '%%';
 
 # Pesquisa de cliente
 SELECT * FROM cliente
