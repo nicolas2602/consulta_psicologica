@@ -180,16 +180,11 @@ OR horarioAgenda like '%%'
 OR nomeCliente like '%%'
 ORDER BY nomeCliente ASC;
 
-SELECT IdAgenda, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda,
-        TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda,
-        nomeCliente
-FROM agenda as ag 
-INNER JOIN cliente as cl 
-ON ag.fk_IdCliente = cl.IdCliente
-WHERE dataAgenda like '%%' 
-OR horarioAgenda like '%%'
-OR nomeCliente like '%%'
-ORDER BY nomeCliente DESC;
+# Pesquisa de cliente
+SELECT * FROM cliente
+WHERE nomeCliente like '%Nicolas%' 
+OR emailCliente like '%@gmail%'
+OR telefoneCliente like '%11%';
 
 # Pagamento
 SELECT IdPagamento, valorPagamento, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, 
