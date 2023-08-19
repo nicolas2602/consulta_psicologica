@@ -4,4 +4,5 @@ Sistema de consulta psicológica desenvolvida na linguagem de programação Pyth
 
 <p>Até o momento...</p>
 
-<img>![Captura de tela 2023-08-12 192908](https://github.com/nicolas2602/consulta_psicologica/assets/111767776/19413db9-eca2-48ad-ad2f-fd0b3e85be12)
+
+![Captura de tela de 2023-08-19 16-33-33](https://github.com/nicolas2602/consulta_psicologica/assets/111767776/4bb001ab-1fcd-4336-815a-b2a3d7e4298c)
