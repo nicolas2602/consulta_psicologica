@@ -6,14 +6,11 @@ import flet as ft
 
 class IconButton(ft.UserControl):
 
-
-    def __init__(self,icone = None, funcao = None):
-
-        self.__funcao = funcao
-
+    def __init__(self,icone = None, corIcone = None, funcao = None):
         self.__desiner = ft.IconButton(
             icon= icone,
-            on_click= self.__funcao
+            on_click= funcao,
+            icon_color = corIcone
         )
 
     def build(self):

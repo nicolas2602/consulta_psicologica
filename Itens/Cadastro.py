@@ -7,9 +7,17 @@ class Cadastro(ft.UserControl):
     def build(self):
 
 
-        self.addCadastro = Painel(self, "Novo Cadastro")
-        self.addBotao = IconButton(ft.icons.ADD, self.addCadastro.openPainel)
+        self.addCadastro = Painel("Novo Cadastro")
 
-        self.desiner = self.addBotao.build()
+        self.addBotao = IconButton(ft.icons.ADD, ft.colors.GREEN , self.openPainel)
 
-        return self.desiner  
+        self.addBotao.build()
+
+        #self.desiner = ft.IconButton(icon=ft.icons.ADD,on_click= self.openPainel)
+
+        return self.addBotao.build()  
+    
+    def openPainel(self,e):
+        self.page.dialog = self.addCadastro.build()
+        self.addCadastro.build().open = True
+        self.page.update()
