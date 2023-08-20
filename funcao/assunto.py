@@ -16,8 +16,8 @@ def select(sql):
     con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
     
-    coletar = ""
+    # coletar = ""
 
-    for r in resultado:
-        coletar += f"ID: {r[0]} | Assunto: {r[1]} | Data da consulta: {r[2]} | Horário da consulta: {r[3]}\n"
-    return coletar
+    # for r in resultado:
+    #     coletar += f"ID: {r[0]} | Assunto: {r[1]} | Data da consulta: {r[2]} | Horário da consulta: {r[3]}\n"
+    return resultado
