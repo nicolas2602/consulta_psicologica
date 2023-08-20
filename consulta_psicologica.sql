@@ -90,6 +90,8 @@ INSERT INTO assunto(descAssunto, fk_IdAgenda) VALUES ('Assunto 1', 1);
 SELECT IdAssunto, descAssunto, dataAgenda, horarioAgenda 
 FROM assunto AS an
 INNER JOIN agenda AS ag
+ON an.fk_IdAgenda = ag.IdAgenda
+INNER JOIN cliente AS cl
 ON an.fk_IdAgenda = ag.IdAgenda;
 
 -- Atualizar dados da tabela assunto
@@ -153,32 +155,47 @@ UPDATE pagamento SET valorPagamento=45.00 WHERE IdPagamento=1;
 
 DELETE FROM pagamento WHERE IdPagamento=1;
 
--- Mostrar a tabela no geral
+-- Campo de pesquisa
+# Agenda em order alfabética
+SELECT IdAgenda, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda,
+        TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda,
+        nomeCliente
+FROM agenda as ag 
+INNER JOIN cliente as cl 
+ON ag.fk_IdCliente = cl.IdCliente
+WHERE dataAgenda like '%%' 
+OR horarioAgenda like '%%'
+OR nomeCliente like '%%'
+ORDER BY nomeCliente ASC;
+
+# Pesquisa em geral 
 SELECT IdAssunto, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda,
         TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda,
-        nomeCliente, descAssunto, valorPagamento, descStatus
+        nomeCliente, descAssunto
 FROM agenda AS ag
 INNER JOIN cliente AS cl 
 ON ag.fk_IdCliente = cl.IdCliente
 INNER JOIN assunto AS an      
-ON ag.IdAgenda = an.fk_IdAgenda
-INNER JOIN pagamento AS pg
-ON ag.IdAgenda = pg.fk_IdAgenda
-INNER JOIN status AS st  
-ON pg.fk_IdStatus = st.IdStatus;
+ON ag.IdAgenda = an.fk_IdAgenda;
 
--- Campo de pesquisa
-# Cliente
-SELECT * FROM cliente 
+# Pesquisa de cliente
+SELECT * FROM cliente
 WHERE nomeCliente like '%Nicolas%' 
-OR emailCliente like '%nicolas%'
-OR telefoneCliente like '%11';
+OR emailCliente like '%@gmail%'
+OR telefoneCliente like '%11%';
 
-# Agenda
+# Pagamento
 SELECT IdPagamento, valorPagamento, DATE_FORMAT(dataAgenda, '%d/%m/%Y') AS dataAgenda, 
        TIME_FORMAT(horarioAgenda, '%H:%m') AS horarioAgenda, descStatus
 FROM pagamento AS pg 
 INNER JOIN agenda AS ag ON pg.fk_IdAgenda = ag.IdAgenda
 INNER JOIN status AS st ON pg.fk_IdStatus = st.IdStatus
-WHERE dataAgenda like '%2%' OR horarioAgenda like '%2%' OR
-      descStatus like '%Concluído%';
+WHERE descStatus = 'Concluído';
+
+-- Ordenar
+SELECT * FROM cliente 
+ORDER BY nomeCliente ASC;
+
+SELECT * FROM cliente 
+ORDER BY nomeCliente DESC;
+
