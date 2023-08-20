@@ -97,7 +97,7 @@ pagamento_resultado = pg.select(sql)
 
 print("Tabela Pagamento:")
 print("-"*85)
-print(pagamento_resultado+"\n")
+print(pagamento_resultado)
 
 # Fechar a conexão MySQL
 con.fechar()
