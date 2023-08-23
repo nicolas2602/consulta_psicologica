@@ -4,14 +4,14 @@ class VerificadorEmail:
 
     def verificar(self):
         if self.email.count("@") != 1:
-            return "O email deve conter exatamente um '@'."
+            return "O e-mail deve conter exatamente um '@'."
 
         parts = self.email.split("@")
         if len(parts) != 2:
-            return "Formato de email inválido."
+            return "Formato de e-mail inválido."
 
         if not parts[0] or not parts[1]:
-            return "O email deve conter um usuário e um domínio."
+            return "O e-mail deve conter um usuário e um domínio."
 
         domain_parts = parts[1].split(".")
         if len(domain_parts) < 2:
@@ -30,5 +30,5 @@ while True:
     if erro_email:
         print(erro_email)
     else:
-        print("Email válido!")
+        print("E-mail válido!")
         break
