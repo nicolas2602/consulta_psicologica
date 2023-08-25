@@ -1,6 +1,6 @@
 import flet as ft
 from Itens.Painel.Painel import Painel
-from Itens.components.buttons.IconButton import IconButton
+from Itens.components.buttons.AddButton import AddButton
 from Itens.Tabela.Tabela import Tabela
 
 class Cadastro(ft.UserControl):
@@ -12,7 +12,7 @@ class Cadastro(ft.UserControl):
 
         self.addCadastro = Painel(self.page,"Novo Cadastro").build()
 
-        self.addBotao = IconButton(ft.icons.ADD, ft.colors.GREEN , self.openPainel).build()
+        self.addBotao = AddButton(self.openPainel).build()
 
         self.tabela = Tabela(self.page).build()
 
@@ -26,8 +26,6 @@ class Cadastro(ft.UserControl):
                 self.tabela, 
             ],expand=True,horizontal_alignment= ft.CrossAxisAlignment.CENTER
         )
-
-
 
         return self.desiner
     
