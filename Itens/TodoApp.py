@@ -4,17 +4,22 @@ from Itens.Cadastro import Cadastro
 
 class TodoApp(ft.UserControl):
 
-    def build(self):
+    def __init__(self,page):
+        self.page = page
 
+
+    def build(self):
         self.menu = MenuPrincipal(self.cadastro, self.agendamentos,self.anotações,self.pagamentos)
 
-        self.bodyCadastro = Cadastro(self)
+        self.bodyCadastro = Cadastro(self.page).build()
 
-        self.desiner =ft.Column(
+        self.desiner =ft.Row(
                 controls=[
                     self.menu.build(),
-                    ft.Divider(color=ft.colors.GREEN_900),
-                ]
+                    #ft.Divider(color=ft.colors.GREEN_900),
+                    ft.VerticalDivider(color=ft.colors.GREEN_900)
+                ],
+                expand=True
             )
         
 
@@ -27,7 +32,7 @@ class TodoApp(ft.UserControl):
 
         else:
             self.desiner.controls.append(ft.Column([self.bodyCadastro]))
-        self.update()
+        self.page.update()
 
     def agendamentos(self,e):
         if (len(self.desiner.controls) > 2):
@@ -36,7 +41,7 @@ class TodoApp(ft.UserControl):
 
         else:
             self.desiner.controls.append(ft.Column([ft.Text("Teste2")]))
-        self.update()
+        self.page.update()
 
     def anotações(self,e):
         pass

@@ -22,16 +22,18 @@ class Formulario(ft.UserControl):
         return self.__desiner
 
 
-    # def __setValue(self,e):
-    #     self.__form_Nome.setValue(self.__nome)
-    #     self.__form_Email.setValue(self.__email)
-    #     self.__form_Telefone.setValue(self.__telefone)
+    def setValue(self,id,nome,email,tel):
+        self.__id = id
+        self.__form_Nome.setValue(nome)
+        self.__form_Email.setValue(email)
+        self.__form_Telefone.setValue(tel)
 
-    def get_value(self,e):
+    def get_value(self):
         return {
             'id':self.__id,
-            'nome': self.__nome,
-            'email': self.__email,
-            'telefone':self.__telefone,
+            'nome': self.__form_Nome.getValue(),
+            'email': self.__form_Email.getValue(),
+            'telefone':self.__form_Telefone.getValue(),
         }
+
     

@@ -8,14 +8,16 @@ class MenuPrincipal(ft.UserControl):
         self.__botao2 = MenuButon("Agendamentos",ft.icons.CALENDAR_MONTH, fAgendamentos)
         self.__botao3 = MenuButon("Anotações",ft.icons.EDIT_DOCUMENT, fAnotações)
         self.__botao4 = MenuButon("Pagamentos",ft.icons.MONETIZATION_ON, fPagamentos)
-        self.__desiner = ft.Row(
+        self.__desiner = ft.Column(
             [
                 self.__botao1.build(),
                 self.__botao2.build(),
                 self.__botao3.build(),
                 self.__botao4.build(),
             ],
-            alignment= ft.MainAxisAlignment.SPACE_EVENLY,
+            #alignment= ft.MainAxisAlignment.SPACE_EVENLY,
+            expand=False
+            
         )
 
     def build(self):

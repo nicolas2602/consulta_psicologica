@@ -1,4 +1,4 @@
-from Itens.TodoApp import *
+from Itens.teste2 import Teste
 import flet as ft
 
 config_page={
@@ -23,7 +23,7 @@ def main(page: ft.Page):
     page.update()
 
     # create application instance
-    app = TodoApp(page)
+    app = Teste(page)
 
     # add application's root control to the page
     page.add(app.build())

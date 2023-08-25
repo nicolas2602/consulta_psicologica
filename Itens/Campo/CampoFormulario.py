@@ -21,7 +21,7 @@ class CampoFormulario(ft.UserControl):
     def build(self):
         return self.__desiner
     
-    def getValue(self,e):
+    def getValue(self):
         return self.__desiner.value
     
     def setValue(self,valor):
