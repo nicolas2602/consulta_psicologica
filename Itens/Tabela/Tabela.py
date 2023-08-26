@@ -22,8 +22,8 @@ class Tabela(ft.UserControl):
             #expand=True,
             columns=[
                 ft.DataColumn(ft.Text('Id',selectable=True)),
-                ft.DataColumn(ft.Text('Nome',selectable=True)),
-                ft.DataColumn(ft.Text('Sobrenome',selectable=True)),
+                ft.DataColumn(ft.Row([ft.Text('Nome',selectable=True),ft.IconButton(icon=ft.icons.KEYBOARD_ARROW_DOWN_ROUNDED,on_click= self.invertTable)])),
+                #ft.DataColumn(ft.Text('Sobrenome',selectable=True)),
                 ft.DataColumn(ft.Text('E-mail',selectable=True)),
                 ft.DataColumn(ft.Text('Telefone',selectable=True),numeric=True),
                 ft.DataColumn(ft.Text("Ação",selectable=True)),
@@ -43,8 +43,8 @@ class Tabela(ft.UserControl):
         self.desiner.controls[0].rows.append((ft.DataRow(
             cells=[
                 ft.DataCell(ft.Text(lista[0],selectable=True)),
-                ft.DataCell(ft.Text(lista[1],selectable=True)),
-                ft.DataCell(ft.Text(lista[2],selectable=True)),
+                ft.DataCell(ft.Text(value=lista[1]+' '+lista[2],selectable=True)),
+                #ft.DataCell(ft.Text(lista[2],selectable=True)),
                 ft.DataCell(ft.Text(lista[3],selectable=True)),
                 ft.DataCell(ft.Text(lista[4],selectable=True)),
                 ft.DataCell(ft.Row([ft.IconButton(icon=ft.icons.EDIT, on_click= lambda e: self.getID(lista[0])),ft.VerticalDivider(),ft.IconButton(icon=ft.icons.DELETE,icon_color="red")])),
@@ -69,4 +69,10 @@ class Tabela(ft.UserControl):
         self.page.update()
         
 
+    def invertTable(self,e):
+        self.dados.reverse()
+        self.desiner.controls[0].rows=[]
+        self.montaTabela()
+        self.page.update()
 
+    

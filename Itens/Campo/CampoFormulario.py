@@ -15,7 +15,7 @@ class CampoFormulario(ft.UserControl):
             label_style= ft.TextStyle(color = ft.colors.GREEN_900),
             value= valor,
             border_color= ft.colors.GREEN_900,
-    
+            border_radius = 15
             )
 
     def build(self):
@@ -24,5 +24,5 @@ class CampoFormulario(ft.UserControl):
     def getValue(self):
         return self.__desiner.value
     
-    def setValue(self,valor):
+    def setValue(self,valor = None):
         self.__desiner.value = valor
