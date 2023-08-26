@@ -11,9 +11,9 @@ class Tabela(ft.UserControl):
 
     def build(self):
 
-        self.dados = [(1,'Eduardo','edu@gmail.com', 1992929292),(2,'Lucas','lucas@gmail.com', 19983553333), (3,'Caio','caio@gmail.com', 1932233228)]
+        self.dados = [(1,'Eduardo','edu@gmail.com', 1992929292),(2,'Lucas','lucas@gmail.com', 19983553333), (3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228),(3,'Caio','caio@gmail.com', 1932233228)]
 
-        self.desiner = ft.DataTable(
+        self.desiner =ft.Column([ ft.DataTable(
             border=ft.border.all(3,ft.colors.BLACK),
             border_radius= 10,
             vertical_lines= ft.border.BorderSide(1,'black'),
@@ -28,7 +28,7 @@ class Tabela(ft.UserControl):
                 ft.DataColumn(ft.Text("Ação")),
             ],
             rows=[],
-        )
+        )],expand= True, horizontal_alignment= ft.CrossAxisAlignment.CENTER, scroll= ft.ScrollMode.ALWAYS,)
         self.montaTabela()
 
         return self.desiner
@@ -39,9 +39,9 @@ class Tabela(ft.UserControl):
             self.page.update()
 
     def tabela(self,lista):
-        self.desiner.rows.append((ft.DataRow(
+        self.desiner.controls[0].rows.append((ft.DataRow(
             cells=[
-                ft.DataCell(ft.Text(lista[0])),
+                ft.DataCell(ft.Text(lista[0]),data=lista[0]),
                 ft.DataCell(ft.Text(lista[1])),
                 ft.DataCell(ft.Text(lista[2])),
                 ft.DataCell(ft.Text(lista[3])),

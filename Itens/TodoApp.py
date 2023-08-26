@@ -28,10 +28,10 @@ class TodoApp(ft.UserControl):
     def cadastro(self,e):
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(ft.Column([self.bodyCadastro]))
+            self.desiner.controls.append(self.bodyCadastro)
 
         else:
-            self.desiner.controls.append(ft.Column([self.bodyCadastro]))
+            self.desiner.controls.append(self.bodyCadastro)
         self.page.update()
 
     def agendamentos(self,e):
