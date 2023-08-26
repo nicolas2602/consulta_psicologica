@@ -3,12 +3,12 @@ import flet as ft
 
 class Painel(ft.UserControl):
 
-    def __init__(self,page,titulo = None, id =None, nome = None, email = None, Telefone = None):
+    def __init__(self,page,titulo = None, id =None, nome = None, sobrenome = None, email = None, Telefone = None):
         self.page = page
 
         self.__titulo = titulo
         
-        self.__form = Formulario(id, nome, email, Telefone)
+        self.__form = Formulario(id, nome, sobrenome, email, Telefone)
         
         self.__desiner = ft.AlertDialog(
             title=ft.Column(
@@ -29,13 +29,14 @@ class Painel(ft.UserControl):
     def build(self):
         return self.__desiner
 
-    def setPaine(self,id =None, nome = None, email = None, Telefone = None):
-        self.__form.setValue(id,nome,email,Telefone)
+    def setPaine(self,id =None, nome = None, sobrenome = None, email = None, Telefone = None):
+        self.__form.setValue(id,nome,sobrenome,email,Telefone)
         # self.__desiner.title.controls[1] = self.__form
         self.page.update()
 
     def fechar(self,e):
         self.__desiner.open = False
+        self.__form.setValue()
         self.page.update()
 
     def ok(self,e):
