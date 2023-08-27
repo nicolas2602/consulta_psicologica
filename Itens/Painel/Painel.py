@@ -1,11 +1,12 @@
 from  Itens.Formulario.Formulario import Formulario
+from  Itens.components.buttons.ActionButton import ActionButton
+from  Itens.Painel.PopUp import PopUp
 import flet as ft
 
 class Painel(ft.UserControl):
 
     def __init__(self,page,titulo = None, id =None, nome = None, sobrenome = None, email = None, Telefone = None):
         self.page = page
-
         self.__titulo = titulo
         
         self.__form = Formulario(id, nome, sobrenome, email, Telefone)
@@ -17,8 +18,8 @@ class Painel(ft.UserControl):
                 self.__form.build(),
                 ft.Row(
                     [
-                        ft.FilledButton(text='Cancelar',on_click= self.fechar),
-                        ft.FilledButton(text='OK',on_click= self.ok)
+                        ActionButton('Cancelar',ft.colors.RED,ft.icons.CANCEL_OUTLINED, self.fechar).build(),
+                        ActionButton('Salvar',ft.colors.GREEN_800,ft.icons.FILE_DOWNLOAD_DONE_ROUNDED,self.ok).build(),
                     ]
                 )   
             ]
@@ -43,10 +44,18 @@ class Painel(ft.UserControl):
         x = self.__form.get_value()
         print(x)
         self.fechar(e)
+        self.openPopUp("Sucesso", ft.colors.GREEN_700)
         
     def openPainel(self):
         self.page.dialog = self.__desiner
         self.__desiner.open = True
+        self.page.update()
+
+    def openPopUp(self,msg,cor):
+        self.pop = PopUp(msg,cor).build()
+        
+        self.page.snack_bar = self.pop
+        self.page.snack_bar.open = True
         self.page.update()
 
     def get(self):
