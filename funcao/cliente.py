@@ -1,11 +1,13 @@
 import funcao.conexao as con
 
-def insert(nome, email, telefone):
-    con.cursor.execute(f"INSERT INTO cliente(nomeCliente, emailCliente, telefoneCliente) VALUES ('{nome}', '{email}', '{telefone}')")
+def insert(nome, sobrenome, email, telefone):
+    con.cursor.execute(f"INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente) \
+                       VALUES ('{nome}', '{sobrenome}','{email}', '{telefone}')")
     con.conexao.commit()
 
-def update(id, nome, email, telefone):
-    con.cursor.execute(f"UPDATE cliente SET nomeCliente='{nome}', emailCliente='{email}', telefoneCliente='{telefone}' WHERE IdCliente={id}")
+def update(id, nome, sobrenome, email, telefone):
+    con.cursor.execute(f"UPDATE cliente SET nomeCliente='{nome}', sobrenomeCliente={sobrenome}, \
+                       emailCliente='{email}', telefoneCliente='{telefone}' WHERE IdCliente={id}")
     con.conexao.commit()
 
 def delete(id):
@@ -15,10 +17,5 @@ def delete(id):
 def select(sql):
     con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
-    
-    # coletar = ""
-
-    # for r in resultado:
-    #     coletar += f"ID: {r[0]} | Nome: {r[1]} | E-mail: {r[2]} | Telefone: {r[3]}\n"
 
     return resultado

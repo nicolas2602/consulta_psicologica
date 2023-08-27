@@ -1,11 +1,14 @@
 import funcao.conexao as con
 
-def insert(valor, IdAgenda, IdStatus):
-    con.cursor.execute(f"INSERT INTO pagamento(valorPagamento, fk_IdAgenda, fk_IdStatus) VALUES ({valor}, {IdAgenda}, {IdStatus})")
+def insert(valor, dataHora, IdConsulta, IdStatus, IdFormaPag):
+    con.cursor.execute(f"INSERT INTO pagamento(valorPagamento, dataHoraPag, fk_IdConsulta, fk_IdStatusPag, fk_IdFormaPag) VALUES \
+                                            ({valor}, '{dataHora}', {IdConsulta}, {IdStatus}, {IdFormaPag})")
     con.conexao.commit()
 
-def update(id, valor, IdAgenda, IdStatus):
-    con.cursor.execute(f"UPDATE pagamento SET valorPagamento={valor}, fk_IdAgenda={IdAgenda}, fk_IdStatus={IdStatus} WHERE IdPagamento={id}")
+def update(id, valor, dataHora, IdConsulta, IdStatus, IdFormaPag):
+    sql = f"UPDATE pagamento SET valorPagamento={valor}, dataHoraPag='{dataHora}', fk_IdAgenda={IdConsulta}, \
+           fk_IdStatusPag={IdStatus}, fk_IdFormaPag={IdFormaPag} WHERE IdPagamento={id}"
+    con.cursor.execute(sql)
     con.conexao.commit()
 
 def delete(id):
@@ -15,12 +18,7 @@ def delete(id):
 def select(sql):
     con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
-    
-    # coletar = ""
 
-    # for r in resultado:
-    #     coletar += f"ID: {r[0]} | Valor: R$ {r[1]} | Data da consulta: {r[2]} | "\
-    #                f"Horário da consulta: {r[3]} | Status: {r[4]}"
     return resultado
 
 
