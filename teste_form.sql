@@ -1,3 +1,7 @@
+CREATE DATABASE consulta_psicologica;
+
+USE consulta_psicologica;
+
 CREATE TABLE cliente(
     IdCliente INT PRIMARY KEY AUTO_INCREMENT,
     nomeCliente VARCHAR(100) NOT NULL,
