@@ -171,6 +171,7 @@ DELETE FROM pagamento WHERE IdPagamento=1;
 # Pesquisa de cliente
 SELECT * FROM cliente
 WHERE nomeCliente like '%Nicolas%' 
+OR sobrenomeCliente like '%%'
 OR emailCliente like '%@gmail%'
 OR telefoneCliente like '%11%';
 
