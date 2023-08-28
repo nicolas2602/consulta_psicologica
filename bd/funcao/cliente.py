@@ -1,4 +1,4 @@
-import funcao.conexao as con
+import bd.funcao.conexao as con
 
 def insert(nome, sobrenome, email, telefone):
     con.cursor.execute(f"INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente) \
@@ -6,7 +6,7 @@ def insert(nome, sobrenome, email, telefone):
     con.conexao.commit()
 
 def update(id, nome, sobrenome, email, telefone):
-    con.cursor.execute(f"UPDATE cliente SET nomeCliente='{nome}', sobrenomeCliente={sobrenome}, \
+    con.cursor.execute(f"UPDATE cliente SET nomeCliente='{nome}', sobrenomeCliente='{sobrenome}', \
                        emailCliente='{email}', telefoneCliente='{telefone}' WHERE IdCliente={id}")
     con.conexao.commit()
 
