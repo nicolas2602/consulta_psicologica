@@ -7,4 +7,5 @@ Sistema de consulta psicológica desenvolvida na linguagem de programação Pyth
 
 
 2. Modelo Lógico
-![image](https://github.com/nicolas2602/consulta_psicologica/assets/69517285/e0303d07-275c-4111-8306-8ed60262a9f1)
+![image](https://github.com/nicolas2602/consulta_psicologica/assets/69517285/b2b518ea-a331-4679-b8bc-767bddfcabf7)
+
