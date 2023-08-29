@@ -2,6 +2,7 @@ import flet as ft
 from enum import Enum
 
 class Cores(Enum):
+    '''Returna as cores do Projetos, ainda em teste...'''
   
     GREEN9 = ft.colors.GREEN_900,
     

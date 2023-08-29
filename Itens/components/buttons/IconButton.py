@@ -1,11 +1,8 @@
 import flet as ft
 
-
-#definir estilo para botão com função de icone
-
-
 class IconButton(ft.UserControl):
-
+    '''Botão Estilizado de Icone.'''
+    
     def __init__(self,icone = None, corIcone = None, funcao = None):
         self.__desiner = ft.IconButton(
             icon= icone,

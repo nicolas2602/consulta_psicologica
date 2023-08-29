@@ -2,6 +2,7 @@ import flet as ft
 from Itens.Campo.CampoFormulario import CampoFormulario
 
 class Formulario(ft.UserControl):
+    '''Cria um conjunto de capos de digitação para o Cadastro.'''
 
     def __init__(self, idBD = None, nome = None, sobrenome = None, email = None, telefone = None):
 
@@ -25,13 +26,14 @@ class Formulario(ft.UserControl):
 
 
     def setValue(self,id=None,nome=None,sobrenome=None,email=None,tel=None):
+        '''Seta os valores do Campo (auto preenchimento).'''
         self.__id = id
         self.__form_Nome.setValue(nome)
         self.__form_Sobrenome.setValue(sobrenome)
         self.__form_Email.setValue(email)
         self.__form_Telefone.setValue(tel)
 
-    def get_value(self):
+    def getValue(self):
         return {
             'id':self.__id,
             'nome': self.__form_Nome.getValue(),

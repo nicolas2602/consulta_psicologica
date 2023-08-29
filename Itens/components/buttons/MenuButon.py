@@ -1,10 +1,13 @@
 import flet as ft
 
 class MenuButon(ft.UserControl):
+    '''Botão Estilizado e dedicado para o Menu principal do projeto.'''
     
     def __init__(self, nome = None, icone = None, funcao = None):
 
         self.__desiner = ft.OutlinedButton(
+
+                #### Modificando o estilo visual do botão ####
                 style= ft.ButtonStyle(
                     color= {
                         ft.MaterialState.DEFAULT: ft.colors.BLACK,
@@ -16,6 +19,7 @@ class MenuButon(ft.UserControl):
                     shape= ft.RoundedRectangleBorder(radius = 10)
                 ),
 
+                #### Itens do Botão ####
                 content=ft.Container(
                     content=ft.Column( 
                         [    
@@ -24,9 +28,7 @@ class MenuButon(ft.UserControl):
                         ],
                         spacing=0,
                         alignment= ft.MainAxisAlignment.START,
-                        horizontal_alignment= ft.CrossAxisAlignment.CENTER,
-                    
-                        
+                        horizontal_alignment= ft.CrossAxisAlignment.CENTER,   
                         
                     ),
                     padding=ft.padding.all(2),

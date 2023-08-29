@@ -1,8 +1,10 @@
 import flet as ft
 
 class ActionButton(ft.UserControl):
+    '''Botão Estilizado para um tipo de ação, EX: Botão de Cancelar, botão de ok e Etc...'''
 
     def __init__(self,texto = None,cor = None,icon = None,funcao = None):
+        
         self.__desiner = ft.OutlinedButton(
             text= texto,
             icon= icon,

@@ -2,6 +2,8 @@ import flet as ft
 from Itens.components.buttons.MenuButon import MenuButon
 
 class MenuPrincipal(ft.UserControl):
+    '''Classe Dedicada a criação do desiner do Menu Principal'''
+
     def __init__(self, fCadastro, fConsultas, fAnotações, fPagamentos):
 
         self.__botao1 = MenuButon("Cadastro",ft.icons.PERSON, fCadastro)
@@ -15,7 +17,6 @@ class MenuPrincipal(ft.UserControl):
                 self.__botao3.build(),
                 self.__botao4.build(),
             ],
-            #alignment= ft.MainAxisAlignment.SPACE_EVENLY,
             expand=False
             
         )

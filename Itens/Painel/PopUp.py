@@ -1,6 +1,7 @@
 import flet as ft 
 
 class PopUp(ft.UserControl):
+    '''Barra Estilizada dedicada para infomar uma mensage para o usuario.'''
 
     def __init__(self, msg = None, cor = ft.colors.GREY_700):
 

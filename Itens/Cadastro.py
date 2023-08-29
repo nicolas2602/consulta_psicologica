@@ -6,11 +6,13 @@ from Itens.Campo.CampoFormulario import CampoFormulario
 from bd.funcao.cliente import *
 
 class Cadastro(ft.UserControl):
+    ''' Janela do Campo MENU Cadastro.
+        Aqui, há todo a criação de contrução do campo MENU CADASTRO 
+    '''
     def __init__(self, page):
         self.page = page
 
     def build(self):
-
 
         self.addCadastro = Painel(self.page,"Novo Cadastro",self.Salvar)
 
@@ -21,9 +23,6 @@ class Cadastro(ft.UserControl):
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
 
         self.tabela = Tabela(self.page)
-
-
-        #self.desiner = ft.IconButton(icon=ft.icons.ADD,on_click= self.openPainel)
 
         self.desiner = ft.Column(
             controls=[
@@ -36,18 +35,23 @@ class Cadastro(ft.UserControl):
 
         return self.desiner
     
+    #### Fuções do Cadastro ####
     def openPainel(self,e):
+        '''Abre o Campo de Novo Cadastro'''
         self.page.dialog = self.addCadastro.build()
         self.addCadastro.build().open = True
         self.page.update()
 
     def getPesquisa(self,e):
+        '''Função dedicada a pegar a informação do campo pesquisa, madar para o banco e atualizar a tabela'''
         x = self.campoPesquisa.getValue()
         self.tabela.dados = select(f"SELECT * FROM cliente WHERE nomeCliente LIKE '%{x}%'")
         self.tabela.montaTabela()
         self.page.update()
 
     def Salvar(self,e):
+        # Dedicado ao Novo Cadastro
+        '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
         x = self.addCadastro.getValue()
         insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
         self.addCadastro.Cancelar(e)
