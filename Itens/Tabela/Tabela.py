@@ -3,6 +3,7 @@ from Itens.Painel.Painel import Painel
 from Itens.Painel.Checagem import Checagem
 from bd.funcao.cliente import *
 from time import sleep
+from Itens.components.Carregamento import Carregamento
 import flet as ft
 
 class Tabela(ft.UserControl):
@@ -13,10 +14,12 @@ class Tabela(ft.UserControl):
     def __init__(self,page):
         self.page = page
         self.painel = Painel(self.page,"Editar Cadastro", self.Salvar) # painel para Editar cadastro
+        self.carregamentoEditar = Carregamento(self.page,"Salvando Alterações...")
+        self.carregamentoExcluir = Carregamento(self.page,"Excluindo Dados...")
 
     def build(self):
         #Pegando dados Iniciais do Banco
-        self.dados = select(f"SELECT * FROM cliente") 
+        self.dados = select(f"SELECT * FROM cliente")
 
         self.desiner =ft.Column([ ft.DataTable(
             border=ft.border.all(3,ft.colors.BLACK),
@@ -56,7 +59,6 @@ class Tabela(ft.UserControl):
                 
             ]))
         )
-        self.page.update()
         
 
     def openPainel(self, id):
@@ -78,22 +80,38 @@ class Tabela(ft.UserControl):
 
     def Salvar(self,e):
         '''Função dedicada a enviar dados editados ao banco.'''
-
-        #### Enviar dados ao Banco ####
+        
         x = self.painel.getValue()
-        update(x['id'],x['nome'],x['sobrenome'],x['email'],x['telefone'])
         self.painel.Cancelar(e)
+
+        sleep(0.5)
+        #### Tela de Carregamento ####
+        self.carregamentoEditar.openCarregamento(e)
+
+        carregamento = True
+
+        while carregamento:
+            #### Enviar dados ao Banco ####
+            update(x['id'],x['nome'],x['sobrenome'],x['email'],x['telefone'])
+            sleep(1)
+            #### Atualiza a tabela ####
+            self.dados = select(f"SELECT * FROM cliente")
+            self.montaTabela()
+            
+            carregamento = False
+
+        self.carregamentoEditar.closeCarregamento(e)
+        #### Fim do Carregamento ####
 
         #### Mostra msg ao usuario ####
         self.painel.openPopUp("Cadastro Atualizado com Sucesso", ft.colors.GREEN_700)
 
-        #### Atualiza a tabela ####
-        self.dados = select(f"SELECT * FROM cliente")
-        self.montaTabela()
+        
 
 
     def deletar(self,id):
         '''Deleta o dado da Tabela'''
+
         #### pesquisa o ID no banco ####
         self.x = select(f"SELECT * FROM cliente WHERE IdCliente = {id}")
 
@@ -103,10 +121,22 @@ class Tabela(ft.UserControl):
 
         #### Se True => Ele Excluirá
         if(resultado):
-            delete(id)
-            sleep(1)
+
+            self.carregamentoExcluir.openCarregamento(self)
+            carregando = True
+
+            while carregando:
+            
+                delete(id)
+                sleep(1)
+                
+                #### Atualiza a Tabela ####
+                self.dados = select(f"SELECT * FROM cliente")
+                self.montaTabela()
+                carregando = False
+
+            self.carregamentoExcluir.closeCarregamento(self)
             self.painel.openPopUp("Cadastro deletado com Sucesso!", ft.colors.GREEN_700)
-            #### Atualiza a Tabela ####
-            self.dados = select(f"SELECT * FROM cliente")
-            self.montaTabela()
+        
+        
         

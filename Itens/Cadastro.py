@@ -3,7 +3,10 @@ from Itens.Painel.Painel import Painel
 from Itens.components.buttons.ActionButton import ActionButton
 from Itens.Tabela.Tabela import Tabela
 from Itens.Campo.CampoFormulario import CampoFormulario
+from Itens.components.Carregamento import Carregamento
 from bd.funcao.cliente import *
+from time import sleep
+
 
 class Cadastro(ft.UserControl):
     ''' Janela do Campo MENU Cadastro.
@@ -23,6 +26,8 @@ class Cadastro(ft.UserControl):
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
 
         self.tabela = Tabela(self.page)
+
+        self.carregamento = Carregamento(self.page,"Salvando dados...")
 
         self.desiner = ft.Column(
             controls=[
@@ -53,9 +58,24 @@ class Cadastro(ft.UserControl):
         # Dedicado ao Novo Cadastro
         '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
         x = self.addCadastro.getValue()
-        insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
         self.addCadastro.Cancelar(e)
-        self.addCadastro.openPopUp("Cadastro com Sucesso", ft.colors.GREEN_700)
-        self.tabela.dados = select(f"SELECT * FROM cliente")
-        self.tabela.montaTabela()
+
+        sleep(0.5)
+
+        #### Tela de carregamento ####
+        self.carregamento.openCarregamento(e)
+
+        Carregando = True
+        while Carregando:
+            
+            insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
+            self.tabela.dados = select(f"SELECT * FROM cliente")
+            self.tabela.montaTabela()
+            sleep(1)
+            Carregando = False
+
+        self.carregamento.closeCarregamento(e)
+        #### Fim do Carregamento ####
+
+        self.addCadastro.openPopUp("Cadastro criado com Sucesso", ft.colors.GREEN_700)
         self.page.update()
