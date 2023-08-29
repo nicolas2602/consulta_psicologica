@@ -73,8 +73,11 @@ DELETE FROM consulta WHERE IdConsulta=2;
 
 CREATE TABLE assunto(
     IdAssunto INT PRIMARY KEY AUTO_INCREMENT,
-    descAssunto VARCHAR(100) NOT NULL
+    descAssunto VARCHAR(200) NOT NULL
 );
+
+ALTER TABLE assunto
+MODIFY COLUMN descAssunto VARCHAR(200) NOT NULL
 
 -- Alterar a tabela assunto adicionando as chaves estrangeiras
 
