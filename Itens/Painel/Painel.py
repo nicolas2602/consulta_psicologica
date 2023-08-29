@@ -58,5 +58,12 @@ class Painel(ft.UserControl):
         self.__form.setValue()
         self.page.update()
 
+    def fechar(self,e):
+        self.__desiner.open = False
+        self.page.update()
+
     def getValue(self):
         return self.__form.getValue()
+    
+    def resetValue(self):
+        self.__form.setValue()

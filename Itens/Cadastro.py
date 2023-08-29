@@ -58,7 +58,7 @@ class Cadastro(ft.UserControl):
         # Dedicado ao Novo Cadastro
         '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
         x = self.addCadastro.getValue()
-        self.addCadastro.Cancelar(e)
+        self.addCadastro.fechar(e)
 
         sleep(0.5)
 
@@ -68,9 +68,11 @@ class Cadastro(ft.UserControl):
         Carregando = True
         while Carregando:
             
-            insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
-            self.tabela.dados = select(f"SELECT * FROM cliente")
-            self.tabela.montaTabela()
+            if(True):
+                insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
+                self.tabela.dados = select(f"SELECT * FROM cliente")
+                self.tabela.montaTabela()
+                self.addCadastro.resetValue()
             sleep(1)
             Carregando = False
 
