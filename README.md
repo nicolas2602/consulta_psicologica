@@ -12,4 +12,5 @@ Sistema de consulta psicológica desenvolvida na linguagem de programação Pyth
 
 
 3. Notação Pé de Galinha
-![WhatsApp Image 2023-08-30 at 15 44 54](https://github.com/nicolas2602/consulta_psicologica/assets/69517285/4fadf315-1b7e-450d-ad0e-826a8fa5a90a)
+![image](https://github.com/nicolas2602/consulta_psicologica/assets/69517285/cef3124f-3299-455c-9c32-8b439a99a4bb)
+
