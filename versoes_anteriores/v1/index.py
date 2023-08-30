@@ -1,7 +1,7 @@
 import funcao.conexao as con # conexao
 import funcao.cliente as cl # cliente
 import funcao.consulta as ag # agenda
-import funcao.assunto as at # assunto
+import funcao.diagnostico as at # assunto
 import funcao.pagamento as pg # pagamento
 
 ############### Tabela cliente #################
