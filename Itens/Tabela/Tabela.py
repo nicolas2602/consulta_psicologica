@@ -4,6 +4,7 @@ from Itens.Painel.Checagem import Checagem
 from bd.funcao.cliente import *
 from time import sleep
 from Itens.components.Carregamento import Carregamento
+from modulos.VerificaCliente import VerificaCliente
 import flet as ft
 
 class Tabela(ft.UserControl):
@@ -89,22 +90,33 @@ class Tabela(ft.UserControl):
         self.carregamentoEditar.openCarregamento(e)
 
         carregamento = True
+        msg = "Cadastro Atualizado com Sucesso"
+        cor = ft.colors.GREEN_700
 
         while carregamento:
-            #### Enviar dados ao Banco ####
-            update(x['id'],x['nome'],x['sobrenome'],x['email'],x['telefone'])
-            sleep(1)
-            #### Atualiza a tabela ####
-            self.dados = select(f"SELECT * FROM cliente")
-            self.montaTabela()
+
+            héValido = VerificaCliente([x['id'],x['nome'],x['sobrenome'],x['email'],x['telefone']]).verificar()
             
+            #### Enviar dados ao Banco ####
+            if (héValido[0]):
+                update(x['id'],x['nome'],x['sobrenome'],x['email'],x['telefone'])
+            
+                #### Atualiza a tabela ####
+                self.dados = select(f"SELECT * FROM cliente")
+                self.montaTabela()
+
+            else:
+                msg = héValido[1] # retorna msg de erro
+                cor = ft.colors.RED_700
+
+            sleep(1)
             carregamento = False
 
         self.carregamentoEditar.closeCarregamento(e)
         #### Fim do Carregamento ####
 
         #### Mostra msg ao usuario ####
-        self.painel.openPopUp("Cadastro Atualizado com Sucesso", ft.colors.GREEN_700)
+        self.painel.openPopUp(msg, cor)
 
         
 

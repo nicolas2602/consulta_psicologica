@@ -4,6 +4,7 @@ from Itens.components.buttons.ActionButton import ActionButton
 from Itens.Tabela.Tabela import Tabela
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.Carregamento import Carregamento
+from modulos.VerificaCliente import VerificaCliente
 from bd.funcao.cliente import *
 from time import sleep
 
@@ -57,6 +58,7 @@ class Cadastro(ft.UserControl):
     def Salvar(self,e):
         # Dedicado ao Novo Cadastro
         '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
+
         x = self.addCadastro.getValue()
         self.addCadastro.fechar(e)
 
@@ -65,19 +67,32 @@ class Cadastro(ft.UserControl):
         #### Tela de carregamento ####
         self.carregamento.openCarregamento(e)
 
+        #### Variavel de Controle ####
+
         Carregando = True
+        msg = "Cadastro criado com Sucesso"
+        cor = ft.colors.GREEN_700
+
+
         while Carregando:
-            
-            if(True):
+
+            héValido = VerificaCliente([x['nome'],x['sobrenome'],x['email'],x['telefone']]).verificar()
+
+            if(héValido[0]):
                 insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
                 self.tabela.dados = select(f"SELECT * FROM cliente")
                 self.tabela.montaTabela()
                 self.addCadastro.resetValue()
+
+            else:
+                msg = héValido[1] # retorna msg de erro
+                cor = ft.colors.RED_700
+
             sleep(1)
             Carregando = False
 
         self.carregamento.closeCarregamento(e)
         #### Fim do Carregamento ####
 
-        self.addCadastro.openPopUp("Cadastro criado com Sucesso", ft.colors.GREEN_700)
+        self.addCadastro.openPopUp(msg, cor)
         self.page.update()
