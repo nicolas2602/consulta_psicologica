@@ -53,7 +53,7 @@ ALTER TABLE consulta
 
 -- Inserir dados na tabela agenda
 
-INSERT INTO consulta (dataConsulta, horarioConsulta, assuntoConsulta, fk_IdCliente) VALUES ('2023-08-20', '14:00:00', 'Problemas',1);
+INSERT INTO consulta (dataConsulta, horarioConsulta, assuntoConsulta, fk_IdCliente) values ('2023-08-20', '14:00:00', ''1);
 
 -- Exibir os dados da tabela agenda com datas e horários formatados para o padrão brasileiro
 
@@ -87,28 +87,28 @@ ALTER TABLE diagnostico
 
 -- Inserir dados na tabela assunto
 
-INSERT INTO diagnostico(descDiagnostico, fk_IdConsulta) VALUES ('Assunto 1', 1);
+INSERT INTO diagnostico(descdiagnostico, fk_IdConsulta) VALUES ('Assunto 1', 1);
 
 -- Exibir todos dados na tabela assunto
 
-SELECT IdDiagnostico, descDiagnostico, dataConsulta, horarioConsulta
-FROM diagnostico AS an
+SELECT IdDiagnostico, descdiagnostico, dataConsulta, horarioConsulta
+FROM diagnosticoo AS an
 INNER JOIN consulta AS cs
 ON an.fk_IdConsulta = cs.IdConsulta
 
 -- Atualizar dados da tabela assunto
 
-UPDATE diagnostico SET descDiagnostico='Assunto 2' WHERE IdDiagnostico=1;
+UPDATE diagnostico SET descAssunto='Assunto 2' WHERE IdAssunto=1;
 
 -- Excluir dados da tabela assunto
 
-DELETE FROM diagnostico WHERE IdDiagnostico=1;
+DELETE FROM diagnostico WHERE IdAssunto=1;
 
 /* Criar a tabela status de pagamento e seus atributos */
 
 CREATE TABLE status_pagamento(
     IdStatusPag INT PRIMARY KEY AUTO_INCREMENT,
-    descStatusPag VARCHAR(50)
+    descStatusPag VARCHAR(100)
 );
 
 -- Inserir os dados possíveis na tabela status de pagamento

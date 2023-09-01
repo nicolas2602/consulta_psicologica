@@ -1,11 +1,11 @@
 import funcao.conexao as con
 
-def insert(data, horario, assunto, IdCliente):
-    con.cursor.execute(f"INSERT INTO consulta (dataConsulta, horarioConsulta, assuntoConsulta, fk_IdCliente) VALUES ('{data}', '{horario}', '{assunto}', {IdCliente})")
+def insert(data, horario, IdCliente):
+    con.cursor.execute(f"INSERT INTO consulta (dataConsulta, horarioConsulta, fk_IdCliente) VALUES ('{data}', '{horario}', {IdCliente})")
     con.conexao.commit()
 
-def update(id, data, horario, assunto, IdCliente):
-    con.cursor.execute(f"UPDATE consulta SET dataConsulta='{data}', horarioConsulta='{horario}', assuntoConsulta='{assunto}', fk_IdCliente={IdCliente} WHERE IdAgenda={id}")
+def update(id, data, horario, IdCliente):
+    con.cursor.execute(f"UPDATE consulta SET dataConsulta='{data}', horarioConsulta='{horario}', fk_IdCliente={IdCliente} WHERE IdAgenda={id}")
     con.conexao.commit()
 
 def delete(id):
