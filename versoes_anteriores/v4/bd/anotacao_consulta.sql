@@ -39,5 +39,3 @@ UPDATE anotacao_consulta SET descAnotCon='Assunto 2' WHERE IdAnotCon=1;
 -- Excluir dados da tabela assunto
 
 DELETE FROM anotacao_consulta WHERE IdAnotCon=1;
-
--- Campo de pesquisa
