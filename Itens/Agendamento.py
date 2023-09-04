@@ -3,7 +3,7 @@ from time import sleep, strftime
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.buttons.ActionButton import ActionButton
 from Itens.components.Carregamento import Carregamento
-
+from Itens.Tabela.TabelaAgendamento import TabelaAgendamento
 
 class Agendamento(ft.UserControl):
     ''' Janela do Campo MENU Agendamento Consultas.
@@ -23,13 +23,15 @@ class Agendamento(ft.UserControl):
         
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH).build()
 
+        self.tabela = TabelaAgendamento(self.page)
+
         self.carregamento = Carregamento(self.page,"Salvando dados...")
 
         self.desiner = ft.Column(
             controls=[
                 ft.Row([self.addBotao, self.campoNome.build(), self.campoData.build(), self.botaoPesquisa], alignment= ft.MainAxisAlignment.CENTER, spacing= 50),
                 ft.Divider(color=ft.colors.GREEN_900),
-                #ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True) 
+                ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True) 
             ],
             expand=True,
         )
