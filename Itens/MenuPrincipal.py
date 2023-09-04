@@ -6,8 +6,8 @@ class MenuPrincipal(ft.UserControl):
 
     def __init__(self, fCadastro, fConsultas, fAnotações, fPagamentos):
 
-        self.__botao1 = MenuButon("Cadastro",ft.icons.PERSON, fCadastro)
-        self.__botao2 = MenuButon("Consultas",ft.icons.CALENDAR_MONTH, fConsultas)
+        self.__botao1 = MenuButon("Paciente",ft.icons.PERSON, fCadastro)
+        self.__botao2 = MenuButon("Agendamento",ft.icons.CALENDAR_MONTH, fConsultas)
         self.__botao3 = MenuButon("Anotações",ft.icons.EDIT_DOCUMENT, fAnotações)
         self.__botao4 = MenuButon("Pagamentos",ft.icons.MONETIZATION_ON, fPagamentos)
         self.__desiner = ft.Column(

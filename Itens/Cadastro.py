@@ -10,7 +10,7 @@ from time import sleep
 
 
 class Cadastro(ft.UserControl):
-    ''' Janela do Campo MENU Cadastro.
+    ''' Janela do Campo MENU Cadastro Paciente.
         Aqui, há todo a criação de contrução do campo MENU CADASTRO 
     '''
     def __init__(self, page):
