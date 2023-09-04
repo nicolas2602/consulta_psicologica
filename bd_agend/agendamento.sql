@@ -23,6 +23,7 @@ ALTER TABLE agendamento_consulta
 
 -- Inserir dados na tabela agenda
 INSERT INTO agendamento_consulta SET dataAgendCon=STR_TO_DATE('21/08/2023','%d/%m/%Y'), horarioAgendCon='14:00:00', fk_IdCliente = 1;
+INSERT INTO agendamento_consulta(dataAgendCon, horarioAgendCon, fk_IdCliente) VALUES (STR_TO_DATE('21/08/2023','%d/%m/%Y'), '14:00:00', 1);
 
 -- Exibir os dados da tabela agenda com datas e horários formatados para o padrão brasileiro
 SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
