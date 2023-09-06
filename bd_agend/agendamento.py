@@ -1,4 +1,4 @@
-import funcao.conexao as con
+import bd.funcao.conexao as con
 
 def insert(data, horario, IdCliente):
     con.cursor.execute(f"INSERT INTO agendamento_consulta(dataAgendCon, horarioAgendCon, fk_IdCliente) VALUES (STR_TO_DATE('{data}','%d/%m/%Y'), '{horario}', {IdCliente}")
