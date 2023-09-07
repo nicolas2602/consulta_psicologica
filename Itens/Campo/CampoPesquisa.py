@@ -4,10 +4,12 @@ from bd.funcao.cliente import *
 class CampoPesquisa(ft.UserControl):
     '''Campo de pesquisa de Clientes que mostrará opções de seleção estilizado para o Projeto'''
         
-    def __init__(self,page, nome = None):
+    def __init__(self,page, nome = None, funcao = None):
 
         self.__nome = nome
         self.page = page
+
+        self.funcao = funcao
 
         self.texto = ft.TextField(
             label= self.__nome,
@@ -21,7 +23,7 @@ class CampoPesquisa(ft.UserControl):
         
         self.Opcoes = ft.ListView(controls=[],visible= False)
 
-        self.__desiner =ft.Column(controls=[self.texto,self.Opcoes],width=300)
+        self.__desiner =ft.Column(controls=[self.texto,self.Opcoes])
 
 
 
@@ -59,11 +61,16 @@ class CampoPesquisa(ft.UserControl):
         
     def opcao(self,dados):
         '''Gera o botão Texto da Lista'''
-        self.Opcoes.controls.append(ft.TextButton(text=f"{dados[1]} {dados[2]}", on_click= lambda e: print(dados)))
+        self.Opcoes.controls.append(ft.TextButton(text=f"{dados[1]} {dados[2]}", on_click= lambda e: self.funcao(dados)))
 
 
     def getValue(self):
         return self.texto.value
     
     def setValue(self,valor = None):
-        self.__desiner.value = valor
+        self.texto.value = valor
+
+    def listaDados(self):
+        self.texto.value = None
+        self.Opcoes.visible = False
+        self.Opcoes.controls = []

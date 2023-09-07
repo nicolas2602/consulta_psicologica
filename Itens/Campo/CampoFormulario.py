@@ -30,3 +30,9 @@ class CampoFormulario(ft.UserControl):
     
     def setValue(self,valor = None):
         self.__desiner.value = valor
+
+    def setNaoAlter(self,valor = False):
+        self.__desiner.read_only = valor
+
+    def setPlaceHolder(self,valor = None):
+        self.__desiner.hint_text =valor

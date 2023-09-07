@@ -4,6 +4,7 @@ from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.buttons.ActionButton import ActionButton
 from Itens.components.Carregamento import Carregamento
 from Itens.Tabela.TabelaAgendamento import TabelaAgendamento
+from Itens.Painel.PainelAgendamento import PainelAgendamento
 
 class Agendamento(ft.UserControl):
     ''' Janela do Campo MENU Agendamento Consultas.
@@ -15,7 +16,7 @@ class Agendamento(ft.UserControl):
 
     def build(self):
 
-        self.addBotao = ActionButton('Adicionar',ft.colors.GREEN_800,ft.icons.ADD).build()
+        self.addBotao = ActionButton('Adicionar',ft.colors.GREEN_800,ft.icons.ADD , self.openPainel).build()
         
         self.campoNome = CampoFormulario("Digite o nome:")
         
@@ -27,6 +28,8 @@ class Agendamento(ft.UserControl):
 
         self.carregamento = Carregamento(self.page,"Salvando dados...")
 
+        self.painelAgendamento = PainelAgendamento(self.page,"Novo Agendamento:",self.Salvar)
+
         self.desiner = ft.Column(
             controls=[
                 ft.Row([self.addBotao, self.campoNome.build(), self.campoData.build(), self.botaoPesquisa], alignment= ft.MainAxisAlignment.CENTER, spacing= 50),
@@ -37,4 +40,47 @@ class Agendamento(ft.UserControl):
         )
         return self.desiner
     
+    def openPainel(self,e):
+        '''Abre o Campo de Novo Agendamento'''
+        self.painelAgendamento.openPainelNovo()
 
+    def Salvar(self,e):
+        # Dedicado ao Novo Cadastro
+        '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
+
+        x = self.painelAgendamento.getValue()
+        self.painelAgendamento.fechar(e)
+        sleep(0.3)
+
+        #### Tela de carregamento ####
+        self.carregamento.openCarregamento(e)
+
+        #### Variavel de Controle ####
+
+        Carregando = True
+        msg = "Cadastro criado com Sucesso"
+        cor = ft.colors.GREEN_700
+
+
+        while Carregando:
+
+            # héValido = VerificaCliente([x['nome'],x['sobrenome'],x['email'],x['telefone']]).verificar()
+
+            # if(héValido[0]):
+            #     insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
+            #     self.tabela.dados = select(f"SELECT * FROM cliente")
+            #     self.tabela.montaTabela()
+            #     self.addCadastro.resetValue()
+
+            # else:
+            #     msg = héValido[1] # retorna msg de erro
+            #     cor = ft.colors.RED_700
+
+            sleep(1)
+            Carregando = False
+
+        self.carregamento.closeCarregamento(e)
+        #### Fim do Carregamento ####
+
+        self.painelAgendamento.openPopUp(msg, cor)
+        self.page.update()
