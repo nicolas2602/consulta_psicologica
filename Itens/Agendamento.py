@@ -1,10 +1,14 @@
 import flet as ft
 from time import sleep, strftime
+from datetime import date
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.buttons.ActionButton import ActionButton
 from Itens.components.Carregamento import Carregamento
 from Itens.Tabela.TabelaAgendamento import TabelaAgendamento
 from Itens.Painel.PainelAgendamento import PainelAgendamento
+from modulos.Check.VerificadorData import VerificadorData
+import bd_agend.agendamento as ag
+
 
 class Agendamento(ft.UserControl):
     ''' Janela do Campo MENU Agendamento Consultas.
@@ -49,6 +53,7 @@ class Agendamento(ft.UserControl):
         '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
 
         x = self.painelAgendamento.getValue()
+        print(x)
         self.painelAgendamento.fechar(e)
         sleep(0.3)
 
@@ -58,23 +63,24 @@ class Agendamento(ft.UserControl):
         #### Variavel de Controle ####
 
         Carregando = True
-        msg = "Cadastro criado com Sucesso"
+        msg = "Consulta agendada com Sucesso"
         cor = ft.colors.GREEN_700
 
 
         while Carregando:
 
-            # héValido = VerificaCliente([x['nome'],x['sobrenome'],x['email'],x['telefone']]).verificar()
+            héValido = VerificadorData(x['data']).verificar()
 
-            # if(héValido[0]):
-            #     insert(x['nome'],x['sobrenome'],x['email'],x['telefone'])
-            #     self.tabela.dados = select(f"SELECT * FROM cliente")
-            #     self.tabela.montaTabela()
-            #     self.addCadastro.resetValue()
+            if(héValido[0]):
+                print(héValido[1])
+                ag.insert(str(héValido[1]),x['hora'],int(x['idNome']))
+                self.tabela.dados = ag.select("SELECT * from agendamento_consulta ORDER BY dataAgendCon,horarioAgendCon;")
+                self.tabela.montaTabela()
+                self.painelAgendamento.resetValue()
 
-            # else:
-            #     msg = héValido[1] # retorna msg de erro
-            #     cor = ft.colors.RED_700
+            else:
+                msg = héValido[1] # retorna msg de erro
+                cor = ft.colors.RED_700
 
             sleep(1)
             Carregando = False

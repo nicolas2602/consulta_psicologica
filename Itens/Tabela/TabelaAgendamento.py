@@ -19,7 +19,7 @@ class TabelaAgendamento(ft.UserControl):
 
     def build(self):
         #Pegando dados Iniciais do Banco
-        self.dados = ag.select("SELECT * from agendamento_consulta")
+        self.dados = ag.select("SELECT * from agendamento_consulta ORDER BY dataAgendCon,horarioAgendCon;")
         #print(self.dados[0][2].strftime('%H:%M:%S'))
         #self.dados = [(1,'20/10/2023','10:00',1)]
 
@@ -30,9 +30,9 @@ class TabelaAgendamento(ft.UserControl):
             heading_row_color= ft.colors.GREY_300,
             columns=[
                 ft.DataColumn(ft.Text('Id_Agenda',selectable=True)),
-                ft.DataColumn(ft.Text('Data',selectable=True)),
+                ft.DataColumn(ft.Row([ft.Text('Data',selectable=True),ft.IconButton(icon=ft.icons.KEYBOARD_ARROW_DOWN_ROUNDED,on_click= self.invertTable)])),
                 ft.DataColumn(ft.Text('Hora',selectable=True)),
-                ft.DataColumn(ft.Row([ft.Text('Nome_Paciente',selectable=True),ft.IconButton(icon=ft.icons.KEYBOARD_ARROW_DOWN_ROUNDED,on_click= self.invertTable)])),
+                ft.DataColumn(ft.Text('Nome_Paciente',selectable=True)),
                 ft.DataColumn(ft.Text("Ação",selectable=True)),
             ],
             rows=[],
@@ -53,7 +53,7 @@ class TabelaAgendamento(ft.UserControl):
 
     def __tabela(self,lista): #(1,'20/10/2023','10:00',1)
         x = cl.select(f"SELECT nomeCliente,sobrenomeCliente FROM cliente WHERE IdCliente ={lista[3]}")
-        print(x)
+        
         self.desiner.controls[0].rows.append((ft.DataRow(
             cells=[
                 ft.DataCell(ft.Text(lista[0],selectable=True)),

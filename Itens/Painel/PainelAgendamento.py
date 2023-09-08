@@ -96,7 +96,7 @@ class PainelAgendamento(ft.UserControl):
         self.page.update()
 
     def getValue(self):
-        self.__formAgendamento.getValue()
+        return self.__formAgendamento.getValue()
     
     def resetValue(self):
         self.__formAgendamento.setValue()
