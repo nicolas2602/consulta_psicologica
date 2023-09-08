@@ -32,37 +32,40 @@ CREATE TABLE forma_pagamento(
 -- Inserir os dados possíveis na tabela forma de pagamento
 INSERT INTO forma_pagamento(descFormaPag) VALUES ('Pix'), ('Débito'), ('Crédito'), ('Convênio'), ('Dinheiro');
 
+drop table pagamento;
+
 /* Criar a tabela pagamento e seus atributos */
 CREATE TABLE pagamento(
     IdPagamento INT PRIMARY KEY AUTO_INCREMENT,
-    valorPagamento DECIMAL(10,2) NOT NULL,
-    dataHoraPag DATETIME NOT NULL
+    valorPagamento DECIMAL(10,2),
+    dataPagamento DATE
 );
 
 -- Alterar a tabela pagamento adicionando as chaves estrangeiras
 
 ALTER TABLE pagamento
-    ADD fk_IdConsulta INT NOT NULL,
+    ADD fk_IdAgendCon INT NOT NULL,
     ADD fk_IdStatusPag INT NOT NULL,
-    ADD fk_IdFormaPag INT NOT NULL,
-    ADD FOREIGN KEY (fk_IdConsulta) REFERENCES consulta(IdConsulta),
+    ADD fk_IdFormaPag INT,
+    ADD FOREIGN KEY (fk_IdAgendCon) REFERENCES agendamento_consulta(IdAgendCon),
     ADD FOREIGN KEY (fk_IdStatusPag) REFERENCES status_pagamento(IdStatusPag),
     ADD FOREIGN KEY (fk_IdFormaPag) REFERENCES forma_pagamento(IdFormaPag);
 
 -- Inserir os dados na tabela pagamento
+INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) VALUES (50.00, '2022-09-22', 1, 2, 1);
 
-INSERT INTO pagamento(valorPagamento, dataHoraPag, fk_IdConsulta, fk_IdStatusPag, fk_IdFormaPag) VALUES (50.00, '2020-09-01 10:10:00', 1, 2, 1);
+-- Inserir no início da consulta
+INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) VALUES (NULL, NULL, 1, 2, NULL);
 
 -- Exibir os dados na tabela pagamento
 
-SELECT IdPagamento, valorPagamento, DATE_FORMAT(dataHoraPag, '%d/%m/%Y') AS dataHora, 
-       TIME_FORMAT(dataHoraPag, '%H:%m') AS 'Hora do Pagamento',
-       DATE_FORMAT(dataConsulta, '%d/%m/%Y') AS dataConsulta, 
-       TIME_FORMAT(horarioConsulta, '%H:%m') AS horarioConsulta, descFormaPag, descStatusPag
+SELECT IdPagamento, IFNULL(valorPagamento, 'Em acerto'), IFNULL(DATE_FORMAT(dataPagamento, '%d/%m/%Y'), 'Em acerto') as dataPagamento,
+       DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, 
+       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
 FROM pagamento AS pg 
-INNER JOIN consulta AS cs ON pg.fk_IdConsulta = cs.IdConsulta
-INNER JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag
-INNER JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag;
+LEFT JOIN agendamento_consulta AS cs ON pg.fk_IdAgendCon = cs.IdAgendCon
+LEFT JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag
+LEFT JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag;
 
 -- Atualizar os dados da tabela pagamento
 

@@ -1,11 +1,11 @@
 import funcao.conexao as con
 
-def insert(descricao, IdConsulta):
-    con.cursor.execute(f"INSERT INTO anotacao_consulta(descAnotCon, fk_IdConsulta) VALUES ('{descricao}', {IdConsulta})")
+def insert(descricao, IdAgendCon):
+    con.cursor.execute(f"INSERT INTO anotacao_consulta(descAnotCon, fk_IdAgendCon) VALUES ('{descricao}', {IdAgendCon})")
     con.conexao.commit()
 
-def update(id, descricao, IdConsulta):
-    con.cursor.execute(f"UPDATE anotacao_consulta SET descAnotCon='{descricao}', fk_IdConsulta={IdConsulta} WHERE IdAnotCon={id}")
+def update(id, descricao, IdAgendCon):
+    con.cursor.execute(f"UPDATE anotacao_consulta SET descAnotCon='{descricao}', fk_IdAgendCon={IdAgendCon} WHERE IdAnotCon={id}")
     con.conexao.commit()
 
 def delete(id):
