@@ -39,7 +39,51 @@ UPDATE agendamento_consulta SET dataAgendCon='2023-08-22' WHERE IdAgendCon=2;
 -- Excluir os dados da tabela agenda
 DELETE FROM agendamento_consulta WHERE IdAgendCon=2;
 
--- Campo de pesquisa
+-- Campo de pesquisa (antigo)
+-- SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
+--         TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
+--         nomeCliente
+-- FROM agendamento_consulta as cs 
+-- INNER JOIN cliente as cl 
+-- ON cs.fk_IdCliente = cl.IdCliente
+-- WHERE nomeCliente like '%Nicolas%'
+-- OR dataAgendCon like '21/08/2023';
+
+-- Campo de pesquisa (novo)
+SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
+        TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
+        nomeCliente
+FROM agendamento_consulta as cs 
+INNER JOIN cliente as cl 
+ON cs.fk_IdCliente = cl.IdCliente
+WHERE nomeCliente like '%Gabriel%'
+AND dataAgendCon like STR_TO_DATE('24/09/2023','%d/%m/%Y');
+
+-- Ordenação crescente da data
+SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
+        TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
+        nomeCliente
+FROM agendamento_consulta as cs 
+INNER JOIN cliente as cl 
+ON cs.fk_IdCliente = cl.IdCliente
+ORDER BY YEAR(dataAgendCon) ASC, 
+         MONTH(dataAgendCon) ASC, 
+         DAY(dataAgendCon) ASC,
+         horarioAgendCon ASC;
+
+-- Ordenação decrescente da data
+SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
+        TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
+        nomeCliente
+FROM agendamento_consulta as cs 
+INNER JOIN cliente as cl 
+ON cs.fk_IdCliente = cl.IdCliente
+ORDER BY YEAR(dataAgendCon) DESC, 
+         MONTH(dataAgendCon) DESC, 
+         DAY(dataAgendCon) DESC,
+         horarioAgendCon DESC;
+
+-- Campo de pesquisa com ordenação
 SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
         TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
         nomeCliente
@@ -47,4 +91,8 @@ FROM agendamento_consulta as cs
 INNER JOIN cliente as cl 
 ON cs.fk_IdCliente = cl.IdCliente
 WHERE nomeCliente like '%Nicolas%'
-OR dataAgendCon like '21/08/2023';
+AND dataAgendCon like STR_TO_DATE('24/09/2023','%d/%m/%Y')
+ORDER BY YEAR(dataAgendCon) ASC, 
+         MONTH(dataAgendCon) ASC, 
+         DAY(dataAgendCon) ASC,
+         horarioAgendCon ASC;
