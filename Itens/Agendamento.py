@@ -6,6 +6,7 @@ from Itens.components.buttons.ActionButton import ActionButton
 from Itens.components.Carregamento import Carregamento
 from Itens.Tabela.TabelaAgendamento import TabelaAgendamento
 from Itens.Painel.PainelAgendamento import PainelAgendamento
+from Itens.components.Titulo import Titulo
 from modulos.Check.VerificadorData import VerificadorData
 import bd_agend.agendamento as ag
 
@@ -36,6 +37,8 @@ class Agendamento(ft.UserControl):
 
         self.desiner = ft.Column(
             controls=[
+                Titulo('Agendamento de Consultas',ft.icons.CALENDAR_MONTH,).build(),
+                ft.Divider(color=ft.colors.GREEN_900),
                 ft.Row([self.addBotao, self.campoNome.build(), self.campoData.build(), self.botaoPesquisa], alignment= ft.MainAxisAlignment.CENTER, spacing= 50),
                 ft.Divider(color=ft.colors.GREEN_900),
                 ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True) 

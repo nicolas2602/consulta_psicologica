@@ -4,6 +4,7 @@ from Itens.components.buttons.ActionButton import ActionButton
 from Itens.Tabela.Tabela import Tabela
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.Carregamento import Carregamento
+from Itens.components.Titulo import Titulo
 from modulos.VerificaCliente import VerificaCliente
 from bd.funcao.cliente import *
 from time import sleep
@@ -32,6 +33,8 @@ class Cadastro(ft.UserControl):
 
         self.desiner = ft.Column(
             controls=[
+                Titulo('Cadastro de Pacientes',ft.icons.PERSON).build(),
+                ft.Divider(color=ft.colors.GREEN_900),
                 ft.Row([self.addBotao, self.campoPesquisa.build(), self.botaoPesquisa], alignment= ft.MainAxisAlignment.CENTER, spacing= 50),
                 ft.Divider(color=ft.colors.GREEN_900),
                 ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True) 
