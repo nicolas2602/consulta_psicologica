@@ -26,7 +26,7 @@ class Agendamento(ft.UserControl):
         
         self.campoData = CampoFormulario("Data",strftime("%d/%m/%Y"),120)
         
-        self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH).build()
+        self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
 
         self.tabela = TabelaAgendamento(self.page)
 
@@ -47,6 +47,32 @@ class Agendamento(ft.UserControl):
     def openPainel(self,e):
         '''Abre o Campo de Novo Agendamento'''
         self.painelAgendamento.openPainelNovo()
+
+    def getPesquisa(self,e):
+        '''Função dedicada a pegar a informação do campo pesquisa, madar para o banco e atualizar a tabela'''
+        nome = self.campoNome.getValue()
+        data = self.campoData.getValue()
+        resultados = None
+
+        # Se os 2 Campos estão com dados
+        data = VerificadorData(data).verificar()
+
+        if (nome != ''and data[0]):
+            resultados = ag.pesquisaNomeData(nome,data[1])
+
+        elif(nome != '' and not data[0]):
+            resultados = ag.pesquisaNome(nome)
+
+        elif(nome == '' and data[0]):
+            resultados = ag.pesquisaData(data[1])
+        
+        else:
+            resultados = ag.pesquisaTudo()
+
+        if (resultados != None):
+            self.tabela.dados = resultados
+            self.tabela.montaTabela()
+            self.page.update()
 
     def Salvar(self,e):
         # Dedicado ao Novo Cadastro
@@ -72,12 +98,15 @@ class Agendamento(ft.UserControl):
             héValido = VerificadorData(x['data']).verificar()
 
             if(héValido[0]):
-                print(héValido[1])
-                ag.insert(str(héValido[1]),x['hora'],int(x['idNome']))
-                self.tabela.dados = ag.select("SELECT * from agendamento_consulta ORDER BY dataAgendCon,horarioAgendCon;")
-                self.tabela.montaTabela()
-                self.painelAgendamento.resetValue()
-
+                if(x['hora'] != ''):
+                    data = héValido[1].strftime("%d/%m/%Y")
+                    ag.insert(data,x['hora'],int(x['idNome']))
+                    self.tabela.dados = ag.pesquisaData(héValido[1])
+                    self.tabela.montaTabela()
+                    self.painelAgendamento.resetValue()
+                else:
+                    msg = "Hora Invalida"
+                    cor = ft.colors.RED_700
             else:
                 msg = héValido[1] # retorna msg de erro
                 cor = ft.colors.RED_700

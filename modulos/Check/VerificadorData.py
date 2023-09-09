@@ -13,7 +13,5 @@ class VerificadorData:
             self.axiliar = date(int(self.axiliar[6:]),int(self.axiliar[3:5]),int(self.axiliar[0:2]))
         except ValueError:
             return [False,"Data Invalida!"]
-       
-        self.axiliar = self.axiliar.strftime("%d/%m/%Y")
 
         return [True,self.axiliar]
