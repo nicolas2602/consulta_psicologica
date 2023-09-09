@@ -19,8 +19,8 @@ class Painel(ft.UserControl):
                 self.__form.build(),
                 ft.Row(
                     [   ## Botões ##
-                        ActionButton('Cancelar',ft.colors.RED,ft.icons.CANCEL_OUTLINED, self.Cancelar).build(),
                         ActionButton('Salvar',ft.colors.GREEN_800,ft.icons.FILE_DOWNLOAD_DONE_ROUNDED, funçãoSalvar).build(),
+                        ActionButton('Cancelar',ft.colors.RED,ft.icons.CANCEL_OUTLINED, self.Cancelar).build(),
                     ]
                 )   
             ]

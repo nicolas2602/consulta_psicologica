@@ -1,4 +1,5 @@
 import flet as ft
+from Itens.components.buttons.ActionButton import ActionButton
 from time import sleep
 
 class Checagem(ft.UserControl):
@@ -14,8 +15,8 @@ class Checagem(ft.UserControl):
             content=ft.Text(msg),
             actions=[
                 ## botões ##
-                ft.TextButton("Sim", on_click= self.__setResutado),
-                ft.TextButton("Não", on_click= self.__fecharDialogo),
+                ActionButton("Sim", ft.colors.GREEN_800,ft.icons.FILE_DOWNLOAD_DONE_ROUNDED,self.__setResutado).build(),
+                ActionButton("Não",ft.colors.RED, ft.icons.CANCEL_OUTLINED,self.__fecharDialogo).build(),
             ],
             actions_alignment=ft.MainAxisAlignment.END,
             on_dismiss=lambda e: print("Modal dialog dismissed!"),)
