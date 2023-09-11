@@ -2,6 +2,7 @@ import flet as ft
 from Itens.MenuPrincipal import MenuPrincipal
 from Itens.Cadastro import Cadastro
 from Itens.Agendamento import Agendamento
+from Itens.Pagamento import Pagamento
 
 class TodoApp(ft.UserControl):
     '''Classe como as Definições dos menus'''
@@ -10,10 +11,12 @@ class TodoApp(ft.UserControl):
 
 
     def build(self):
-        self.menu = MenuPrincipal(self.cadastro, self.agendamento,self.anotações,self.pagamentos)
+        self.menu = MenuPrincipal(self.cadastro, self.agendamento,self.anotações,self.pagamentos,self.graficos)
 
         self.bodyCadastro = Cadastro(self.page).build()
         self.bodyAgendamento = Agendamento(self.page).build()
+        self.bodyAnotacoes = ""
+        self.bodyPagamento = Pagamento(self.page).build()
 
         self.desiner =ft.Row(
                 controls=[
@@ -66,10 +69,21 @@ class TodoApp(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Pagamentos... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyPagamento)
 
         else:
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Pagamentos... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyPagamento)
+        self.page.update()
+
+    def graficos(self,e):
+        '''Quando selecionado, abre o janela graficos'''
+        #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
+        if (len(self.desiner.controls) > 2):
+            self.desiner.controls.pop(2)
+            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Graficos... Em Desenvolvimento...",size=20)]))
+
+        else:
+            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Graficos... Em Desenvolvimento...",size=20)]))
         self.page.update()
 
         
