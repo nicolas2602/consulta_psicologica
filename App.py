@@ -3,10 +3,10 @@ import flet as ft
 
 config_page={
     'color': ft.colors.BROWN_50,
-    'width': 1150,
-    'height':600,
+    'width': 1200,
+    'height':700,
     'min_height': 600,
-    'min_width':1150,
+    'min_width':1220,
     'title': "PsicoTeck"
 }
 
