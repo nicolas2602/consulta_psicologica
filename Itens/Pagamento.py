@@ -2,6 +2,7 @@ import flet as ft
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.buttons.ActionButton import ActionButton
 from Itens.Campo.CampoDrop import CampoDrop
+from Itens.Tabela.TabelaPagamento import TabelaPagamento
 from Itens.components.Carregamento import Carregamento
 from Itens.components.Titulo import Titulo
 from time import sleep,strftime
@@ -26,6 +27,7 @@ class Pagamento(ft.UserControl):
 
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH).build()
 
+        self.tabela = TabelaPagamento(self.page)
 
         self.designer = ft.Column(
             controls=[
@@ -34,8 +36,10 @@ class Pagamento(ft.UserControl):
                 ft.Row([self.campoNome.build(), self.campoDataInicio.build(), self.campoDataFinal.build(), self.campoStatusPG.build(), self.botaoPesquisa], alignment= ft.MainAxisAlignment.CENTER, spacing= 15),
                 ft.Divider(color=ft.colors.GREEN_900),
 
+                ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True),
+                
                 ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Pagamentos... Em Desenvolvimento...",size=20)])
-                #ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True) 
+                 
             ],
             expand=True,
         )
