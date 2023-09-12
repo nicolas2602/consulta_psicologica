@@ -77,7 +77,7 @@ DELETE FROM pagamento WHERE IdPagamento=1;
 
 --Campo de pesquisa com ordenação crescente
 SELECT IdPagamento, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, 
-       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
+       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') AS valorPagmento,
        IFNULL(DATE_FORMAT(dataPagamento, '%d/%m/%Y'), 'Em acerto') as dataPagamento, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
 FROM pagamento AS pg 
 LEFT JOIN agendamento_consulta AS cs ON pg.fk_IdAgendCon = cs.IdAgendCon
