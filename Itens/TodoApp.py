@@ -1,91 +1,62 @@
 import flet as ft
-from Itens.MenuPrincipal import MenuPrincipal
-from Itens.Cadastro import Cadastro
-from Itens.Agendamento import Agendamento
-from Itens.Pagamento import Pagamento
+from Itens.Principal import Principal
+from Itens.Logging import Logging
+from Itens.components.Carregamento import Carregamento
+from Itens.Painel.PopUp import PopUp
+from time import sleep
 
 class TodoApp(ft.UserControl):
-    '''Classe como as Definições dos menus'''
+
     def __init__(self,page):
         self.page = page
 
+        self.login = Logging(self.page, self.logar)
+
+        self.name = 'sistem'
+        self.password = '1234'
+
+        self.Carregar = Carregamento(self.page,"Carregando...")
+
+        self.pagePrincipal = Principal(self.page, self.sair)
+
+        self.designer = ft.Container(content = self.login.build(),expand=True)
 
     def build(self):
-        self.menu = MenuPrincipal(self.cadastro, self.agendamento,self.anotações,self.pagamentos,self.graficos)
+        return self.designer
 
-        self.bodyCadastro = Cadastro(self.page).build()
-        self.bodyAgendamento = Agendamento(self.page).build()
-        self.bodyAnotacoes = ""
-        self.bodyPagamento = Pagamento(self.page).build()
+    def openPopUp(self,msg,cor):
+        '''Abre o msg informando o resultado da ação'''
+        self.pop = PopUp(msg,cor).build()    
+        self.page.snack_bar = self.pop
+        self.page.snack_bar.open = True
+        self.page.update()
 
-        self.desiner =ft.Row(
-                controls=[
-                    self.menu.build(),
-                    #ft.Divider(color=ft.colors.GREEN_900),
-                    ft.VerticalDivider(color=ft.colors.GREEN_900)
-                ],
-                expand=True
-            )
+    def logar(self,e):
+        self.Carregar.openCarregamento(e)
+        sleep(0.2)
+        x =self.login.getValue()
+
+        resutLog = (x['login'] == self.name)
+        resutSn = (x['senha'] == self.password)
         
+        msg = "Loggin e Senha incorretas!"
 
-        return self.desiner
-
-    def cadastro(self,e):
-        '''Quando selecionado, abre o janela cadastro'''
-
-        #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
-        if (len(self.desiner.controls) > 2):
-            self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyCadastro)
+        if (resutLog and resutSn):
+            self.login.limpar()
+            sleep(0.2)
+            self.designer.content = self.pagePrincipal.build()
+            sleep(0.3)
+            self.Carregar.closeCarregamento(e)
 
         else:
-            self.desiner.controls.append(self.bodyCadastro)
-        self.page.update()
+            sleep(0.5)
+            self.Carregar.closeCarregamento(e)
+            self.openPopUp(msg,ft.colors.RED)
+            self.page.update()
 
-    def agendamento(self,e):
-        '''Quando selecionado, abre o janela Agendamento consultas'''
-        #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
-        if (len(self.desiner.controls) > 2):
-            self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyAgendamento)
-
-        else:
-            self.desiner.controls.append(self.bodyAgendamento)
-        self.page.update()
-
-    def anotações(self,e):
-        '''Quando selecionado, abre o janela anotações'''
-        #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
-        if (len(self.desiner.controls) > 2):
-            self.desiner.controls.pop(2)
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Anotações... Em Desenvolvimento...",size=20)]))
-
-        else:
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Anotações... Em Desenvolvimento...",size=20)]))
-        self.page.update()
-
-    def pagamentos(self,e):
-        '''Quando selecionado, abre o janela pagamentos'''
-        #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
-        if (len(self.desiner.controls) > 2):
-            self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyPagamento)
-
-        else:
-            self.desiner.controls.append(self.bodyPagamento)
-        self.page.update()
-
-    def graficos(self,e):
-        '''Quando selecionado, abre o janela graficos'''
-        #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
-        if (len(self.desiner.controls) > 2):
-            self.desiner.controls.pop(2)
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Graficos... Em Desenvolvimento...",size=20)]))
-
-        else:
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Graficos... Em Desenvolvimento...",size=20)]))
-        self.page.update()
-
-        
-    
-        
+    def sair(self,e):
+        self.Carregar.openCarregamento(e)
+        sleep(0.2)
+        self.designer.content = self.login.build()
+        sleep(0.2)
+        self.Carregar.closeCarregamento(e)
