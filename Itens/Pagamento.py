@@ -1,10 +1,12 @@
 import flet as ft
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.buttons.ActionButton import ActionButton
-from Itens.Campo.CampoDrop import CampoDrop
+from Itens.Campo.CampoDropStatus import CampoDropStatus
 from Itens.Tabela.TabelaPagamento import TabelaPagamento
 from Itens.components.Carregamento import Carregamento
+from modulos.Check.VerificadorData import VerificadorData
 from Itens.components.Titulo import Titulo
+import bd_pagamento.pagamento as pg
 from time import sleep,strftime
 
 class Pagamento(ft.UserControl):
@@ -18,14 +20,16 @@ class Pagamento(ft.UserControl):
 
         self.campoNome = CampoFormulario("Digite o nome:")
         
-        self.campoDataInicio = CampoFormulario("Data Inicial",strftime("%d/%m/%Y"),120)
+        self.campoDataInicio = CampoFormulario("Data Inicial",None,120)
 
-        self.campoDataFinal = CampoFormulario("Data Final",strftime("%d/%m/%Y"),120)
+        self.campoDataFinal = CampoFormulario("Data Final",None,120)
 
-        self.campoStatusPG = CampoDrop("Status",['Todos','Pago','Não Pago', 'Em Andamento'],160)
+        self.StatusPGLista = pg.listaStatusPg()
+
+        self.campoStatusPG = CampoDropStatus("Status",self.StatusPGLista,160)
         self.campoStatusPG.setValue('Todos')
 
-        self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH).build()
+        self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
 
         self.tabela = TabelaPagamento(self.page)
 
@@ -37,12 +41,30 @@ class Pagamento(ft.UserControl):
                 ft.Divider(color=ft.colors.GREEN_900),
 
                 ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True),
-                
-                ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Pagamentos... Em Desenvolvimento...",size=20)])
-                 
+                    
             ],
             expand=True,
         )
-
    
         return self.designer
+    
+    def getPesquisa(self,e):
+        '''Função dedicada a pegar a informação do campo pesquisa, madar para o banco e atualizar a tabela'''
+        nome = self.campoNome.getValue()
+        dataInicial = self.campoDataInicio.getValue()
+        datafinal = self.campoDataFinal.getValue()
+        status = self.campoStatusPG.getValue()
+
+        # Se os 2 Campos estão com dados
+        dataInicial = VerificadorData(dataInicial).verificar()
+        datafinal = VerificadorData(datafinal).verificar()
+
+        if (dataInicial[0] and datafinal[0]):
+            resultados = pg.pesquisarComTodasInfo(nome,status[1],dataInicial[1],datafinal[1])
+
+        else:
+            resultados = pg.pesquisarSemData(nome,status[1])
+
+        self.tabela.dados = resultados
+        self.tabela.montaTabela()
+        self.page.update()

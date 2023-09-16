@@ -9,6 +9,7 @@ from Itens.Painel.PainelAgendamento import PainelAgendamento
 from Itens.components.Titulo import Titulo
 from modulos.Check.VerificadorData import VerificadorData
 import bd_agend.agendamento as ag
+import bd_pagamento.pagamento as pg
 
 
 class Agendamento(ft.UserControl):
@@ -82,7 +83,7 @@ class Agendamento(ft.UserControl):
         '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
 
         x = self.painelAgendamento.getValue()
-        print(x)
+
         self.painelAgendamento.fechar(e)
         sleep(0.3)
 
@@ -103,7 +104,16 @@ class Agendamento(ft.UserControl):
             if(héValido[0]):
                 if(x['hora'] != ''):
                     data = héValido[1].strftime("%d/%m/%Y")
+
+                    #### INSERE AGENDAMENTO NO BD #####
                     ag.insert(data,x['hora'],int(x['idNome']))
+                    sleep(0.5)
+
+                    #### INSERE PAGAMENTO NO BD #####
+                    novoDados = ag.pesquisaIdNomeDataHora(x['idNome'],héValido[1],x['hora'])
+                    pg.insertAgendPg(100.00,novoDados[0][0],2)
+
+                    #### ATUALIZA A TABELA ####
                     self.tabela.dados = ag.pesquisaData(héValido[1])
                     self.tabela.montaTabela()
                     self.painelAgendamento.resetValue()

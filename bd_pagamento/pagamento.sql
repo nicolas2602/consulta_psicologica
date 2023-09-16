@@ -36,7 +36,7 @@ drop table pagamento;
 
 /* Criar a tabela pagamento e seus atributos */
 CREATE TABLE pagamento(
-    IdPagamento INT PRIMARY KEY AUTO_INCREMENT,
+    IdPagamento INT PRIMARY KEY NOT NULL,
     valorPagamento DECIMAL(10,2),
     dataPagamento DATE
 );
@@ -106,3 +106,24 @@ WHERE nomeCliente like '%Nicolas%' AND
 ORDER BY YEAR(dataAgendCon) DESC, 
          MONTH(dataAgendCon) DESC, 
          DAY(dataAgendCon) DESC;
+
+SELECT IdPagamento,
+        fk_IdAgendCon,
+        dataAgendCon AS dataAgendCon, 
+        horarioAgendCon AS horarioAgendCon,
+        nomeCliente,
+        valorPagamento AS valorPagmento,
+        dataPagamento AS dataPagamento,
+        fk_IdFormaPag,
+        descFormaPag AS descFormaPag,
+        fk_IdStatusPag,
+        descStatusPag
+FROM pagamento AS pg
+LEFT JOIN agendamento_consulta AS cs ON pg.fk_IdAgendCon = cs.IdAgendCon
+LEFT JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente
+LEFT JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag
+LEFT JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag
+WHERE nomeCliente like '%N%' AND
+    descStatusPag like '%%' OR
+    dataPagamento BETWEEN '2023-09-01' AND '2023-09-30'
+    ORDER BY dataAgendCon;
