@@ -11,9 +11,16 @@ try:
 
     cursor = conexao.cursor()
 
+    resultado = True
+
     def fechar():
         cursor.close()
         conexao.close()
 
 except Error as erro:
     print(f"Erro de conexão: {erro}")
+    resultado = False
+
+
+def statosConexao():
+    return resultado

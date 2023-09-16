@@ -1,9 +1,12 @@
 import flet as ft
+import bd.funcao.conexao as bd
 from Itens.Principal import Principal
 from Itens.Logging import Logging
 from Itens.components.Carregamento import Carregamento
 from Itens.Painel.PopUp import PopUp
+from Itens.SemConexao import SemConexao
 from time import sleep
+
 
 class TodoApp(ft.UserControl):
 
@@ -21,8 +24,12 @@ class TodoApp(ft.UserControl):
 
         self.designer = ft.Container(content = self.login.build(),expand=True)
 
+
     def build(self):
-        return self.designer
+        if not bd.statosConexao():
+            return SemConexao().build()
+        else:
+            return self.designer
 
     def openPopUp(self,msg,cor):
         '''Abre o msg informando o resultado da ação'''
