@@ -23,9 +23,9 @@ class Agendamento(ft.UserControl):
 
         self.addBotao = ActionButton('Adicionar',ft.colors.GREEN_800,ft.icons.ADD , self.openPainel).build()
         
-        self.campoNome = CampoFormulario("Digite o nome:")
+        self.campoNome = CampoFormulario("Digite o nome:",None,None,self.getPesquisa)
         
-        self.campoData = CampoFormulario("Data",strftime("%d/%m/%Y"),120)
+        self.campoData = CampoFormulario("Data",strftime("%d/%m/%Y"),120,self.getPesquisa)
         
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
 

@@ -11,7 +11,7 @@ class Logging(ft.UserControl):
         self.page = page
 
         self.campoLog = CampoFormulario("Login")
-        self.campoSn = CampoFormularioSenha("Senha")
+        self.campoSn = CampoFormularioSenha("Senha",None,None,fLogar)
         self.iconBotao = IconButton(ft.icons.VISIBILITY, ft.colors.BLACK54, self.visualizaSenha)
         self.LogBotao = ActionButton("Login",ft.colors.PRIMARY, None, fLogar)
 

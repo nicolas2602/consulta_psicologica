@@ -23,7 +23,7 @@ class Cadastro(ft.UserControl):
 
         self.addBotao = ActionButton('Adicionar',ft.colors.GREEN_800,ft.icons.ADD, self.openPainel).build()
 
-        self.campoPesquisa = CampoFormulario("Pesquisa por nome")
+        self.campoPesquisa = CampoFormulario("Pesquisa por nome",None,None,self.getPesquisa)
         
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
 

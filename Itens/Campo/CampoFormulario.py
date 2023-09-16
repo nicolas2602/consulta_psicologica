@@ -3,7 +3,7 @@ import flet as ft
 class CampoFormulario(ft.UserControl):
     '''Campo de Digitação Estilizado para o Projeto'''
         
-    def __init__(self, nome = None, valor = None, largura = None):
+    def __init__(self, nome = None, valor = None, largura = None, funcao=None):
 
         self.__nome = nome
 
@@ -18,7 +18,8 @@ class CampoFormulario(ft.UserControl):
             value= valor,
             border_color= ft.colors.GREEN_900,
             border_radius = 15,
-            width= largura
+            width= largura,
+            on_submit= funcao
             )
 
     def build(self):
