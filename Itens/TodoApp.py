@@ -5,6 +5,7 @@ from Itens.Logging import Logging
 from Itens.components.Carregamento import Carregamento
 from Itens.Painel.PopUp import PopUp
 from Itens.SemConexao import SemConexao
+from modulos.AtualizarPagamento import AtualizarPagamento
 from time import sleep
 
 
@@ -49,6 +50,9 @@ class TodoApp(ft.UserControl):
         msg = "Loggin e Senha incorretas!"
 
         if (resutLog and resutSn):
+            #### Atualiza as Guia de Pagamento ####
+            AtualizarPagamento().atualizar()
+
             self.login.limpar()
             sleep(0.2)
             self.designer.content = self.pagePrincipal.build()
