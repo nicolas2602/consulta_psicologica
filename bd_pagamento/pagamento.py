@@ -10,8 +10,8 @@ def insertAgendPg(valor,IdAgendCon, IdStatus):
                                             ({IdAgendCon},{valor}, {IdAgendCon}, {IdStatus})")
     con.conexao.commit()
 
-def update(id, valor, dataHora, IdAgendCon, IdStatus, IdFormaPag):
-    sql = f"UPDATE pagamento SET valorPagamento={valor}, dataHoraPag='{dataHora}', fk_IdAgendCon={IdAgendCon}, \
+def update(id, valor, dataHora, IdStatus, IdFormaPag):
+    sql = f"UPDATE pagamento SET valorPagamento={valor}, dataPagamento='{dataHora}', \
            fk_IdStatusPag={IdStatus}, fk_IdFormaPag={IdFormaPag} WHERE IdPagamento={id}"
     con.cursor.execute(sql)
     con.conexao.commit()
@@ -28,6 +28,10 @@ def select(sql):
 
 def listaStatusPg():
     resultado = select(f"SELECT * FROM status_pagamento")
+    return resultado
+
+def listaFormaPg():
+    resultado = select(f"SELECT * FROM forma_pagamento")
     return resultado
 
 def pesquisarComTodasInfo(nome,statusPag,dataInicio,datafim):

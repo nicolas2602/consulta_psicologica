@@ -3,14 +3,12 @@ import flet as ft
 class CampoDropStatus(ft.UserControl):
     '''Campo com opções de seleção estilizado para o Projeto'''
         
-    def __init__(self, nome = None, listaOpções = None, width = None):
+    def __init__(self, nome = None, listaOpções = None, width = None, AddTODOS = False):
 
         self.__nome = nome
         self.__lista = listaOpções
-        # self.__config_form = {
-        #     'color': ft.colors.BLACK,
-        #     'bg': ft.colors.GREEN_700
-        # }
+        
+        self.__Todos = AddTODOS
 
         self.__desiner = ft.Dropdown(
             width= width,
@@ -28,7 +26,8 @@ class CampoDropStatus(ft.UserControl):
         return self.__desiner
     
     def addlista(self):
-        self.__desiner.options.append(ft.dropdown.Option("Todos"))
+        if (self.__Todos):
+            self.__desiner.options.append(ft.dropdown.Option("Todos"))
 
         for item in self.__lista:
             self.__desiner.options.append(ft.dropdown.Option(item[1]))

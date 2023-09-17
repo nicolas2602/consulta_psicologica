@@ -26,7 +26,7 @@ class Pagamento(ft.UserControl):
 
         self.StatusPGLista = pg.listaStatusPg()
 
-        self.campoStatusPG = CampoDropStatus("Status",self.StatusPGLista,160)
+        self.campoStatusPG = CampoDropStatus("Status",self.StatusPGLista,160,True)
         self.campoStatusPG.setValue('Todos')
 
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
