@@ -3,6 +3,8 @@ from Itens.MenuPrincipal import MenuPrincipal
 from Itens.Cadastro import Cadastro
 from Itens.Agendamento import Agendamento
 from Itens.Pagamento import Pagamento
+from Itens.Anotacoes import Anotacoes
+from Itens.Configuracoes import Configuracoes
 
 class Principal(ft.UserControl):
     '''Classe como as Definições dos menus'''
@@ -15,8 +17,10 @@ class Principal(ft.UserControl):
 
         self.bodyCadastro = Cadastro(self.page).build()
         self.bodyAgendamento = Agendamento(self.page).build()
-        self.bodyAnotacoes = ""
+        self.bodyAnotacoes = Anotacoes(self.page).build()
         self.bodyPagamento = Pagamento(self.page).build()
+        self.bodyConfiguracao = Configuracoes(self.page).build()
+
 
         self.desiner =ft.Row(
                 controls=[
@@ -58,10 +62,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Anotações... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyAnotacoes)
 
         else:
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Anotações... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyAnotacoes)
         self.page.update()
 
     def pagamentos(self,e):
@@ -91,10 +95,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Configurações... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyConfiguracao)
 
         else:
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Configurações... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyConfiguracao)
         self.page.update()    
     
         

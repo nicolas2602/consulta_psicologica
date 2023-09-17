@@ -101,7 +101,7 @@ def pesquisarSemData(nome,statusPag,):
         LEFT JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag \
         WHERE nomeCliente like '%{nome}%' AND \
         descStatusPag like '%{statusPag}%' \
-        ORDER BY dataAgendCon;"
+        ORDER BY dataAgendCon,horarioAgendCon;"
 
     con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
