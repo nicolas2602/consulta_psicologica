@@ -117,7 +117,7 @@ class TabelaPagamento(ft.UserControl):
             if(héValido[0]):
                 
                 data = héValido[1]
-                pg.update(x['id'],x['valor'],data,x['formaPagamento'][0],x['statusPatamento'][0])
+                pg.update(x['id'],x['valor'],data,x['statusPatamento'][0],x['formaPagamento'][0])
                 self.dados = pg.pesquisarSemData('','')
                 self.montaTabela()
                 self.painelEditar.resetValue()
