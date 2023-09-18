@@ -37,7 +37,7 @@ drop table pagamento;
 /* Criar a tabela pagamento e seus atributos */
 CREATE TABLE pagamento(
     IdPagamento INT PRIMARY KEY AUTO_INCREMENT,
-    valorPagamento DECIMAL(10,2),
+    valorPagamento VARCHAR(12),
     dataPagamento DATE
 );
 
@@ -52,7 +52,7 @@ ALTER TABLE pagamento
     ADD FOREIGN KEY (fk_IdFormaPag) REFERENCES forma_pagamento(IdFormaPag);
 
 -- Inserir os dados na tabela pagamento
-INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) VALUES (50.00, '2023-11-22', 1, 1, 1);
+INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) VALUES ('50.00', '2023-11-22', 1, 1, 1);
 
 -- Inserir no início da consulta
 INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) VALUES (NULL, NULL, 1, 2, NULL);

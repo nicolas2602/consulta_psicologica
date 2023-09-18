@@ -17,7 +17,6 @@ CREATE TABLE cliente(
     emailCliente VARCHAR(100) UNIQUE,
     telefoneCliente VARCHAR(100) NOT NULL UNIQUE
 );
-
 -- Inserir dados na tabela cliente
 
 INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente) VALUES ('Nicolas', 'Yonekawa', 'nicolas@gmail.com', '11996274706');
