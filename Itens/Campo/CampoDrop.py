@@ -37,3 +37,6 @@ class CampoDrop(ft.UserControl):
     
     def setValue(self,valor = None):
         self.__desiner.value = valor
+
+    def setNaoAlter(self,valor = False):
+        self.__desiner.disabled = valor

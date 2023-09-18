@@ -1,5 +1,8 @@
 import flet as ft
 from Itens.components.Titulo import Titulo
+from Itens.Campo.Config.Sobre import Sobre
+from Itens.Campo.Config.ConfigHoras import ConfigHoras
+from Itens.Campo.Config.ConfigSenha import ConfigSenha
 
 class Configuracoes(ft.UserControl):
     ''' Janela do Campo MENU Anotações Consultas.
@@ -16,33 +19,23 @@ class Configuracoes(ft.UserControl):
                 text="Horários",
                 icon=ft.icons.ACCESS_TIME,
                 content=ft.Container(
-                    content=ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Configurações... Em Desenvolvimento...",size=20)])
+                    content=ConfigHoras(self.page).build()
                 ),
             ),
             ft.Tab(
                 text="Pagamentos",
                 icon=ft.icons.MONETIZATION_ON,
-                content=ft.Text("This is Tab 2"),
+                content=ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Configurações... Em Desenvolvimento...",size=20)])
             ),
             ft.Tab(
                 text="Senhas",
                 icon=ft.icons.KEY,
-                content=ft.Text("This is Tab 3"),
+                content= ConfigSenha(self.page).build()
             ),
             ft.Tab(
                 text="Sobre",
                 icon=ft.icons.INFO,
-                content=ft.Column([
-                    ft.Text("PsicoTeck"),
-                    ft.Text("Desenvolvido pelos alunos do 4º sementre de sistemas de Informação"),
-                    ft.Text("Integrantes:"),
-                    ft.Text("Caio"),
-                    ft.Text("Eduardo"),
-                    ft.Text("Gabriel"),
-                    ft.Text("Lucas"),
-                    ft.Text("Nicolas"),
-                    ft.Text("Olivia"),
-                    ])
+                content= Sobre().build()
             ),
         ],
         expand=1,

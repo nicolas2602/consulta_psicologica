@@ -12,3 +12,6 @@ class IconButton(ft.UserControl):
 
     def build(self):
         return self.__desiner
+    
+    def setNaoAlter(self,valor = False):
+        self.__desiner.disabled = valor
