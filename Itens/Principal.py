@@ -5,6 +5,7 @@ from Itens.Agendamento import Agendamento
 from Itens.Pagamento import Pagamento
 from Itens.Anotacoes import Anotacoes
 from Itens.Configuracoes import Configuracoes
+from Itens.Graficos import Graficos
 
 class Principal(ft.UserControl):
     '''Classe como as Definições dos menus'''
@@ -20,6 +21,7 @@ class Principal(ft.UserControl):
         self.bodyAnotacoes = Anotacoes(self.page).build()
         self.bodyPagamento = Pagamento(self.page).build()
         self.bodyConfiguracao = Configuracoes(self.page).build()
+        self.bodyGraficos = Graficos().build()
 
 
         self.desiner =ft.Row(
@@ -84,10 +86,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Graficos... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyGraficos)
 
         else:
-            self.desiner.controls.append(ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Graficos... Em Desenvolvimento...",size=20)]))
+            self.desiner.controls.append(self.bodyGraficos)
         self.page.update()
 
     def configuracoes(self,e):
