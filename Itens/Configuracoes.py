@@ -3,6 +3,7 @@ from Itens.components.Titulo import Titulo
 from Itens.Campo.Config.Sobre import Sobre
 from Itens.Campo.Config.ConfigHoras import ConfigHoras
 from Itens.Campo.Config.ConfigSenha import ConfigSenha
+from Itens.Campo.Config.ConfigPagamento import ConfigPagamento
 
 class Configuracoes(ft.UserControl):
     ''' Janela do Campo MENU Anotações Consultas.
@@ -25,7 +26,7 @@ class Configuracoes(ft.UserControl):
             ft.Tab(
                 text="Pagamentos",
                 icon=ft.icons.MONETIZATION_ON,
-                content=ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Configurações... Em Desenvolvimento...",size=20)])
+                content=ConfigPagamento(self.page).build()
             ),
             ft.Tab(
                 text="Senhas",
