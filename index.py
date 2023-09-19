@@ -3,6 +3,7 @@ import funcao.cliente as cl # cliente
 import funcao.agendamento as cs # agenda
 import funcao.anotacao_consulta as at # assunto
 import funcao.pagamento as pg # pagamento
+import funcao.login as lg
 import datetime
 
 sql_teste = "SELECT IdAnotCon, descAnotCon, dataConsulta, horarioConsulta as horarioConsulta \
@@ -22,6 +23,9 @@ print("Sem função do MySQL")
 print(teste)
 print()
 print("Com algumas funções do MySQL")
+print(r)
+
+r = lg.logar('admin', 'admin12')
 print(r)
 
 # Fechar a conexão MySQL

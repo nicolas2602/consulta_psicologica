@@ -59,9 +59,9 @@ INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusP
 
 -- Exibir os dados na tabela pagamento
 
-SELECT IdPagamento, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, 
-       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
-       IFNULL(DATE_FORMAT(dataPagamento, '%d/%m/%Y'), 'Em acerto') as dataPagamento, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
+SELECT IdPagamento, dataAgendCon AS dataAgendCon, 
+       horarioAgendCon AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
+       IFNULL(dataPagamento, 'Em acerto') as dataPagamento, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
 FROM pagamento AS pg 
 LEFT JOIN agendamento_consulta AS cs ON pg.fk_IdAgendCon = cs.IdAgendCon
 LEFT JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente
@@ -76,32 +76,32 @@ UPDATE pagamento SET valorPagamento=45.00 WHERE IdPagamento=1;
 DELETE FROM pagamento WHERE IdPagamento=1;
 
 --Campo de pesquisa com ordenação crescente
-SELECT IdPagamento, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, 
-       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
-       IFNULL(DATE_FORMAT(dataPagamento, '%d/%m/%Y'), 'Em acerto') as dataPagamento, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
+SELECT IdPagamento, dataAgendCon, dataAgendCon, 
+       horarioAgendCon AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
+       IFNULL(dataPagamento, 'Em acerto') as dataPagamento, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
 FROM pagamento AS pg 
 LEFT JOIN agendamento_consulta AS cs ON pg.fk_IdAgendCon = cs.IdAgendCon
 LEFT JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente
 LEFT JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag
 LEFT JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag
-WHERE nomeCliente like '%Nicolas%' AND 
-      dataPagamento BETWEEN STR_TO_DATE('22/09/2022', '%d/%m/%Y') AND STR_TO_DATE('22/09/2023', '%d/%m/%Y') AND
+WHERE nomeCliente like '%Gabriel%' AND 
+      dataPagamento BETWEEN '2022-09-22' AND '2023-09-22' AND
       descStatusPag like '%Concluído%'
 ORDER BY YEAR(dataAgendCon) ASC, 
          MONTH(dataAgendCon) ASC, 
          DAY(dataAgendCon) ASC;
 
 --Campo de pesquisa com ordenação decrescente
-SELECT IdPagamento, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, 
-       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
-       IFNULL(DATE_FORMAT(dataPagamento, '%d/%m/%Y'), 'Em acerto') as dataPagamento, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
+SELECT IdPagamento, dataAgendCon, dataAgendCon, 
+       horarioAgendCon AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
+       IFNULL(dataPagamento, 'Em acerto') as dataPagamento, IFNULL(descFormaPag, 'Em acerto') AS descFormaPag, descStatusPag
 FROM pagamento AS pg 
 LEFT JOIN agendamento_consulta AS cs ON pg.fk_IdAgendCon = cs.IdAgendCon
 LEFT JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente
 LEFT JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag
 LEFT JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag
 WHERE nomeCliente like '%Nicolas%' AND 
-      dataPagamento BETWEEN STR_TO_DATE('22/09/2022', '%d/%m/%Y') AND STR_TO_DATE('22/09/2023', '%d/%m/%Y') AND
+      dataPagamento BETWEEN '2022-09-22' AND '2023-09-22' AND
       descStatusPag like '%Concluído%'
 ORDER BY YEAR(dataAgendCon) DESC, 
          MONTH(dataAgendCon) DESC, 

@@ -22,12 +22,10 @@ ALTER TABLE agendamento_consulta
     ADD FOREIGN KEY (fk_IdCliente) REFERENCES cliente(IdCliente);
 
 -- Inserir dados na tabela agenda
-INSERT INTO agendamento_consulta SET dataAgendCon=STR_TO_DATE('24/09/2022','%d/%m/%Y'), horarioAgendCon='18:00:00', fk_IdCliente = 2;
+INSERT INTO agendamento_consulta SET dataAgendCon='2022-09-22', horarioAgendCon='18:00:00', fk_IdCliente = 2;
 
 -- Exibir os dados da tabela agenda com datas e horários formatados para o padrão brasileiro
-SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
-        TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
-        nomeCliente
+SELECT IdAgendCon, dataAgendCon, horarioAgendCon, nomeCliente
 FROM agendamento_consulta as cs 
 INNER JOIN cliente as cl 
 ON cs.fk_IdCliente = cl.IdCliente;
@@ -39,27 +37,23 @@ UPDATE agendamento_consulta SET dataAgendCon='2023-08-22' WHERE IdAgendCon=2;
 DELETE FROM agendamento_consulta WHERE IdAgendCon=2;
 
 -- Campo de pesquisa e ordenação por data (crescente)
-SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
-        TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
-        nomeCliente
+SELECT IdAgendCon, dataAgendCon, horarioAgendCon, nomeCliente
 FROM agendamento_consulta as cs 
 INNER JOIN cliente as cl 
 ON cs.fk_IdCliente = cl.IdCliente
 WHERE nomeCliente like '%Nicolas%'
-AND dataAgendCon like STR_TO_DATE('21/08/2022','%d/%m/%Y')
+AND dataAgendCon like '%2022-08-21%'
 ORDER BY YEAR(dataAgendCon) ASC, 
          MONTH(dataAgendCon) ASC, 
          DAY(dataAgendCon) ASC;
 
 -- Campo de pesquisa e ordenação por data (decrescente)
-SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon,
-        TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,
-        nomeCliente
+SELECT IdAgendCon, dataAgendCon, horarioAgendCon, nomeCliente
 FROM agendamento_consulta as cs 
 INNER JOIN cliente as cl 
 ON cs.fk_IdCliente = cl.IdCliente
 WHERE nomeCliente like '%Nicolas%'
-AND dataAgendCon like STR_TO_DATE('21/08/2022','%d/%m/%Y')
+AND dataAgendCon like '%2022-08-21%'
 ORDER BY YEAR(dataAgendCon) DESC, 
          MONTH(dataAgendCon) DESC, 
          DAY(dataAgendCon) DESC;

@@ -27,8 +27,8 @@ INSERT INTO anotacao_consulta(descAnotCon, tituloAnotCon, fk_IdAgendCon) VALUES 
 
 -- Exibir todos dados na tabela assunto
 
-SELECT IdAnotCon, tituloAnotCon, descAnotCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, 
-       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, nomeCliente
+SELECT IdAnotCon, tituloAnotCon, descAnotCon, dataAgendCon, 
+       horarioAgendCon, nomeCliente
 FROM anotacao_consulta AS an
 INNER JOIN agendamento_consulta AS cs
 ON an.fk_IdAgendCon = cs.IdAgendCon
@@ -44,8 +44,8 @@ UPDATE anotacao_consulta SET descAnotCon='Assunto 2' WHERE IdAnotCon=1;
 DELETE FROM anotacao_consulta WHERE IdAnotCon=1;
 
 -- Campo de pesquisa
-SELECT IdAnotCon, tituloAnotCon, descAnotCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, 
-       TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon, nomeCliente
+SELECT IdAnotCon, tituloAnotCon, descAnotCon, dataAgendCon, 
+       horarioAgendCon, nomeCliente
 FROM anotacao_consulta AS an
 INNER JOIN agendamento_consulta AS cs
 ON an.fk_IdAgendCon = cs.IdAgendCon
