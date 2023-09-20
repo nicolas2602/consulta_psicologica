@@ -22,7 +22,8 @@ ALTER TABLE agendamento_consulta
     ADD FOREIGN KEY (fk_IdCliente) REFERENCES cliente(IdCliente);
 
 -- Inserir dados na tabela agenda
-INSERT INTO agendamento_consulta SET dataAgendCon='2022-09-22', horarioAgendCon='18:00:00', fk_IdCliente = 2;
+-- INSERT INTO agendamento_consulta SET dataAgendCon='2022-09-22', horarioAgendCon='18:00:00', fk_IdCliente = 2;
+INSERT INTO agendamento_consulta(dataAgendCon, horarioAgendCon, fk_IdCliente) VALUES ('2022-09-22', '18:00:00', 2);
 
 -- Exibir os dados da tabela agenda com datas e horários formatados para o padrão brasileiro
 SELECT IdAgendCon, dataAgendCon, horarioAgendCon, nomeCliente
