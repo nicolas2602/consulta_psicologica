@@ -1,3 +1,4 @@
+-- Verificar o idioma
 SELECT @@lc_time_names;
 
 -- Definir para padrão brasileiro

@@ -72,9 +72,17 @@ CREATE TABLE valor_fixo (
 drop table valor_fixo;
 
 ALTER TABLE valor_fixo
-ADD fk_IdUsuario INT,
-ADD FOREIGN KEY(fk_IdUsuario) REFERENCES usuario(IdUsuario);
+    ADD fk_IdUsuario INT,
+    ADD FOREIGN KEY(fk_IdUsuario) REFERENCES usuario(IdUsuario);
 
+-- Inserir
+INSERT INTO valor_fixo(valorFixo, fk_IdUsuario) VALUES ('20.00', 2);
+
+--Exibir
 SELECT * FROM valor_fixo;
 
+-- Atualizar
 UPDATE valor_fixo SET valorFixo='20.00' WHERE IdValor=1;
+
+-- Deletar
+DELETE FROM valor_fixo WHERE IdValor=1;
