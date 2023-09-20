@@ -36,7 +36,7 @@ drop table pagamento;
 
 /* Criar a tabela pagamento e seus atributos */
 CREATE TABLE pagamento(
-    IdPagamento INT PRIMARY KEY AUTO_INCREMENT,
+    IdPagamento INT PRIMARY KEY NOT NULL,
     valorPagamento VARCHAR(12),
     dataPagamento DATE
 );

@@ -10,7 +10,7 @@ DROP DATABASE consulta_psicologica;
 USE consulta_psicologica;
 
 CREATE TABLE anotacao_consulta(
-    IdAnotCon INT PRIMARY KEY AUTO_INCREMENT,
+    IdAnotCon INT PRIMARY KEY NOT NULL,
     tituloAnotCon VARCHAR(200) NOT NULL,
     descAnotCon VARCHAR(200) NOT NULL
 );

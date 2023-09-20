@@ -1,8 +1,3 @@
-CREATE DATABASE login;
-
-DROP DATABASE login;
-
-USE login;
 
 -- Tabela de perfil
 CREATE TABLE perfil(
