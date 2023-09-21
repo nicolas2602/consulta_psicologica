@@ -19,8 +19,8 @@ CREATE TABLE cliente(
 );
 
 ALTER TABLE cliente
-ADD fk_IdUsuario INT,
-ADD FOREIGN KEY(fk_IdUsuario) REFERENCES usuario(IdUsuario);
+    ADD fk_IdUsuario INT,
+    ADD FOREIGN KEY(fk_IdUsuario) REFERENCES usuario(IdUsuario);
 
 -- Inserir dados na tabela cliente
 

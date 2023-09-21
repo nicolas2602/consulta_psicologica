@@ -23,7 +23,7 @@ ALTER TABLE anotacao_consulta
 
 -- Inserir dados na tabela assunto
 
-INSERT INTO anotacao_consulta(descAnotCon, tituloAnotCon, fk_IdAgendCon) VALUES ('Assunto 2', 'Titulo', 3);
+INSERT INTO anotacao_consulta(IdAnotCon, descAnotCon, tituloAnotCon, fk_IdAgendCon) VALUES (1, 'Assunto 2', 'Titulo', 1);
 
 -- Exibir todos dados na tabela assunto
 

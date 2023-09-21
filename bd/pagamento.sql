@@ -1,3 +1,4 @@
+-- Active: 1691770896943@@0.0.0.0@3306@consulta_psicologica
 -- SQLBook: Code
 
 -- Criar o banco de dados
@@ -37,8 +38,10 @@ drop table pagamento;
 /* Criar a tabela pagamento e seus atributos */
 CREATE TABLE pagamento(
     IdPagamento INT PRIMARY KEY NOT NULL,
-    valorPagamento VARCHAR(12),
-    dataPagamento DATE
+    valorPagamento DECIMAL(10,2),
+    dataPagamento DATE,
+    valorDesconto DECIMAL(10,2),
+    valorAcrescimo DECIMAL(10,2)
 );
 
 -- Alterar a tabela pagamento adicionando as chaves estrangeiras
@@ -52,10 +55,9 @@ ALTER TABLE pagamento
     ADD FOREIGN KEY (fk_IdFormaPag) REFERENCES forma_pagamento(IdFormaPag);
 
 -- Inserir os dados na tabela pagamento
-INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) VALUES ('50.00', '2023-11-22', 1, 1, 1);
+INSERT INTO pagamento(IdPagamento, valorPagamento, dataPagamento, valorDesconto, valorAcrescimo, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) 
+                    VALUES (1, 50.00, '2023-11-22', 10.00, 11.00, 1, 1, 1);
 
--- Inserir no início da consulta
-INSERT INTO pagamento(valorPagamento, dataPagamento, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) VALUES (NULL, NULL, 1, 2, NULL);
 
 -- Exibir os dados na tabela pagamento
 

@@ -1,4 +1,13 @@
 
+-- Criar o Banco de Dados
+CREATE DATABASE consulta_psicologica;
+
+-- Excluir o banco de dados
+DROP DATABASE consulta_psicologica;
+
+-- Usar o banco de dados
+USE consulta_psicologica;
+
 -- Tabela de perfil
 CREATE TABLE perfil(
     IdPerfil INT PRIMARY KEY AUTO_INCREMENT,
@@ -66,7 +75,7 @@ DELETE FROM horario_atendimento WHERE IdHorarioAtend=1;
 -- Tabela de Valor fixo
 CREATE TABLE valor_fixo (
     IdValor INT PRIMARY KEY AUTO_INCREMENT,
-    valorFixo VARCHAR(12) NOT NULL
+    valorFixo DECIMAL(10,2) NOT NULL
 );
 
 drop table valor_fixo;
