@@ -43,7 +43,7 @@ UPDATE anotacao_consulta SET descAnotCon='Assunto 2' WHERE IdAnotCon=1;
 
 DELETE FROM anotacao_consulta WHERE IdAnotCon=1;
 
--- Campo de pesquisa
+-- Campo de pesquisa com ordenação crescente
 SELECT IdAnotCon, tituloAnotCon, descAnotCon, dataAgendCon, 
        horarioAgendCon, nomeCliente
 FROM anotacao_consulta AS an
@@ -52,4 +52,21 @@ ON an.fk_IdAgendCon = cs.IdAgendCon
 INNER JOIN cliente as cl 
 ON cs.fk_IdCliente = cl.IdCliente
 WHERE nomeCliente like '%Nicolas%' AND
-tituloAnotCon like '%Titulo%';
+      tituloAnotCon like '%Titulo%'
+ORDER BY YEAR(dataAgendCon) ASC, 
+         MONTH(dataAgendCon) ASC, 
+         DAY(dataAgendCon) ASC;
+
+-- Campo de pesquisa com ordenação decrescente
+SELECT IdAnotCon, tituloAnotCon, descAnotCon, dataAgendCon, 
+       horarioAgendCon, nomeCliente
+FROM anotacao_consulta AS an
+INNER JOIN agendamento_consulta AS cs
+ON an.fk_IdAgendCon = cs.IdAgendCon
+INNER JOIN cliente as cl 
+ON cs.fk_IdCliente = cl.IdCliente
+WHERE nomeCliente like '%Nicolas%' AND
+      tituloAnotCon like '%Titulo%'
+ORDER BY YEAR(dataAgendCon) DESC, 
+         MONTH(dataAgendCon) DESC, 
+         DAY(dataAgendCon) DESC;
