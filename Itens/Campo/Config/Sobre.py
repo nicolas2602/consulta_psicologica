@@ -12,7 +12,7 @@ class Sobre(ft.UserControl):
                 ft.Text("PsicoTech",style=ft.TextThemeStyle.TITLE_LARGE),
                 ft.Text("Desenvolvido pelos alunos do 4º semestre de Sistemas de Informação, da Faculdade UNASP Hortolândia-SP - Ano 2023"),
                 ft.Text("Integrantes:",style=ft.TextThemeStyle.TITLE_MEDIUM),
-                ft.Text("Caio"),
+                ft.Text("Caio Gabriel"),
                 ft.Text("Eduardo Silva"),
                 ft.Text("Gabriel Martins"),
                 ft.Text("Lucas Lima"),

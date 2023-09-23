@@ -33,9 +33,9 @@ class PainelPagamento(ft.UserControl):
     def build(self):
         return self.__designer
 
-    def setPaine(self,idBD = None, valor = None, data = None, formaPg = None , statusPg = None):
+    def setPaine(self,idBD = None, desconto = None, acrescimo=None, data = None, formaPg = None , statusPg = None):
         '''Envia as informações para o formulario, normalmente usado como auto preenchimento da função editar.'''
-        self.__formPagamento.setValue(idBD,valor,data,formaPg,statusPg)
+        self.__formPagamento.setValue(idBD,desconto,acrescimo,data,formaPg,statusPg)
         self.page.update()
  
     def openPainel(self):

@@ -2,14 +2,16 @@ import flet as ft
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.Campo.CampoLista import CampoLista
 from Itens.components.buttons.ActionButton import ActionButton
-from bd_pagamento.pagamento import listaFormaPg
+from  Itens.Painel.PopUp import PopUp
+from bd.funcao.pagamento import listaFormaPg
+from bd.funcao.usuario import valorFixo,updateValorFixo
 
 class ConfigPagamento(ft.UserControl):
 
     def __init__(self,page):
         self.page = page
 
-        self.valorDaConsulta = CampoFormulario("Valor",'100.00')
+        self.valorDaConsulta = CampoFormulario("Valor",valorFixo()[0][0])
         self.valorDaConsulta.setNaoAlter(True)
 
         self.AddFormaPagamento = CampoFormulario("Forma")
@@ -25,7 +27,7 @@ class ConfigPagamento(ft.UserControl):
         self.botaoCancelarValor = ActionButton('Cancelar',ft.colors.RED,ft.icons.CANCEL_OUTLINED,self.cancelarValor)
         self.botaoCancelarFormaPG = ActionButton('Cancelar',ft.colors.RED,ft.icons.CANCEL_OUTLINED,self.cancelarFormaPg)
 
-        self.botaoSalvarValor = ActionButton('Salvar',ft.colors.GREEN_800,ft.icons.FILE_DOWNLOAD_DONE_ROUNDED,self.cancelarValor)
+        self.botaoSalvarValor = ActionButton('Salvar',ft.colors.GREEN_800,ft.icons.FILE_DOWNLOAD_DONE_ROUNDED,self.salvarValor)
         self.botaoSalvarFormaPG = ActionButton('Salvar',ft.colors.GREEN_800,ft.icons.FILE_DOWNLOAD_DONE_ROUNDED,self.cancelarFormaPg)
         
         self.designerBotaoValor = ft.Row(controls=[self.botaoEditarValor.build()],alignment=ft.MainAxisAlignment.SPACE_EVENLY,width=300)
@@ -47,6 +49,15 @@ class ConfigPagamento(ft.UserControl):
     def build(self):
         return ft.Column([ft.Divider(opacity=0),self.designer],spacing=10,expand=True,horizontal_alignment="Center",alignment="Center",scroll=ft.ScrollMode.ALWAYS)
     
+    
+    def openPopUp(self,msg,cor):
+        '''Abre o msg informando o resultado da ação, Ex: enviado com Sucesso ou Banco de dados.'''
+        self.pop = PopUp(msg,cor).build()    
+        self.page.snack_bar = self.pop
+        self.page.snack_bar.open = True
+        self.page.update()
+
+
     def editarValor(self,e):
         self.valorDaConsulta.setNaoAlter()
 
@@ -65,6 +76,7 @@ class ConfigPagamento(ft.UserControl):
         self.page.update()
     
     def cancelarValor(self,e):
+        self.valorDaConsulta.setValue(valorFixo()[0][0])
         self.valorDaConsulta.setNaoAlter(True)
 
         self.designerBotaoValor.controls.pop()
@@ -80,3 +92,11 @@ class ConfigPagamento(ft.UserControl):
         self.designerBotaoFormaPag.controls.pop()
         self.designerBotaoFormaPag.controls.append(self.botaoEditarFormaPg.build())
         self.page.update()
+    
+    def salvarValor(self,e):
+        valor =self.valorDaConsulta.getValue()
+        updateValorFixo(valor)
+        self.cancelarValor(e)
+        self.openPopUp("Valor Salvo com Sucesso",ft.colors.GREEN_700)
+        
+

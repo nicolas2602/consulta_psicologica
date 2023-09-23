@@ -1,10 +1,11 @@
 import flet as ft
 import bd.funcao.conexao as bd
+from modulos.Check.VerificaLoginESenha import VerificaLoginESenha
+from Itens.SemConexao import SemConexao
 from Itens.Principal import Principal
 from Itens.Logging import Logging
 from Itens.components.Carregamento import Carregamento
 from Itens.Painel.PopUp import PopUp
-from Itens.SemConexao import SemConexao
 from modulos.AtualizarPagamento import AtualizarPagamento
 from time import sleep
 
@@ -15,9 +16,6 @@ class TodoApp(ft.UserControl):
         self.page = page
 
         self.login = Logging(self.page, self.logar)
-
-        self.name = 'sistem'
-        self.password = '1234'
 
         self.Carregar = Carregamento(self.page,"Carregando...")
 
@@ -43,13 +41,10 @@ class TodoApp(ft.UserControl):
         self.Carregar.openCarregamento(e)
         sleep(0.2)
         x =self.login.getValue()
-
-        resutLog = (x['login'] == self.name)
-        resutSn = (x['senha'] == self.password)
         
         msg = "Loggin e Senha incorretas!"
 
-        if (resutLog and resutSn):
+        if (VerificaLoginESenha().loginSenhaHeCorreto(x['login'],x['senha'])):
             #### Atualiza as Guia de Pagamento ####
             AtualizarPagamento().atualizar()
 

@@ -3,8 +3,8 @@ from Itens.components.Carregamento import Carregamento
 from Itens.Painel.PainelAgendamento import PainelAgendamento
 from modulos.Check.VerificadorData import VerificadorData
 from Itens.Painel.Checagem import Checagem
-import bd_agend.agendamento as ag
-import bd_pagamento.pagamento as pg
+import bd.funcao.agendamento as ag
+import bd.funcao.pagamento as pg
 from time import sleep,strftime
 
 class TabelaAgendamento(ft.UserControl):

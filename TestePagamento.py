@@ -1,12 +1,12 @@
-from Itens.TodoApp import *
+from Itens.Campo.CampoLista import CampoLista
 import flet as ft
-
+from Itens.Campo.GraficosColunas import GraficosColunas
 config_page={
     'color': ft.colors.BROWN_50,
-    'width': 1250,
-    'height':700,
+    'width': 1150,
+    'height':600,
     'min_height': 600,
-    'min_width':1250,
+    'min_width':1150,
     'title': "PsicoTeck"
 }
 
@@ -23,11 +23,11 @@ def main(page: ft.Page):
     page.update()
 
     # create application instance
-    app = TodoApp(page)
+    app = GraficosColunas()
+
 
     # add application's root control to the page
     page.add(app.build())
 
 
 ft.app(target=main)
-#ft.app(target=main, view=ft.WEB_BROWSER)

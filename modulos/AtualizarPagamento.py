@@ -1,4 +1,4 @@
-from bd_pagamento.pagamento import pesquisarStatusPagamento,updateStatus
+from bd.funcao.pagamento import pesquisarStatusPagamento,updateStatus
 from datetime import datetime, timedelta
 from time import sleep
 

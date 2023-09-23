@@ -1,8 +1,8 @@
 import bd.funcao.conexao as con
 
 def insert(nome, sobrenome, email, telefone):
-    con.cursor.execute(f"INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente) \
-                       VALUES ('{nome}', '{sobrenome}','{email}', '{telefone}')")
+    con.cursor.execute(f"INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente,fk_IdUsuario) \
+                       VALUES ('{nome}', '{sobrenome}','{email}', '{telefone}','{2}')")
     con.conexao.commit()
 
 def update(id, nome, sobrenome, email, telefone):

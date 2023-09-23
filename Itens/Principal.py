@@ -16,12 +16,12 @@ class Principal(ft.UserControl):
 
     def build(self):
 
-        self.bodyCadastro = Cadastro(self.page).build()
-        self.bodyAgendamento = Agendamento(self.page).build()
-        self.bodyAnotacoes = Anotacoes(self.page).build()
-        self.bodyPagamento = Pagamento(self.page).build()
-        self.bodyConfiguracao = Configuracoes(self.page).build()
-        self.bodyGraficos = Graficos().build()
+        # self.bodyCadastro = Cadastro(self.page).build()
+        # self.bodyAgendamento = Agendamento(self.page).build()
+        # self.bodyAnotacoes = Anotacoes(self.page).build()
+        # self.bodyPagamento = Pagamento(self.page).build()
+        # self.bodyConfiguracao = Configuracoes(self.page).build()
+        # self.bodyGraficos = Graficos().build()
 
 
         self.desiner =ft.Row(
@@ -42,10 +42,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyCadastro)
+            self.desiner.controls.append(Cadastro(self.page).build())
 
         else:
-            self.desiner.controls.append(self.bodyCadastro)
+            self.desiner.controls.append(Cadastro(self.page).build())
         self.page.update()
 
     def agendamento(self,e):
@@ -53,10 +53,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyAgendamento)
+            self.desiner.controls.append(Agendamento(self.page).build())
 
         else:
-            self.desiner.controls.append(self.bodyAgendamento)
+            self.desiner.controls.append(Agendamento(self.page).build())
         self.page.update()
 
     def anotações(self,e):
@@ -64,10 +64,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyAnotacoes)
+            self.desiner.controls.append(Anotacoes(self.page).build())
 
         else:
-            self.desiner.controls.append(self.bodyAnotacoes)
+            self.desiner.controls.append(Anotacoes(self.page).build())
         self.page.update()
 
     def pagamentos(self,e):
@@ -75,10 +75,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyPagamento)
+            self.desiner.controls.append(Pagamento(self.page).build())
 
         else:
-            self.desiner.controls.append(self.bodyPagamento)
+            self.desiner.controls.append(Pagamento(self.page).build())
         self.page.update()
 
     def graficos(self,e):
@@ -86,10 +86,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyGraficos)
+            self.desiner.controls.append(Graficos().build())
 
         else:
-            self.desiner.controls.append(self.bodyGraficos)
+            self.desiner.controls.append(Graficos().build())
         self.page.update()
 
     def configuracoes(self,e):
@@ -97,10 +97,10 @@ class Principal(ft.UserControl):
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(self.bodyConfiguracao)
+            self.desiner.controls.append(Configuracoes(self.page).build())
 
         else:
-            self.desiner.controls.append(self.bodyConfiguracao)
+            self.desiner.controls.append(Configuracoes(self.page).build())
         self.page.update()    
     
         

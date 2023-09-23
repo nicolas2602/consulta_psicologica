@@ -6,7 +6,7 @@ from Itens.Tabela.TabelaPagamento import TabelaPagamento
 from Itens.components.Carregamento import Carregamento
 from modulos.Check.VerificadorData import VerificadorData
 from Itens.components.Titulo import Titulo
-import bd_pagamento.pagamento as pg
+import bd.funcao.pagamento as pg
 from time import sleep,strftime
 
 class Pagamento(ft.UserControl):

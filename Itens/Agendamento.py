@@ -8,8 +8,8 @@ from Itens.Tabela.TabelaAgendamento import TabelaAgendamento
 from Itens.Painel.PainelAgendamento import PainelAgendamento
 from Itens.components.Titulo import Titulo
 from modulos.Check.VerificadorData import VerificadorData
-import bd_agend.agendamento as ag
-import bd_pagamento.pagamento as pg
+import bd.funcao.agendamento as ag
+import bd.funcao.pagamento as pg
 
 
 class Agendamento(ft.UserControl):
@@ -111,7 +111,7 @@ class Agendamento(ft.UserControl):
 
                     #### INSERE PAGAMENTO NO BD #####
                     novoDados = ag.pesquisaIdNomeDataHora(x['idNome'],héValido[1],x['hora'])
-                    pg.insertAgendPg(100.00,novoDados[0][0],2)
+                    pg.insertAgendPg(novoDados[0][0])
 
                     #### ATUALIZA A TABELA ####
                     self.tabela.dados = ag.pesquisaData(héValido[1])
