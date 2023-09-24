@@ -10,7 +10,7 @@ from Itens.components.Titulo import Titulo
 from modulos.Check.VerificadorData import VerificadorData
 import bd.funcao.agendamento as ag
 import bd.funcao.pagamento as pg
-
+import bd.funcao.anotacao_consulta as ac
 
 class Agendamento(ft.UserControl):
     ''' Janela do Campo MENU Agendamento Consultas.
@@ -112,6 +112,7 @@ class Agendamento(ft.UserControl):
                     #### INSERE PAGAMENTO NO BD #####
                     novoDados = ag.pesquisaIdNomeDataHora(x['idNome'],héValido[1],x['hora'])
                     pg.insertAgendPg(novoDados[0][0])
+                    ac.insertAnotacao(novoDados[0][0])
 
                     #### ATUALIZA A TABELA ####
                     self.tabela.dados = ag.pesquisaData(héValido[1])

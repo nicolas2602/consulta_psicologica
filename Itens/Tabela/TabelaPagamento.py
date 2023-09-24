@@ -20,7 +20,7 @@ class TabelaPagamento(ft.UserControl):
         #Pegando dados Iniciais do Banco
         #data = strftime('%Y-%m-%d')
         self.dados = pg.pesquisarSemData('','')
-        print(self.dados)
+
         # [(1, 2, datetime.date(2022, 9, 22), datetime.timedelta(seconds=64800), 'Ze', 'Buscape', Decimal('50.00'), Decimal('10.00'), Decimal('11.00'), datetime.date(2023, 11, 22), 1, 'Pix', 1, 'Concluído')],
 
         self.desiner =ft.Column([ ft.DataTable(
@@ -70,7 +70,7 @@ class TabelaPagamento(ft.UserControl):
         self.desiner.controls[0].rows.append((ft.DataRow(
             cells=[
                 #ft.DataCell(ft.Text(lista[0],selectable=True)),                             # id
-                ft.DataCell(ft.Text(value=data+' as '+str(lista[3])[0:5],selectable=True)), # Data e Hora
+                ft.DataCell(ft.Text(value=data+' as '+str(lista[3])[:-3],selectable=True)), # Data e Hora
                 ft.DataCell(ft.Text(value=lista[4]+' '+lista[5],selectable=True)),          # Nome e Sobrenome
                 ft.DataCell(ft.Text(lista[6],selectable=True)),                             # Valor
                 ft.DataCell(ft.Text(lista[7],selectable=True)),                             # Desconto

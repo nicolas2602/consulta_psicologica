@@ -5,6 +5,7 @@ from modulos.Check.VerificadorData import VerificadorData
 from Itens.Painel.Checagem import Checagem
 import bd.funcao.agendamento as ag
 import bd.funcao.pagamento as pg
+import bd.funcao.anotacao_consulta as ac
 from time import sleep,strftime
 
 class TabelaAgendamento(ft.UserControl):
@@ -146,6 +147,8 @@ class TabelaAgendamento(ft.UserControl):
 
             while carregando:
                 pg.delete(id)
+                sleep(0.5)
+                ac.delete(id)
                 sleep(0.5)
                 ag.delete(id)
                 sleep(0.5)

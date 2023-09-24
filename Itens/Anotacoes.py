@@ -2,6 +2,9 @@ import flet as ft
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.components.buttons.ActionButton import ActionButton
 from Itens.components.Titulo import Titulo
+from Itens.Tabela.TabelaAnotacoes import TabelaAnotacoes
+from modulos.Check.VerificadorData import VerificadorData
+from bd.funcao.anotacao_consulta import pesquisaAnotacoesNome,pesquisaAnotacoesNomeData
 from time import sleep, strftime
 
 class Anotacoes(ft.UserControl):
@@ -19,6 +22,8 @@ class Anotacoes(ft.UserControl):
         self.campoData = CampoFormulario("Data",strftime("%d/%m/%Y"),120,self.getPesquisa)
 
         self.botaoPesquisa = ActionButton('Pesquisar', ft.colors.GREY_800 , ft.icons.SEARCH, self.getPesquisa).build()
+
+        self.tabela = TabelaAnotacoes(self.page)
         
         self.designer = ft.Column(
             controls=[
@@ -27,9 +32,7 @@ class Anotacoes(ft.UserControl):
                 ft.Row([self.campoNome.build(), self.campoData.build(), self.botaoPesquisa], alignment= ft.MainAxisAlignment.CENTER, spacing= 15),
                 ft.Divider(color=ft.colors.GREEN_900),
 
-                ft.Column([ft.Icon(name=ft.icons.CONSTRUCTION, size= 200),ft.Text("Anotações... Em Desenvolvimento...",size=20)])
-
-                #ft.Row([self.tabela.build(),],vertical_alignment= ft.CrossAxisAlignment.START,expand=True),   
+                ft.Row([self.tabela.build()],vertical_alignment= ft.CrossAxisAlignment.START,expand=True),   
             ],
             expand=True,
         )
@@ -38,22 +41,19 @@ class Anotacoes(ft.UserControl):
     
     def getPesquisa(self,e):
         '''Função dedicada a pegar a informação do campo pesquisa, madar para o banco e atualizar a tabela'''
-        pass
-        # nome = self.campoNome.getValue()
-        # dataInicial = self.campoDataInicio.getValue()
-        # datafinal = self.campoDataFinal.getValue()
-        # status = self.campoStatusPG.getValue()
 
-        # # Se os 2 Campos estão com dados
-        # dataInicial = VerificadorData(dataInicial).verificar()
-        # datafinal = VerificadorData(datafinal).verificar()
+        nome = self.campoNome.getValue()
+        data = self.campoData.getValue()
 
-        # if (dataInicial[0] and datafinal[0]):
-        #     resultados = pg.pesquisarComTodasInfo(nome,status[1],dataInicial[1],datafinal[1])
+        # Se os 2 Campos estão com dados
+        data = VerificadorData(data).verificar()
 
-        # else:
-        #     resultados = pg.pesquisarSemData(nome,status[1])
+        if (data[0]):
+            resultados = pesquisaAnotacoesNomeData(nome,data[1])
 
-        # self.tabela.dados = resultados
-        # self.tabela.montaTabela()
-        # self.page.update()
+        else:
+            resultados = pesquisaAnotacoesNome(nome)
+
+        self.tabela.dados = resultados
+        self.tabela.montaTabela()
+        self.page.update()

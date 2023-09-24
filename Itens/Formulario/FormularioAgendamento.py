@@ -1,6 +1,7 @@
 import flet as ft
 from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.Campo.CampoDrop import CampoDrop
+from modulos.ListaHorarios import ListaHorarios
 
 class FormularioAgendamento(ft.UserControl):
     '''Cria um conjunto de capos de digitação para o Agendamento.'''
@@ -16,8 +17,7 @@ class FormularioAgendamento(ft.UserControl):
         self.__form_Data = CampoFormulario("Data",data)
         self.__form_Data.setPlaceHolder("Ex: 27/06/1991")
 
-        self.__listaHora = ['06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00']
-        self.__form_Hora = CampoDrop("Hora",self.__listaHora)
+        self.__form_Hora = CampoDrop("Hora",ListaHorarios().criarListaHorarios())
         
 
         self.__desiner = ft.Column(controls=[
