@@ -22,7 +22,7 @@ SELECT * FROM perfil;
 CREATE TABLE usuario(
     IdUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nomeUsuario VARCHAR(100) NOT NULL UNIQUE,
-    senhaUsuario VARCHAR(10) NOT NULL UNIQUE
+    senhaUsuario VARCHAR(100) NOT NULL UNIQUE
 );
 
 drop table usuario;

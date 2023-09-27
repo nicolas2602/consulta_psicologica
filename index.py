@@ -5,6 +5,7 @@ import funcao.anotacao_consulta as at # assunto
 import funcao.pagamento as pg # pagamento
 import funcao.login as lg
 import datetime
+import cryptocode
 
 sql_teste = "SELECT IdAnotCon, descAnotCon, dataConsulta, horarioConsulta as horarioConsulta \
 FROM anotacao_consulta AS an \
@@ -16,17 +17,8 @@ FROM anotacao_consulta AS an \
 INNER JOIN consulta AS cs \
 ON an.fk_IdConsulta = cs.IdConsulta"
 
-teste = at.select(sql_teste )
-r = at.select(sql)
-
-print("Sem função do MySQL")
+teste = at.select(sql)
 print(teste)
-print()
-print("Com algumas funções do MySQL")
-print(r)
-
-r = lg.logar('admin', 'admin12')
-print(r)
 
 # Fechar a conexão MySQL
 con.fechar()
