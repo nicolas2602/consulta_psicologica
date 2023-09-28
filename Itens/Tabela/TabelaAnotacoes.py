@@ -81,7 +81,7 @@ class TabelaAnotacoes(ft.UserControl):
         '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
 
         x = self.painelEditar.getValue()
-        print(x)
+        
         self.painelEditar.fechar(e)
         sleep(0.3)
 

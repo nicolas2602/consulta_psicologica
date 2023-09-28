@@ -9,9 +9,8 @@ from Itens.Painel.PopUp import PopUp
 from modulos.AtualizarPagamento import AtualizarPagamento
 from time import sleep
 
-
 class TodoApp(ft.UserControl):
-
+    
     def __init__(self,page):
         self.page = page
 
@@ -19,10 +18,7 @@ class TodoApp(ft.UserControl):
 
         self.Carregar = Carregamento(self.page,"Carregando...")
 
-        self.pagePrincipal = Principal(self.page, self.sair)
-
         self.designer = ft.Container(content = self.login.build(),expand=True)
-
 
     def build(self):
         if not bd.statosConexao():
@@ -50,7 +46,7 @@ class TodoApp(ft.UserControl):
 
             self.login.limpar()
             sleep(0.2)
-            self.designer.content = self.pagePrincipal.build()
+            self.designer.content = Principal(self.page, self.sair).build()
             sleep(0.3)
             self.Carregar.closeCarregamento(e)
 

@@ -18,6 +18,20 @@ def select(sql):
     
     return resultado
 
+def selectHora(data):
+    con.cursor.execute(f"SELECT horarioAgendCon FROM agendamento_consulta WHERE dataAgendCon = '{data}'")
+    resultado = con.cursor.fetchall()
+    
+    return resultado
+
+def selectDataHora(data,hora):
+    con.cursor.execute(f"SELECT IdAgendCon,dataAgendCon,horarioAgendCon FROM agendamento_consulta \
+                       WHERE dataAgendCon = '{data}' AND horarioAgendCon = '{hora}'")
+    resultado = con.cursor.fetchall()
+    
+    return resultado
+
+
 def pesquisaNome(nome):
     '''IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente'''
     con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,\
@@ -72,3 +86,4 @@ def pesquisaTudo():
     resultado = con.cursor.fetchall()
     
     return resultado
+

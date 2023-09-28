@@ -78,7 +78,7 @@ class Cadastro(ft.UserControl):
 
 
         while Carregando:
-
+                
             héValido = VerificaCliente([x['nome'],x['sobrenome'],x['email'],x['telefone']]).verificar()
 
             if(héValido[0]):

@@ -8,9 +8,11 @@ from Itens.Tabela.TabelaAgendamento import TabelaAgendamento
 from Itens.Painel.PainelAgendamento import PainelAgendamento
 from Itens.components.Titulo import Titulo
 from modulos.Check.VerificadorData import VerificadorData
+from modulos.Check.VerificadorAgendamentoExiste import VerificadorAgendamentoExiste
 import bd.funcao.agendamento as ag
 import bd.funcao.pagamento as pg
 import bd.funcao.anotacao_consulta as ac
+
 
 class Agendamento(ft.UserControl):
     ''' Janela do Campo MENU Agendamento Consultas.
@@ -102,22 +104,27 @@ class Agendamento(ft.UserControl):
             héValido = VerificadorData(x['data']).verificar()
 
             if(héValido[0]):
-                if(x['hora'] != ''):
+                if(x['hora'] != '' and x['hora'] != None):
                     data = héValido[1].strftime("%d/%m/%Y")
 
                     #### INSERE AGENDAMENTO NO BD #####
-                    ag.insert(data,x['hora'],int(x['idNome']))
-                    sleep(0.5)
+                    if (not VerificadorAgendamentoExiste().AgendaExiste(héValido[1],x['hora'])[0]):
+                        #### INSERE AGENDAMENTO NO BD #####
+                        ag.insert(data,x['hora'],int(x['idNome']))
+                        sleep(0.5)
 
-                    #### INSERE PAGAMENTO NO BD #####
-                    novoDados = ag.pesquisaIdNomeDataHora(x['idNome'],héValido[1],x['hora'])
-                    pg.insertAgendPg(novoDados[0][0])
-                    ac.insertAnotacao(novoDados[0][0])
+                        #### INSERE PAGAMENTO NO BD #####
+                        novoDados = ag.pesquisaIdNomeDataHora(x['idNome'],héValido[1],x['hora'])
+                        pg.insertAgendPg(novoDados[0][0])
+                        ac.insertAnotacao(novoDados[0][0])
 
-                    #### ATUALIZA A TABELA ####
-                    self.tabela.dados = ag.pesquisaData(héValido[1])
-                    self.tabela.montaTabela()
-                    self.painelAgendamento.resetValue()
+                        #### ATUALIZA A TABELA ####
+                        self.tabela.dados = ag.pesquisaData(héValido[1])
+                        self.tabela.montaTabela()
+                        self.painelAgendamento.resetValue()
+                    else:
+                        msg = "Agendamento já exitente"
+                        cor = ft.colors.RED_700
                 else:
                     msg = "Hora Invalida"
                     cor = ft.colors.RED_700

@@ -1,8 +1,8 @@
 import bd.funcao.conexao as con
 
 def valorFixo():
-    sqlLogin = f"SELECT valorFixo FROM valor_fixo WHERE IdValor='1';"
-    con.cursor.execute(sqlLogin)
+    sql = f"SELECT valorFixo FROM valor_fixo WHERE IdValor='1';"
+    con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
 
     return resultado
@@ -13,15 +13,15 @@ def updateValorFixo(novoValor):
     con.conexao.commit()
 
 def selectUsuario():
-    sqlLogin = f"SELECT nomeUsuario FROM usuario WHERE IdUsuario='2';"
-    con.cursor.execute(sqlLogin)
+    sql = f"SELECT nomeUsuario FROM usuario WHERE IdUsuario='2';"
+    con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
 
     return resultado
 
 def selectSenha():
-    sqlLogin = f"SELECT senhaUsuario FROM usuario WHERE IdUsuario='2';"
-    con.cursor.execute(sqlLogin)
+    sql = f"SELECT senhaUsuario FROM usuario WHERE IdUsuario='2';"
+    con.cursor.execute(sql)
     resultado = con.cursor.fetchall()
 
     return resultado
@@ -33,10 +33,12 @@ def updateUsuarioSenha(novoUsuario,novaSenha):
 
 
 def selectHorarios():
-    sqlLogin = f"SELECT * FROM horario_atendimento;"
-    con.cursor.execute(sqlLogin)
-    resultado = con.cursor.fetchall()
-
+    sql = f"SELECT * FROM horario_atendimento;"
+    try:
+        con.cursor.execute(sql)
+        resultado = con.cursor.fetchall()
+    except:
+        resultado = False
     return resultado
 
 def updateHorarios(horaInicio,horaFim, inicioIntervalo, finalIntervalor, sessao):

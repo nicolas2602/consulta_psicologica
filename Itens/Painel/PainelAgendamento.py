@@ -13,7 +13,7 @@ class PainelAgendamento(ft.UserControl):
 
         self.__formPesquisar = CampoPesquisa(page, "Digite o nome do Paciente:", self.pegardadosPesquisados)
         
-        self.__formAgendamento = FormularioAgendamento()
+        self.__formAgendamento = FormularioAgendamento(self.page)
 
 
         self.__desinerPesquisar = ft.AlertDialog(
@@ -78,10 +78,6 @@ class PainelAgendamento(ft.UserControl):
         self.page.snack_bar = self.pop
         self.page.snack_bar.open = True
         self.page.update()
-
-    # def get(self):
-    #     return self.__titulo
-    
 
     def Cancelar(self,e):
         self.__desinerPesquisar.open = False

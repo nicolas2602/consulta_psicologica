@@ -40,3 +40,8 @@ class CampoDrop(ft.UserControl):
 
     def setNaoAlter(self,valor = False):
         self.__desiner.disabled = valor
+    
+    def setLista(self,lista):
+        self.__lista = lista
+        self.__desiner.options = []
+        self.addlista()

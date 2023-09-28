@@ -2,6 +2,7 @@ import flet as ft
 from Itens.components.Carregamento import Carregamento
 from Itens.Painel.PainelAgendamento import PainelAgendamento
 from modulos.Check.VerificadorData import VerificadorData
+from modulos.Check.VerificadorAgendamentoExiste import VerificadorAgendamentoExiste
 from Itens.Painel.Checagem import Checagem
 import bd.funcao.agendamento as ag
 import bd.funcao.pagamento as pg
@@ -105,12 +106,17 @@ class TabelaAgendamento(ft.UserControl):
             héValido = VerificadorData(x['data']).verificar()
 
             if(héValido[0]):
-                if(x['hora'] != ''):
+                if(x['hora'] != '' and x['hora'] != None):
                     data = héValido[1]
-                    ag.update(x['id'],data,x['hora'],int(x['idNome']))
-                    self.dados = ag.pesquisaData(héValido[1])
-                    self.montaTabela()
-                    self.painelEditar.resetValue()
+                    check = VerificadorAgendamentoExiste().AgendaExiste(héValido[1],x['hora'])
+                    if (not check[0] or check[1] == x['id']):
+                        ag.update(x['id'],data,x['hora'],int(x['idNome']))
+                        self.dados = ag.pesquisaData(héValido[1])
+                        self.montaTabela()
+                        self.painelEditar.resetValue()
+                    else:
+                        msg = "Horario ou Data indisponivel!"
+                        cor = ft.colors.RED_700
                 else:
                     msg = "Hora Invalida"
                     cor = ft.colors.RED_700

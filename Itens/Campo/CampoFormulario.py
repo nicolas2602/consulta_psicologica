@@ -41,3 +41,6 @@ class CampoFormulario(ft.UserControl):
     def setMultiline(self,valor=False,qtd=None):
         self.__desiner.multiline = valor
         self.__desiner.max_lines = qtd
+
+    def setOnChange(self,funcao=None):
+        self.__desiner.on_change = funcao

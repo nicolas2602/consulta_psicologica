@@ -5,6 +5,7 @@ from bd.funcao.cliente import *
 from time import sleep
 from Itens.components.Carregamento import Carregamento
 from modulos.VerificaCliente import VerificaCliente
+from modulos.Criptografia import Criptografia
 import flet as ft
 
 class Tabela(ft.UserControl):
@@ -50,12 +51,14 @@ class Tabela(ft.UserControl):
 
 
     def __tabela(self,lista):
+        cript = Criptografia()
+
         self.desiner.controls[0].rows.append((ft.DataRow(
             cells=[
-                ft.DataCell(ft.Text(lista[0],selectable=True)),
-                ft.DataCell(ft.Text(value=lista[1]+' '+lista[2],selectable=True)),
-                ft.DataCell(ft.Text(lista[3],selectable=True)),
-                ft.DataCell(ft.Text(lista[4],selectable=True)),
+                ft.DataCell(ft.Text(lista[0],selectable=True)),                         # ID
+                ft.DataCell(ft.Text(value=lista[1]+' '+lista[2],selectable=True)),      # Nome Sobrenome
+                ft.DataCell(ft.Text(cript.decodificar(lista[3]),selectable=True)),                         # Email
+                ft.DataCell(ft.Text(cript.decodificar(lista[4]),selectable=True)),                         # Telefone
                 ft.DataCell(ft.Row([ft.IconButton(icon=ft.icons.EDIT, on_click= lambda e: self.openPainel(lista[0])),ft.VerticalDivider(),ft.IconButton(icon=ft.icons.DELETE,icon_color="red",on_click= lambda e: self.deletar(lista[0]))])),
                 
             ]))
@@ -64,9 +67,11 @@ class Tabela(ft.UserControl):
 
     def openPainel(self, id):
         '''Abre o Campo de Editar com os dados pré preenchidos'''
+        cript = Criptografia()
 
-        self.x = select(f"SELECT * FROM cliente WHERE IdCliente = {id}")
-        self.painel.setPaine(self.x[0][0],self.x[0][1],self.x[0][2],self.x[0][3],self.x[0][4])
+        self.x = selectID(id)
+        
+        self.painel.setPaine(self.x[0][0],self.x[0][1],self.x[0][2],cript.decodificar(self.x[0][3]),cript.decodificar(self.x[0][4]))
         #### Abretura do painel de Edição ####
         self.page.dialog = self.painel.build()
         self.painel.build().open = True
