@@ -5,12 +5,12 @@ class NomeDataAnotação(ft.UserControl):
     def __init__(self,page,nome=None, sobreNome = None, data = None , hora = None):
         
         self.page = page
-        self.nome = ft.Text(value=f'{nome} {sobreNome}',size=15)
+        self.nome = ft.Text(value=f'{nome} {sobreNome}',size=15,width=100)
         self.data = ft.Text(value=f'{data}',size=15)
         self.hora = ft.Text(value=f'{hora}',size=15)
 
     def build(self):
-
+        
         return ft.Column([
             ft.Text('Nome do Paciente:',size=15,weight=ft.FontWeight.BOLD),
             ft.Row([ft.Icon(ft.icons.PERSON,color=ft.colors.GREEN_800),self.nome]),
