@@ -62,7 +62,8 @@ def pesquisaAnotacoesNomeData(Nome,data):
                         dataAgendCon = '{data}' \
                         ORDER BY YEAR(dataAgendCon) ASC, \
                         MONTH(dataAgendCon) ASC, \
-                        DAY(dataAgendCon) ASC;")
+                        DAY(dataAgendCon) ASC,\
+                        HOUR(horarioAgendCon)ASC;")
 
     resultado = con.cursor.fetchall()
     
@@ -77,8 +78,9 @@ def pesquisaAnotacoesNome(Nome):
                         ON cs.fk_IdCliente = cl.IdCliente \
                         WHERE nomeCliente like '%{Nome}%' \
                         ORDER BY YEAR(dataAgendCon) ASC, \
-                        MONTH(dataAgendCon) ASC, \
-                        DAY(dataAgendCon) ASC;")
+                        MONTH(dataAgendCon) ASC,\
+                        DAY(dataAgendCon) ASC,\
+                        HOUR(horarioAgendCon)ASC;")
 
     resultado = con.cursor.fetchall()
     
@@ -94,7 +96,8 @@ def pesquisaAnotacoesData(data):
                         WHERE dataAgendCon = '{data}' \
                         ORDER BY YEAR(dataAgendCon) ASC, \
                         MONTH(dataAgendCon) ASC, \
-                        DAY(dataAgendCon) ASC;")
+                        DAY(dataAgendCon) ASC,\
+                        HOUR(horarioAgendCon)ASC;")
 
     resultado = con.cursor.fetchall()
     

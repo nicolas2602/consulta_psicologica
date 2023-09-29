@@ -25,3 +25,6 @@ class ActionButton(ft.UserControl):
 
     def build(self):
         return self.__desiner
+    
+    def setDisabled(self,valor=False):
+        self.__desiner.disabled = valor

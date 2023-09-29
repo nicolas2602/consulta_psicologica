@@ -12,13 +12,13 @@ class FormularioAnotacao(ft.UserControl):
         
         self.__id = idBD
 
-        self.__titulo = CampoFormulario("Titulo",Titulo)
-        self.__anotacoes = CampoFormularioAnotacao("Anotações",Anotacoes,None,self.contCaracteres)
+        self.__titulo = CampoFormulario("Titulo",Titulo,420)
+        self.__anotacoes = CampoFormularioAnotacao("Anotações",Anotacoes,420,self.contCaracteres)
         self.__anotacoes.setMultiline(True,10)
         
 
         self.qtdInicial = 0
-        self.qtdFinal = 200
+        self.qtdFinal = 300
         self.__qtdCaracteres = ft.Text(value=f"{self.qtdInicial}/{self.qtdFinal}",size=15,color=ft.colors.GREEN_900)
 
         self.contCaracteres(self)
@@ -59,7 +59,9 @@ class FormularioAnotacao(ft.UserControl):
 
         if (self.qtdInicial > self.qtdFinal):
             self.__qtdCaracteres.color = ft.colors.RED
+            self.__qtdCaracteres.size=20
         else:
             self.__qtdCaracteres.color=ft.colors.GREEN_900
+            self.__qtdCaracteres.size=15
 
         self.page.update()

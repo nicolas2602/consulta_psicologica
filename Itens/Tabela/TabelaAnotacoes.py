@@ -1,6 +1,7 @@
 import flet as ft
 from Itens.components.Carregamento import Carregamento
 from Itens.Painel.PainelAnotacoes import PainelAnotacoes
+from Itens.Painel.PainelVisualizacaoAnotacoes import PainelVisualizacaoAnotacoes
 from modulos.Check.VerificadorData import VerificadorData
 from Itens.Painel.Checagem import Checagem
 import bd.funcao.anotacao_consulta as ac
@@ -13,7 +14,8 @@ class TabelaAnotacoes(ft.UserControl):
 
     def __init__(self,page):
         self.page = page
-        self.painelEditar = PainelAnotacoes(self.page,"Anotações",self.Salvar) # painel para Editar cadastro  
+        self.painelEditar = PainelAnotacoes(self.page,"Anotações",self.Salvar) # painel para Editar cadastro 
+        self.visualisacao = PainelVisualizacaoAnotacoes(self.page,"Anotações") 
         self.carregamentoEditar = Carregamento(self.page,"Salvando Alterações...")
 
     def build(self):
@@ -57,7 +59,9 @@ class TabelaAnotacoes(ft.UserControl):
                 ft.DataCell(ft.Text(data+' as '+str(lista[2])[:-3],selectable=True)),
                 ft.DataCell(ft.Text(value=f"{lista[3]} {lista[4]}",selectable=True)),
                 ft.DataCell(ft.Text(lista[5],selectable=True)),
-                ft.DataCell(ft.Row([ft.IconButton(icon=ft.icons.EDIT_DOCUMENT,on_click= lambda e: self.openPainelEditar(lista))]))
+                ft.DataCell(ft.Row([ft.IconButton(icon=ft.icons.EDIT_DOCUMENT,on_click= lambda e: self.openPainelEditar(lista)),
+                                    ft.VerticalDivider(),
+                                    ft.IconButton(icon=ft.icons.VISIBILITY,on_click= lambda e: self.openPainelVisualizar(lista)),]))
             ]))
         )
 
@@ -70,35 +74,41 @@ class TabelaAnotacoes(ft.UserControl):
     def openPainelEditar(self, lista):
         '''Abre o Campo de Editar com os dados pré preenchidos'''
         
-        self.painelEditar.setPaine(lista[0],lista[5],lista[6])
+        self.painelEditar.setPaine(lista[0],lista[3],lista[4],lista[1],lista[2],lista[5],lista[6])
 
         #### Abretura do painel de Edição ####
         self.painelEditar.openPainel()
 
+    def openPainelVisualizar(self, lista):
+        '''Abre o Campo de Editar com os dados pré preenchidos'''
+        
+        self.visualisacao.setPaine(lista[3],lista[4],lista[1],lista[2],lista[5],lista[6])
+
+        #### Abretura do painel de Edição ####
+        self.visualisacao.openPainel()
 
     def Salvar(self,e):
         # Dedicado ao Novo Cadastro
         '''Função e pega as informações do campo Novo cadastro e envia ao banco de dados.'''
-
-        x = self.painelEditar.getValue()
-        
-        self.painelEditar.fechar(e)
-        sleep(0.3)
-
-        #### Tela de carregamento ####
-        self.carregamentoEditar.openCarregamento(e)
-
         #### Variavel de Controle ####
 
         Carregando = True
         msg = "Consulta agendada com Sucesso"
         cor = ft.colors.GREEN_700
 
-        #'id','titulo','anotacoes','qtdTxt'
+        x = self.painelEditar.getValue()
+        if(x['qtdTxt']):
+                
+            self.painelEditar.fechar(e)
+            sleep(0.3)
 
-        while Carregando:
+            #### Tela de carregamento ####
+            self.carregamentoEditar.openCarregamento(e)
 
-            if(x['qtdTxt']):
+            #'id','titulo','anotacoes','qtdTxt'
+
+            while Carregando:
+
                 if(x['titulo'] != '' and x['anotacoes'] != ''):
                     ac.updateAnotacao(x['id'],x['anotacoes'],x['titulo'])
                     self.dados = ac.selectAnotacoesId(x['id'])
@@ -107,15 +117,17 @@ class TabelaAnotacoes(ft.UserControl):
                 else:
                     msg = "Campo Titulo e Anotações, não podem estar vazios."
                     cor = ft.colors.RED_700
-            else:
-                msg = "Campo Anotações com quantidade de caracteres acima do permitito."  # retorna msg de erro
-                cor = ft.colors.RED_700
+            
 
-            sleep(1)
-            Carregando = False
+                sleep(1)
+                Carregando = False
 
-        self.carregamentoEditar.closeCarregamento(e)
-        #### Fim do Carregamento ####
+            self.carregamentoEditar.closeCarregamento(e)
+            #### Fim do Carregamento ####
+
+        else:
+            msg = "Campo Anotações com quantidade de caracteres acima do permitito."  # retorna msg de erro
+            cor = ft.colors.RED_700
 
         self.painelEditar.openPopUp(msg, cor)
         self.page.update()
