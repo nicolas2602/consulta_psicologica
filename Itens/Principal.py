@@ -6,6 +6,7 @@ from Itens.Pagamento import Pagamento
 from Itens.Anotacoes import Anotacoes
 from Itens.Configuracoes import Configuracoes
 from Itens.Graficos import Graficos
+from Itens.components.Carregamento import Carregamento
 
 class Principal(ft.UserControl):
     '''Classe como as Definições dos menus'''
@@ -38,6 +39,8 @@ class Principal(ft.UserControl):
 
     def cadastro(self,e):
         '''Quando selecionado, abre o janela cadastro'''
+        x = Carregamento(self.page,"Carregando...")
+        x.openCarregamento(e)
 
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
         if (len(self.desiner.controls) > 2):
@@ -47,10 +50,14 @@ class Principal(ft.UserControl):
         else:
             self.desiner.controls.append(Cadastro(self.page).build())
         self.page.update()
+        x.closeCarregamento(e)
+
 
     def agendamento(self,e):
         '''Quando selecionado, abre o janela Agendamento consultas'''
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
+        x = Carregamento(self.page,"Carregando...")
+        x.openCarregamento(e)
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
             self.desiner.controls.append(Agendamento(self.page).build())
@@ -58,10 +65,13 @@ class Principal(ft.UserControl):
         else:
             self.desiner.controls.append(Agendamento(self.page).build())
         self.page.update()
+        x.closeCarregamento(e)
 
     def anotações(self,e):
         '''Quando selecionado, abre o janela anotações'''
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
+        x = Carregamento(self.page,"Carregando...")
+        x.openCarregamento(e)
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
             self.desiner.controls.append(Anotacoes(self.page).build())
@@ -69,10 +79,13 @@ class Principal(ft.UserControl):
         else:
             self.desiner.controls.append(Anotacoes(self.page).build())
         self.page.update()
+        x.closeCarregamento(e)
 
     def pagamentos(self,e):
         '''Quando selecionado, abre o janela pagamentos'''
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
+        x = Carregamento(self.page,"Carregando...")
+        x.openCarregamento(e)
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
             self.desiner.controls.append(Pagamento(self.page).build())
@@ -80,10 +93,13 @@ class Principal(ft.UserControl):
         else:
             self.desiner.controls.append(Pagamento(self.page).build())
         self.page.update()
+        x.closeCarregamento(e)
 
     def graficos(self,e):
         '''Quando selecionado, abre o janela graficos'''
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
+        x = Carregamento(self.page,"Carregando...")
+        x.openCarregamento(e)
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
             self.desiner.controls.append(Graficos().build())
@@ -91,16 +107,20 @@ class Principal(ft.UserControl):
         else:
             self.desiner.controls.append(Graficos().build())
         self.page.update()
+        x.closeCarregamento(e)
 
     def configuracoes(self,e):
         '''Quando selecionado, abre o janela graficos'''
         #### Se houver uma janela já aberta, ele fecha a aberta e abre a janela selecionada. 
+        x = Carregamento(self.page,"Carregando...")
+        x.openCarregamento(e)
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
             self.desiner.controls.append(Configuracoes(self.page).build())
 
         else:
             self.desiner.controls.append(Configuracoes(self.page).build())
-        self.page.update()    
+        self.page.update()
+        x.closeCarregamento(e)  
     
         
