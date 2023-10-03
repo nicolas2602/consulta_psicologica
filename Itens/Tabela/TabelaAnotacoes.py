@@ -2,8 +2,7 @@ import flet as ft
 from Itens.components.Carregamento import Carregamento
 from Itens.Painel.PainelAnotacoes import PainelAnotacoes
 from Itens.Painel.PainelVisualizacaoAnotacoes import PainelVisualizacaoAnotacoes
-from modulos.Check.VerificadorData import VerificadorData
-from Itens.Painel.Checagem import Checagem
+from modulos.Criptografia import Criptografia
 import bd.funcao.anotacao_consulta as ac
 from time import sleep,strftime
 
@@ -52,13 +51,14 @@ class TabelaAnotacoes(ft.UserControl):
 
     def __tabela(self,lista):
         data = lista[1].strftime('%d/%m/%Y')
+        cript= Criptografia()
         
         self.desiner.controls[0].rows.append((ft.DataRow(
             cells=[
                 ft.DataCell(ft.Text(lista[0],selectable=True)),
                 ft.DataCell(ft.Text(data+' as '+str(lista[2])[:-3],selectable=True)),
                 ft.DataCell(ft.Text(value=f"{lista[3]} {lista[4]}",selectable=True)),
-                ft.DataCell(ft.Text(lista[5],selectable=True)),
+                ft.DataCell(ft.Text(value = cript.decodificar(lista[5]),selectable=True)),
                 ft.DataCell(ft.Row([ft.IconButton(icon=ft.icons.EDIT_DOCUMENT,on_click= lambda e: self.openPainelEditar(lista)),
                                     ft.VerticalDivider(),
                                     ft.IconButton(icon=ft.icons.VISIBILITY,on_click= lambda e: self.openPainelVisualizar(lista)),]))
@@ -73,16 +73,16 @@ class TabelaAnotacoes(ft.UserControl):
 
     def openPainelEditar(self, lista):
         '''Abre o Campo de Editar com os dados pré preenchidos'''
-        
-        self.painelEditar.setPaine(lista[0],lista[3],lista[4],lista[1],lista[2],lista[5],lista[6])
+        cript= Criptografia()
+        self.painelEditar.setPaine(lista[0],lista[3],lista[4],lista[1],lista[2],cript.decodificar(lista[5]),cript.decodificar(lista[6]))
 
         #### Abretura do painel de Edição ####
         self.painelEditar.openPainel()
 
     def openPainelVisualizar(self, lista):
         '''Abre o Campo de Editar com os dados pré preenchidos'''
-        
-        self.visualisacao.setPaine(lista[3],lista[4],lista[1],lista[2],lista[5],lista[6])
+        cript= Criptografia()
+        self.visualisacao.setPaine(lista[3],lista[4],lista[1],lista[2],cript.decodificar(lista[5]),cript.decodificar(lista[6]))
 
         #### Abretura do painel de Edição ####
         self.visualisacao.openPainel()

@@ -3,17 +3,18 @@ from Itens.Campo.CampoFormulario import CampoFormulario
 from Itens.Campo.CampoFormularioSenha import CampoFormularioSenha
 from Itens.components.buttons.ActionButton import ActionButton
 from Itens.components.buttons.IconButton import IconButton
+from modulos.Criptografia import Criptografia
 from  Itens.Painel.PopUp import PopUp
 from bd.funcao.usuario import selectUsuario,selectSenha,updateUsuarioSenha
 
 class ConfigSenha(ft.UserControl):
     def __init__(self,page):
         self.page = page
-
+        self.cript = Criptografia()
         self.login = CampoFormulario("Login",selectUsuario()[0][0])
         self.login.setNaoAlter(True)
 
-        self.senha = CampoFormularioSenha("Senha",selectSenha()[0][0],250)
+        self.senha = CampoFormularioSenha("Senha",self.cript.decodificar(selectSenha()[0][0]),250)
         self.senha.setNaoAlter(True)
 
         self.iconBotao = IconButton(ft.icons.VISIBILITY, ft.colors.BLACK54, self.visualizaSenha)
@@ -57,7 +58,7 @@ class ConfigSenha(ft.UserControl):
     
     def cancelar(self,e):
         self.login.setValue(selectUsuario()[0][0])
-        self.senha.setValue(selectSenha()[0][0])
+        self.senha.setValue(self.cript.decodificar(selectSenha()[0][0]))
         self.login.setNaoAlter(True)
         self.senha.setPassVisual(True)
         self.senha.setNaoAlter(True)

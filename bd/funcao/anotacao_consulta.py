@@ -1,4 +1,7 @@
 import bd.funcao.conexao as con
+from modulos.Criptografia import Criptografia
+
+cript = Criptografia()
 
 def insert(descricao, titulo, IdAgendCon):
     con.cursor.execute(f"INSERT INTO anotacao_consulta(descAnotCon, tituloAnotCon, fk_IdAgendCon) VALUES ('{descricao}', '{titulo}', {IdAgendCon})")
@@ -9,15 +12,15 @@ def insertAnotacao(IdAgendCon):
     descricao = f'Anotação{IdAgendCon}'
 
     con.cursor.execute(f"INSERT INTO anotacao_consulta(IdAnotCon, descAnotCon, tituloAnotCon, fk_IdAgendCon) VALUES \
-                                                            ({IdAgendCon},'{descricao}', '{titulo}',{IdAgendCon})")
+                                                            ({IdAgendCon},'{cript.codificar(descricao)}', '{cript.codificar(titulo)}',{IdAgendCon})")
     con.conexao.commit()
 
 def update(id, descricao, titulo, IdAgendCon):
-    con.cursor.execute(f"UPDATE anotacao_consulta SET descAnotCon='{descricao}', tituloAnotCon='{titulo}', fk_IdAgendCon={IdAgendCon} WHERE IdAnotCon={id}")
+    con.cursor.execute(f"UPDATE anotacao_consulta SET descAnotCon='{cript.codificar(descricao)}', tituloAnotCon='{cript.codificar(titulo)}', fk_IdAgendCon={IdAgendCon} WHERE IdAnotCon={id}")
     con.conexao.commit()
 
 def updateAnotacao(id, descricao, titulo):
-    con.cursor.execute(f"UPDATE anotacao_consulta SET descAnotCon='{descricao}', tituloAnotCon='{titulo}' WHERE IdAnotCon={id}")
+    con.cursor.execute(f"UPDATE anotacao_consulta SET descAnotCon='{cript.codificar(descricao)}', tituloAnotCon='{cript.codificar(titulo)}' WHERE IdAnotCon={id}")
     con.conexao.commit()
 
 def delete(id):

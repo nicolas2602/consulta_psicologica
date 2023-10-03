@@ -1,4 +1,7 @@
 import bd.funcao.conexao as con
+from modulos.Criptografia import Criptografia
+
+cript = Criptografia()
 
 def valorFixo():
     sql = f"SELECT valorFixo FROM valor_fixo WHERE IdValor='1';"
@@ -27,7 +30,7 @@ def selectSenha():
     return resultado
 
 def updateUsuarioSenha(novoUsuario,novaSenha):
-    sql = f"UPDATE usuario SET nomeUsuario='{novoUsuario}',senhaUsuario='{novaSenha}' WHERE IdUsuario='2'"
+    sql = f"UPDATE usuario SET nomeUsuario='{novoUsuario}',senhaUsuario='{cript.codificar(novaSenha)}' WHERE IdUsuario='2'"
     con.cursor.execute(sql)
     con.conexao.commit()
 

@@ -12,7 +12,7 @@ USE consulta_psicologica;
 CREATE TABLE anotacao_consulta(
     IdAnotCon INT PRIMARY KEY NOT NULL,
     tituloAnotCon VARCHAR(200) NOT NULL,
-    descAnotCon VARCHAR(200) NOT NULL
+    descAnotCon VARCHAR(500) NOT NULL
 );
 
 -- Alterar a tabela assunto adicionando as chaves estrangeiras

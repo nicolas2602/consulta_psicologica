@@ -1,4 +1,4 @@
--- Active: 1693247688030@@localhost@3306@consulta_psicologica
+-- Active: 1691770896943@@0.0.0.0@3306@consulta_psicologica
 -- SQLBook: Code
 
 -- Criar o banco de dados
@@ -10,7 +10,6 @@ DROP DATABASE consulta_psicologica;
 -- Usar o banco de dados
 USE consulta_psicologica;
 
-drop table status_pagamento;
 /* Criar a tabela status de pagamento e seus atributos */
 CREATE TABLE status_pagamento(
     IdStatusPag INT PRIMARY KEY AUTO_INCREMENT,
@@ -20,7 +19,6 @@ CREATE TABLE status_pagamento(
 -- Inserir os dados possíveis na tabela status de pagamento
 
 INSERT INTO status_pagamento(descStatusPag) VALUES ('Concluído'), ('Em andamento'), ('Pendente');
-
 
 -- Exibir todos os dados na tabela status de pagamento
 
@@ -58,7 +56,7 @@ ALTER TABLE pagamento
 
 -- Inserir os dados na tabela pagamento
 INSERT INTO pagamento(IdPagamento, valorPagamento, dataPagamento, valorDesconto, valorAcrescimo, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) 
-                    VALUES (1, 50.00, '2023-11-22', 10.00, 11.00, 2, 1, 1);
+                    VALUES (1, 50.00, '2023-11-22', 10.00, 11.00, 1, 1, 1);
 
 
 -- Exibir os dados na tabela pagamento
@@ -79,7 +77,6 @@ UPDATE pagamento SET valorPagamento=45.00 WHERE IdPagamento=1;
 -- Excluir os dados da tabela pagamento
 DELETE FROM pagamento WHERE IdPagamento=1;
 
-SELECT * FROM pagamento
 --Campo de pesquisa com ordenação crescente
 SELECT IdPagamento, dataAgendCon, dataAgendCon, 
        horarioAgendCon AS horarioAgendCon, nomeCliente, IFNULL(valorPagamento, 'Em acerto') as valorPagmento,
@@ -89,10 +86,7 @@ LEFT JOIN agendamento_consulta AS cs ON pg.fk_IdAgendCon = cs.IdAgendCon
 LEFT JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente
 LEFT JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag
 LEFT JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag
-
-
-
-WHERE nomeCliente like '%%' AND 
+WHERE nomeCliente like '%Gabriel%' AND 
       dataPagamento BETWEEN '2022-09-22' AND '2023-09-22' AND
       descStatusPag like '%Concluído%'
 ORDER BY YEAR(dataAgendCon) ASC, 

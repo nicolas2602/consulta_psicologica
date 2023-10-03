@@ -1,12 +1,20 @@
 import bd.funcao.login as lg
+from modulos.Criptografia import Criptografia
 
 class VerificaLoginESenha:
     
     def __init__(self) -> None:
-        pass
-
+        self.cript = Criptografia()
+        
     def loginSenhaHeCorreto(self,usuario,senha):
-        if (lg.login(usuario,senha) == []):
+        log = lg.login(usuario)
+
+        if (log == []):
             return False
         else:
-            return True
+            dados  = log[0]
+
+            if dados[1] == usuario and self.cript.decodificar(dados[2]) == str(senha):
+                return True
+            else:
+                return False

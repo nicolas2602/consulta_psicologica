@@ -22,7 +22,7 @@ SELECT * FROM perfil;
 CREATE TABLE usuario(
     IdUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nomeUsuario VARCHAR(100) NOT NULL UNIQUE,
-    senhaUsuario VARCHAR(10) NOT NULL UNIQUE
+    senhaUsuario VARCHAR(100) NOT NULL UNIQUE
 );
 
 drop table usuario;
@@ -31,12 +31,12 @@ ALTER TABLE usuario
     ADD fk_IdPerfil INT NOT NULL,
     ADD FOREIGN KEY(fk_IdPerfil) REFERENCES perfil(IdPerfil);
 
-INSERT INTO usuario(nomeUsuario, senhaUsuario, fk_IdPerfil) VALUES ('sistem', '1234', 1), 
-                                                                   ('psico_renata23', 'psico@123', 2);
+INSERT INTO usuario(nomeUsuario, senhaUsuario, fk_IdPerfil) VALUES ('sistem', 'm3UR7w==*dm+A6OlUSQXSvo73GJw5Vg==*q0SgTPkfHPy2YHr7bh4ZEw==*nBf3aSzFQPulXSuqMDyZKw==', 1), 
+                                                                   ('user', '5yUP*4blacH66otBdr1w5iMhBPw==*VZuHVPVVAHASmhTGjOef4g==*iFkGzapvX6vQR3MDw0e1jA==', 2);
 
 -- Logar a conta usuária
 SELECT * FROM usuario
-WHERE nomeUsuario='sistem' AND senhaUsuario='1234';
+WHERE nomeUsuario='admin' AND senhaUsuario='admin12';
 
 UPDATE usuario SET nomeUsuario='psico_renata33', senhaUsuario='psico@123' WHERE IdUsuario=2;
 
@@ -60,7 +60,7 @@ ALTER TABLE horario_atendimento
 
 INSERT INTO horario_atendimento(horarioInicialTrab, horarioFinalTrab, horarioIntervInicial, 
                                            horarioIntervFinal, tempoConsulta, fk_IdUsuario) 
-VALUES ('09:09', '17:09', '12:00', '13:00', '30', 2);
+VALUES ('09:00', '17:00', '12:00', '13:00', '30', 2);
 
 SELECT horarioInicialTrab, horarioFinalTrab, horarioIntervInicial, 
        horarioIntervFinal, tempoConsulta, nomeUsuario
