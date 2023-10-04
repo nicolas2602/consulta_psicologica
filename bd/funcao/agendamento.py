@@ -34,7 +34,7 @@ def selectDataHora(data,hora):
 
 def pesquisaNome(nome):
     '''IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente'''
-    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,\
+    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\
                         IdCliente, nomeCliente, sobrenomeCliente FROM agendamento_consulta as cs INNER JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente\
                         WHERE nomeCliente like '%{nome}%' ORDER BY dataAgendCon,horarioAgendCon;")
     resultado = con.cursor.fetchall()
@@ -43,7 +43,7 @@ def pesquisaNome(nome):
 
 def pesquisaData(data):
     '''Data deve ser padrão americano (AAAA-MM-DD) - IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente '''
-    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,\
+    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\
                         IdCliente, nomeCliente, sobrenomeCliente FROM agendamento_consulta as cs INNER JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente\
                         WHERE dataAgendCon = '{data}' ORDER BY dataAgendCon,horarioAgendCon;")
     resultado = con.cursor.fetchall()
@@ -52,7 +52,7 @@ def pesquisaData(data):
 
 def pesquisaNomeData(nome,data):
     '''Data deve ser padrão americano (AAAA-MM-DD) - IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente '''
-    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,\
+    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\
                         IdCliente, nomeCliente, sobrenomeCliente FROM agendamento_consulta as cs INNER JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente\
                         WHERE dataAgendCon = '{data}' AND nomeCliente like '%{nome}%' ORDER BY dataAgendCon,horarioAgendCon;")
     resultado = con.cursor.fetchall()
@@ -62,7 +62,7 @@ def pesquisaNomeData(nome,data):
 ################################################################
 def pesquisaIdNomeDataHora(idNome,data,hora):
     '''Data deve ser padrão americano (AAAA-MM-DD) - IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente '''
-    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,\
+    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\
                         IdCliente, nomeCliente, sobrenomeCliente FROM agendamento_consulta as cs INNER JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente\
                         WHERE dataAgendCon = '{data}'AND horarioAgendCon = '{hora}' AND IdCliente = {idNome} ORDER BY dataAgendCon,horarioAgendCon;")
     resultado = con.cursor.fetchall()
@@ -71,7 +71,7 @@ def pesquisaIdNomeDataHora(idNome,data,hora):
 
 def pesquisaID(id):
     '''IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente'''
-    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,\
+    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\
                         IdCliente, nomeCliente, sobrenomeCliente FROM agendamento_consulta as cs INNER JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente\
                         WHERE IdAgendCon = '{id}';")
     resultado = con.cursor.fetchall()
@@ -80,7 +80,7 @@ def pesquisaID(id):
 
 def pesquisaTudo():
     '''Data deve ser padrão americano (AAAA-MM-DD) - IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente '''
-    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%m') AS horarioAgendCon,\
+    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\
                         IdCliente, nomeCliente, sobrenomeCliente FROM agendamento_consulta as cs INNER JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente\
                         ORDER BY dataAgendCon,horarioAgendCon;")
     resultado = con.cursor.fetchall()

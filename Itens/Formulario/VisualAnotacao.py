@@ -15,7 +15,7 @@ class VisualAnotacao(ft.UserControl):
         self.__desginer = ft.Column(controls=[
             self.__titulo,
             self.__anotacoes
-        ],scroll= ft.ScrollMode.ALWAYS)
+        ],scroll= ft.ScrollMode.ALWAYS, alignment=ft.MainAxisAlignment.START,height=380)
 
     def build(self):
         return self.__desginer

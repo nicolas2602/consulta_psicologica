@@ -56,7 +56,7 @@ class TabelaAgendamento(ft.UserControl):
 
 
     def __tabela(self,lista):
-        
+        print(lista)
         self.desiner.controls[0].rows.append((ft.DataRow(
             cells=[
                 ft.DataCell(ft.Text(lista[0],selectable=True)),
