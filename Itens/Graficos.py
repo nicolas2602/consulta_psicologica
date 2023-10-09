@@ -1,6 +1,7 @@
 import flet as ft
 from Itens.Campo.CampoDrop import CampoDrop
-from Itens.Campo.GraficosColunas import GraficosColunas
+#from Itens.Campo.Graficos.GraficosColunas import GraficosColunas
+from Itens.Tabela.GraficosDashboard import GraficosDashboard
 from Itens.components.Titulo import Titulo
 
 class Graficos(ft.UserControl):
@@ -9,7 +10,9 @@ class Graficos(ft.UserControl):
         self.anos = CampoDrop('Anos',['2023'])
         self.anos.setValue('2023')
 
-        self.graficos = GraficosColunas()
+        #self.graficos = GraficosColunas()
+
+        self.graficos = GraficosDashboard()
 
         self.designer = ft.Column(
             controls=[
@@ -17,7 +20,7 @@ class Graficos(ft.UserControl):
                 ft.Divider(color=ft.colors.GREEN_900),
                 ft.Row([self.anos.build()]),
                 ft.Divider(color=ft.colors.GREEN_900),
-                ft.Row([self.graficos.build()])
+                ft.Row([self.graficos.build()],expand=True,alignment="Center",vertical_alignment=ft.CrossAxisAlignment.START)
             ],expand=True
         )
 
