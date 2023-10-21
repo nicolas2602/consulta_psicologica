@@ -1,17 +1,8 @@
--- Active: 1691770896943@@0.0.0.0@3306@consulta_psicologica
+-- Active: 1691770896943@@0.0.0.0@3306
 -- SQLBook: Code
 
--- Criar o banco de dados
-CREATE DATABASE consulta_psicologica;
-
--- Excluir o banco de dados
-DROP DATABASE consulta_psicologica;
-
--- Usar o banco de dados
-USE consulta_psicologica;
-
 /* Criar a tabela status de pagamento e seus atributos */
-CREATE TABLE status_pagamento(
+CREATE TABLE IF NOT EXISTS status_pagamento(
     IdStatusPag INT PRIMARY KEY AUTO_INCREMENT,
     descStatusPag VARCHAR(50)
 );
@@ -25,7 +16,7 @@ INSERT INTO status_pagamento(descStatusPag) VALUES ('Concluído'), ('Em andament
 SELECT * FROM status_pagamento;
 
 /* Criar a tabela forma de pagamento e seus atributos */
-CREATE TABLE forma_pagamento(
+CREATE TABLE IF NOT EXISTS forma_pagamento(
     IdFormaPag INT PRIMARY KEY AUTO_INCREMENT,
     descFormaPag VARCHAR(100) 
 );
@@ -33,10 +24,14 @@ CREATE TABLE forma_pagamento(
 -- Inserir os dados possíveis na tabela forma de pagamento
 INSERT INTO forma_pagamento(descFormaPag) VALUES ('Pix'), ('Débito'), ('Crédito'), ('Convênio'), ('Dinheiro');
 
+UPDATE forma_pagamento SET descFormaPag='Cheque' WHERE IdFormaPag=2;
+
+DELETE FROM forma_pagamento WHERE IdFormaPag=2;
+
 drop table pagamento;
 
 /* Criar a tabela pagamento e seus atributos */
-CREATE TABLE pagamento(
+CREATE TABLE IF NOT EXISTS pagamento(
     IdPagamento INT PRIMARY KEY NOT NULL,
     valorPagamento DECIMAL(10,2),
     dataPagamento DATE,
@@ -56,7 +51,7 @@ ALTER TABLE pagamento
 
 -- Inserir os dados na tabela pagamento
 INSERT INTO pagamento(IdPagamento, valorPagamento, dataPagamento, valorDesconto, valorAcrescimo, fk_IdAgendCon, fk_IdStatusPag, fk_IdFormaPag) 
-                    VALUES (1, 50.00, '2023-11-22', 10.00, 11.00, 1, 1, 1);
+                    VALUES (18, 50.00, '2023-09-22', 10.00, 11.00, 1, 1, 5);
 
 
 -- Exibir os dados na tabela pagamento
@@ -76,6 +71,8 @@ UPDATE pagamento SET valorPagamento=45.00 WHERE IdPagamento=1;
 
 -- Excluir os dados da tabela pagamento
 DELETE FROM pagamento WHERE IdPagamento=1;
+
+select * from pagamento;
 
 --Campo de pesquisa com ordenação crescente
 SELECT IdPagamento, dataAgendCon, dataAgendCon, 

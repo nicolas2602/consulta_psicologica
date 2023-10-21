@@ -1,15 +1,15 @@
 
 -- Criar o Banco de Dados
-CREATE DATABASE consulta_psicologica;
+CREATE DATABASE IF NOT EXISTS consulta_psicologica;
 
 -- Excluir o banco de dados
-DROP DATABASE consulta_psicologica;
+DROP DATABASE IF EXISTS consulta_psicologica;
 
 -- Usar o banco de dados
 USE consulta_psicologica;
 
 -- Tabela de perfil
-CREATE TABLE perfil(
+CREATE TABLE IF NOT EXISTS  perfil(
     IdPerfil INT PRIMARY KEY AUTO_INCREMENT,
     tipoPerfil VARCHAR(20) UNIQUE
 );
@@ -19,13 +19,11 @@ INSERT INTO perfil(tipoPerfil) VALUES ('Administrador'), ('Usuário');
 SELECT * FROM perfil;
 
 -- Tabela de usuário
-CREATE TABLE usuario(
+CREATE TABLE IF NOT EXISTS usuario(
     IdUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nomeUsuario VARCHAR(100) NOT NULL UNIQUE,
     senhaUsuario VARCHAR(100) NOT NULL UNIQUE
 );
-
-drop table usuario;
 
 ALTER TABLE usuario
     ADD fk_IdPerfil INT NOT NULL,
@@ -43,7 +41,7 @@ UPDATE usuario SET nomeUsuario='psico_renata33', senhaUsuario='psico@123' WHERE 
 DELETE FROM usuario WHERE IdUsuario=2;
 
 -- Tabela de Horário de Atendimento
-CREATE TABLE horario_atendimento (
+CREATE TABLE IF NOT EXISTS  horario_atendimento (
     IdHorarioAtend INT PRIMARY KEY AUTO_INCREMENT,
     horarioInicialTrab TIME,
     horarioFinalTrab TIME,
@@ -51,8 +49,6 @@ CREATE TABLE horario_atendimento (
     horarioIntervFinal TIME,
     tempoConsulta VARCHAR(2)
 );
-
-drop table horario_atendimento;
 
 ALTER TABLE horario_atendimento
     ADD fk_IdUsuario INT NOT NULL UNIQUE,
@@ -73,7 +69,7 @@ UPDATE horario_atendimento SET horarioInicialTrab='09:09' WHERE IdHorarioAtend=2
 DELETE FROM horario_atendimento WHERE IdHorarioAtend=1;
 
 -- Tabela de Valor fixo
-CREATE TABLE valor_fixo (
+CREATE TABLE IF NOT EXISTS  valor_fixo (
     IdValor INT PRIMARY KEY AUTO_INCREMENT,
     valorFixo DECIMAL(10,2) NOT NULL
 );

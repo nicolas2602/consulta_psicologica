@@ -10,7 +10,7 @@ DROP DATABASE consulta_psicologica;
 USE consulta_psicologica;
 
 /* Criar a tabela assunto e seus atributos */
-CREATE TABLE cliente(
+CREATE TABLE IF NOT EXISTS  cliente(
     IdCliente INT PRIMARY KEY AUTO_INCREMENT,
     nomeCliente VARCHAR(100) NOT NULL,
     sobrenomeCliente VARCHAR(100) NOT NULL,

@@ -1,3 +1,4 @@
+-- Active: 1691770896943@@0.0.0.0@3306@consulta_psicologica
 -- SQLBook: Code
 
 -- Criar o banco de dados
@@ -9,7 +10,7 @@ DROP DATABASE consulta_psicologica;
 -- Usar o banco de dados
 USE consulta_psicologica;
 
-CREATE TABLE anotacao_consulta(
+CREATE TABLE IF NOT EXISTS  anotacao_consulta(
     IdAnotCon INT PRIMARY KEY NOT NULL,
     tituloAnotCon VARCHAR(200) NOT NULL,
     descAnotCon VARCHAR(500) NOT NULL

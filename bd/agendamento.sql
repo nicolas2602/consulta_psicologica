@@ -10,7 +10,7 @@ DROP DATABASE IF EXISTS consulta_psicologica;
 USE consulta_psicologica;
 
 /* Criar a tabela agenda e seus atributos */
-CREATE TABLE agendamento_consulta(
+CREATE TABLE IF NOT EXISTS  agendamento_consulta(
     IdAgendCon INT PRIMARY KEY AUTO_INCREMENT,
     dataAgendCon DATE NOT NULL,
     horarioAgendCon TIME NOT NULL
