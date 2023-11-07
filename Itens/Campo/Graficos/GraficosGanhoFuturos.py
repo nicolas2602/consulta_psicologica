@@ -1,7 +1,8 @@
 import flet as ft
 
 class GraficosGanhoFuturos(ft.UserControl):
-    def __init__(self,valor, ano):
+    def __init__(self,page,valor = "0",ano = "----"):
+        self.page = page
 
         self.cor = ft.colors.BLUE
         
@@ -16,3 +17,8 @@ class GraficosGanhoFuturos(ft.UserControl):
 
     def build(self):
         return ft.Container(content=self.designer,width=270,height=120,border=ft.border.all(2, ft.colors.GREY),border_radius=10, bgcolor=ft.colors.BLUE_GREY_50)
+
+    def setValue(self,ano = "----" ,valor = "0"):
+        self.Titulo.value = f"Ganhos futuros {ano}:"
+        self.texto.value = f"R$ {valor}"
+        self.page.update()

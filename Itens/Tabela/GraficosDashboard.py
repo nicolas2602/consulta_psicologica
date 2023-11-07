@@ -6,14 +6,18 @@ from Itens.Campo.Graficos.GraficosValorNaoPago import GraficosValorNaoPago
 from Itens.Campo.Graficos.GraficosStatusMes import GraficosStatusMes
 from Itens.Campo.Graficos.GraficosLinhas import GraficosLinhas
 from Itens.Campo.Graficos.GraficosPizza import GraficosPizza
+from modulos.DadosGraficos import DadosGraficos
 
 class GraficosDashboard(ft.UserControl):
-    def __init__(self):
+    def __init__(self,page):
+        self.page = page
 
-        self.graf1 = GraficosGanhoTotal('10560.00','2023')
-        self.graf2 = GraficosGanhoFuturos('2780.00','2023')
-        self.graf3 = GraficosMediaGanhoMes('3580.00')
-        self.graf4 = GraficosValorNaoPago('542.00')
+        self.dados = DadosGraficos()
+
+        self.graf1 = GraficosGanhoTotal(self.page)
+        self.graf2 = GraficosGanhoFuturos(self.page)
+        self.graf3 = GraficosMediaGanhoMes(self.page)
+        self.graf4 = GraficosValorNaoPago(self.page)
         self.graf5 = GraficosStatusMes("Julho","Janeiro")
 
         self.cabecalhoGrafico = ft.Row([self.graf1.build(),self.graf2.build(),self.graf3.build(),self.graf4.build()])
@@ -32,3 +36,11 @@ class GraficosDashboard(ft.UserControl):
 
     def build(self):
         return ft.Column([self.grid],alignment="Center",scroll=ft.ScrollMode.ALWAYS)
+
+    def setValue(self,ano):
+
+        self.graf1.setValue(f"{ano}",f"{self.dados.totalAnoConcluido(ano)}")
+        self.graf2.setValue(f"{ano}",f"{self.dados.totalAnoAndamento(ano)}")
+        self.graf3.setValue("0")
+        self.graf4.setValue(f"{self.dados.totalAnoPendente(ano)}")
+        #self.page.update()
