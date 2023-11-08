@@ -34,14 +34,12 @@ class Log:
 
             if response.status_code != 200:
                 logging.error(f"Resposta={response.__dict__}")
-                #print("ERRO!")
+                
             else:
                 logging.info(f"Content={response.content}")
-                #print("OK")
+                
         except requests.exceptions.RequestException as erro_conexao:
-        # except Exception as erro_conexao:
             logging.critical("Error no logging! Tente novamente...")
-            #print("Deu RUIM!")
     
     def submit(self, table, pk, crud, user):
         self.tabela = table
