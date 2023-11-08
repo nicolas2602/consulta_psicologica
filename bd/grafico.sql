@@ -35,7 +35,7 @@ FROM pagamento WHERE YEAR(dataPagamento) = '2023' AND fk_IdStatusPag=1;
 
 -- Total de ganhos futuros
 SELECT valorPagamento, valorAcrescimo, valorDesconto
-FROM pagamento WHERE YEAR(dataPagamento) = '2023' AND fk_IdStatusPag=2;
+FROM pagamento WHERE YEAR(dataAgendCon) = '2023' AND fk_IdStatusPag=2;
 
 -- Média por mês
 SELECT SUM(valorPagamento) / 12 AS mediaPorMes
