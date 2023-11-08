@@ -22,7 +22,7 @@ class GraficosDashboard(ft.UserControl):
 
         self.cabecalhoGrafico = ft.Row([self.graf1.build(),self.graf2.build(),self.graf3.build(),self.graf4.build()])
 
-        self.grafLinhas = GraficosLinhas('2023','2022')
+        self.grafLinhas = GraficosLinhas(self.page)
         self.grafPizza = GraficosPizza()
 
         self.grid = ft.Container(ft.Column([
@@ -41,6 +41,8 @@ class GraficosDashboard(ft.UserControl):
 
         self.graf1.setValue(f"{ano}",f"{self.dados.totalAnoConcluido(ano)}")
         self.graf2.setValue(f"{ano}",f"{self.dados.totalAnoAndamento(ano)}")
-        self.graf3.setValue("0")
+        self.graf3.setValue(f"{self.dados.mediaAno(ano)}")
         self.graf4.setValue(f"{self.dados.totalAnoPendente(ano)}")
+
+        self.grafLinhas.setValue(ano)
         #self.page.update()
