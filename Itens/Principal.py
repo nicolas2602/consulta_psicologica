@@ -102,10 +102,10 @@ class Principal(ft.UserControl):
         x.openCarregamento(e)
         if (len(self.desiner.controls) > 2):
             self.desiner.controls.pop(2)
-            self.desiner.controls.append(Graficos().build())
+            self.desiner.controls.append(Graficos(self.page).build())
 
         else:
-            self.desiner.controls.append(Graficos().build())
+            self.desiner.controls.append(Graficos(self.page).build())
         self.page.update()
         x.closeCarregamento(e)
 
