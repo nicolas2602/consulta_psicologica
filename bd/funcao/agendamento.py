@@ -41,6 +41,15 @@ def pesquisaNome(nome):
     
     return resultado
 
+def pesquisaNomeID(idnome):
+    '''IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente'''
+    con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\
+                        IdCliente, nomeCliente, sobrenomeCliente FROM agendamento_consulta as cs INNER JOIN cliente as cl ON cs.fk_IdCliente = cl.IdCliente\
+                        WHERE IdCliente = {idnome} ORDER BY dataAgendCon,horarioAgendCon;")
+    resultado = con.cursor.fetchall()
+    
+    return resultado
+
 def pesquisaData(data):
     '''Data deve ser padrão americano (AAAA-MM-DD) - IdAgendCon,dataAgendCon,horarioAgendCon,IdCliente,nomeCliente,sobrenomeCliente '''
     con.cursor.execute(f"SELECT IdAgendCon, DATE_FORMAT(dataAgendCon, '%d/%m/%Y') AS dataAgendCon, TIME_FORMAT(horarioAgendCon, '%H:%i') AS horarioAgendCon,\

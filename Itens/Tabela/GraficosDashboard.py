@@ -23,7 +23,7 @@ class GraficosDashboard(ft.UserControl):
         self.cabecalhoGrafico = ft.Row([self.graf1.build(),self.graf2.build(),self.graf3.build(),self.graf4.build()])
 
         self.grafLinhas = GraficosLinhas(self.page)
-        self.grafPizza = GraficosPizza()
+        self.grafPizza = GraficosPizza(self.page)
 
         self.grid = ft.Container(ft.Column([
             self.cabecalhoGrafico,     
@@ -45,4 +45,5 @@ class GraficosDashboard(ft.UserControl):
         self.graf4.setValue(f"{self.dados.totalAnoPendente(ano)}")
 
         self.grafLinhas.setValue(ano)
+        self.grafPizza.setValue(ano)
         #self.page.update()

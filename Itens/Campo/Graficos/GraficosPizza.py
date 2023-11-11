@@ -1,8 +1,10 @@
 import flet as ft
+from modulos.DadosGraficos import DadosGraficos
 
 class GraficosPizza(ft.UserControl):
-    def __init__(self):
-        
+    def __init__(self,page):
+        self.page = page
+        self.dados = DadosGraficos()
         self.corGanhos = ft.colors.GREEN_700
         self.corGanhosFuturos = ft.colors.BLUE
         self.corNaoPago = ft.colors.RED_900
@@ -42,8 +44,8 @@ class GraficosPizza(ft.UserControl):
             sections=[
                 #### Não Pagos ####
                 ft.PieChartSection(
-                    5,
-                    title="5%",
+                    0,
+                    title=f"{0}%",
                     title_style=self.normal_title_style,
                     color=self.corNaoPago,
                     radius=self.normal_radius,
@@ -53,8 +55,8 @@ class GraficosPizza(ft.UserControl):
 
                 #### Ganhos ####
                 ft.PieChartSection(
-                    70,
-                    title="70%",
+                    0,
+                    title=f"{0}%",
                     title_style=self.normal_title_style,
                     color=self.corGanhos,
                     radius=self.normal_radius,
@@ -64,8 +66,8 @@ class GraficosPizza(ft.UserControl):
 
                 #### Ganhos Futuros ####
                 ft.PieChartSection(
-                    25,
-                    title="25%",
+                    0,
+                    title=f"{0}%",
                     title_style=self.normal_title_style,
                     color=self.corGanhosFuturos,
                     radius=self.normal_radius,
@@ -112,3 +114,21 @@ class GraficosPizza(ft.UserControl):
                 section.radius = self.normal_radius
                 section.title_style = self.normal_title_style
         self.chart.update()
+
+    def setValue(self,ano):
+        x = self.dados.porcentagemStatosPagamento(ano)
+
+        if x['Pendente']+x['Concluído']+x['Em andamento'] != 100:
+            print(x['Pendente']+x['Concluído']+x['Em andamento'])
+            x['Em andamento']+=0.1
+
+        self.chart.sections[0].value = x['Pendente']
+        self.chart.sections[0].title = f"{x['Pendente']}%"
+        
+        self.chart.sections[1].value = x['Concluído']
+        self.chart.sections[1].title = f"{x['Concluído']}%"
+        
+        self.chart.sections[2].value = x['Em andamento']
+        self.chart.sections[2].title = f"{x['Em andamento']}%"
+
+        self.page.update()

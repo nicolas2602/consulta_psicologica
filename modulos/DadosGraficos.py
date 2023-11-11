@@ -37,6 +37,9 @@ class DadosGraficos:
     
     def _totalMesesPendente(self,ano):
         return bdDados.StatusAnoPendente(ano)
+
+    def _qntStatusPagamentoAno(self,ano):
+        return bdDados.qntStatusPagamento(ano)
     
     def mediaAno(self,ano):
         qntMes = self.valorMesesConcluido(ano)
@@ -57,3 +60,33 @@ class DadosGraficos:
             mesTratado[f'{dados[0]}'] = dados[2]
 
         return mesTratado
+
+    def porcentagemStatosPagamento(self,ano):
+        x = self._qntStatusPagamentoAno(ano)
+        total = 0
+        resultado = {}
+
+        # define o total
+        for qnt in x:
+           total+= qnt[0] 
+
+        for item in x:
+            
+            if item[1] == "Concluído":
+                resultado[f'{item[1]}'] = round(float(item[0] / total)*100 , 1)
+            elif item[1] == "Pendente":
+                resultado[f'{item[1]}'] = round(float(item[0] / total)*100 , 1)
+            elif item[1] == "Em andamento":
+                resultado[f'{item[1]}'] = round(float(item[0] / total)*100 , 1)
+            else:
+                pass
+
+        if "Concluído" not in resultado:
+            resultado['Concluído'] = float(0)
+        if "Pendente" not in resultado:
+            resultado['Pendente'] = float(0)
+        if "Em andamento" not in resultado:
+            resultado['Em andamento'] = float(0)
+
+        return resultado
+        # em dev

@@ -74,8 +74,8 @@ def pesquisarComTodasInfo(nome,statusPag,dataInicio,datafim):
         LEFT JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag \
         LEFT JOIN status_pagamento AS st ON pg.fk_IdStatusPag = st.IdStatusPag \
         WHERE nomeCliente like '%{nome}%' AND \
-        descStatusPag like '%{statusPag}%' OR \
-        dataPagamento BETWEEN '{dataInicio}' AND '{datafim}' \
+        descStatusPag like '%{statusPag}%' AND \
+        dataAgendCon BETWEEN '{dataInicio}' AND '{datafim}' \
         ORDER BY dataAgendCon;"
 
     con.cursor.execute(sql)

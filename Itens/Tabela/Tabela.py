@@ -2,6 +2,9 @@
 from Itens.Painel.Painel import Painel
 from Itens.Painel.Checagem import Checagem
 from bd.funcao.cliente import *
+import bd.funcao.agendamento as ag
+import bd.funcao.anotacao_consulta as ac
+import bd.funcao.pagamento as pg
 from time import sleep
 from Itens.components.Carregamento import Carregamento
 from modulos.VerificaCliente import VerificaCliente
@@ -131,10 +134,11 @@ class Tabela(ft.UserControl):
 
         #### pesquisa o ID no banco ####
         self.x = select(f"SELECT * FROM cliente WHERE IdCliente = {id}")
-
+        
         #### Checa se vai excluir (sim ou não / True or False)
         self.checa = Checagem(self.page,f"Deseja deletar o cadastro do {self.x[0][1]} {self.x[0][2]}?")
         resultado = self.checa.checar()
+        
 
         #### Se True => Ele Excluirá
         if(resultado):
@@ -143,7 +147,16 @@ class Tabela(ft.UserControl):
             carregando = True
 
             while carregando:
-            
+                # CONDIÇÃO PARA DELETAR
+
+                for idAgenda in ag.pesquisaNomeID(id):
+                    pg.delete(idAgenda[0])
+                    sleep(0.1)
+                    ac.delete(idAgenda[0])
+                    sleep(0.1)
+                    ag.delete(idAgenda[0])
+                    sleep(0.1)
+
                 delete(id)
                 sleep(1)
                 

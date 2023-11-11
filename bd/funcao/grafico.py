@@ -63,3 +63,20 @@ def StatusAnoPendente(ano):
     resultado = con.cursor.fetchall()
     
     return resultado
+
+
+def qntStatusPagamento(ano):
+    setLanguange()
+    con.cursor.execute(f"SELECT COUNT(fk_IdStatusPag) AS qtdStatusPag, descStatusPag, \
+        SUM(valorPagamento) AS totalPagamento \
+        FROM pagamento AS pg \
+        INNER JOIN agendamento_consulta as ac \
+        ON pg.fk_IdAgendCon = ac.IdAgendCon \
+        LEFT JOIN status_pagamento AS st  \
+        ON pg.fk_IdStatusPag = st.IdStatusPag \
+        WHERE dataAgendCon LIKE '%{ano}%' \
+        GROUP BY fk_IdStatusPag;")
+    
+    resultado = con.cursor.fetchall()
+    
+    return resultado

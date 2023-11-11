@@ -54,10 +54,12 @@ class Pagamento(ft.UserControl):
         dataInicial = self.campoDataInicio.getValue()
         datafinal = self.campoDataFinal.getValue()
         status = self.campoStatusPG.getValue()
-
+        
         # Se os 2 Campos estão com dados
         dataInicial = VerificadorData(dataInicial).verificar()
         datafinal = VerificadorData(datafinal).verificar()
+
+        print(status)
 
         if (dataInicial[0] and datafinal[0]):
             resultados = pg.pesquisarComTodasInfo(nome,status[1],dataInicial[1],datafinal[1])

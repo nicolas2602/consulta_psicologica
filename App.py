@@ -7,7 +7,7 @@ config_page={
     'height':700,
     'min_height': 600,
     'min_width':1250,
-    'title': "PsicoTeck"
+    'title': "PsicoTech"
 }
 
 
