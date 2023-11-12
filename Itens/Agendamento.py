@@ -12,6 +12,7 @@ from modulos.Check.VerificadorAgendamentoExiste import VerificadorAgendamentoExi
 import bd.funcao.agendamento as ag
 import bd.funcao.pagamento as pg
 import bd.funcao.anotacao_consulta as ac
+from modulos.Log import Log
 
 
 class Agendamento(ft.UserControl):
@@ -97,7 +98,7 @@ class Agendamento(ft.UserControl):
         Carregando = True
         msg = "Consulta agendada com Sucesso"
         cor = ft.colors.GREEN_700
-
+        salvarNoBD = [False,'']
 
         while Carregando:
 
@@ -117,6 +118,9 @@ class Agendamento(ft.UserControl):
                         novoDados = ag.pesquisaIdNomeDataHora(x['idNome'],héValido[1],x['hora'])
                         pg.insertAgendPg(novoDados[0][0])
                         ac.insertAnotacao(novoDados[0][0])
+
+                        #### Salvo ####
+                        salvarNoBD = [True,novoDados[0][0]]
 
                         #### ATUALIZA A TABELA ####
                         self.tabela.dados = ag.pesquisaData(héValido[1])
@@ -140,3 +144,11 @@ class Agendamento(ft.UserControl):
 
         self.painelAgendamento.openPopUp(msg, cor)
         self.page.update()
+
+        sleep(1)
+        if salvarNoBD[0]:
+            self.awdEnvido("Create",salvarNoBD[1])
+
+    def awdEnvido(self,tipo,id):
+        x = Log(self.page)
+        x.submit("agendamento_consulta",id,tipo,"user")

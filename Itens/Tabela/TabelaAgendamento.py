@@ -8,6 +8,7 @@ import bd.funcao.agendamento as ag
 import bd.funcao.pagamento as pg
 import bd.funcao.anotacao_consulta as ac
 from time import sleep,strftime
+from modulos.Log import Log
 
 class TabelaAgendamento(ft.UserControl):
     ''' Criar a Tabela com os dados do banco.
@@ -99,7 +100,7 @@ class TabelaAgendamento(ft.UserControl):
         Carregando = True
         msg = "Consulta agendada com Sucesso"
         cor = ft.colors.GREEN_700
-
+        salvarNoBD = [False,'']
 
         while Carregando:
 
@@ -114,6 +115,8 @@ class TabelaAgendamento(ft.UserControl):
                         self.dados = ag.pesquisaData(héValido[1])
                         self.montaTabela()
                         self.painelEditar.resetValue()
+                        #### Salvo ####
+                        salvarNoBD = [True,x['id']]
                     else:
                         msg = "Horario ou Data indisponivel!"
                         cor = ft.colors.RED_700
@@ -133,6 +136,14 @@ class TabelaAgendamento(ft.UserControl):
         self.painelEditar.openPopUp(msg, cor)
         self.page.update()
 
+        sleep(1)
+        if salvarNoBD[0]:
+            self.awdEnvido("Update",salvarNoBD[1])
+
+    def awdEnvido(self,tipo,id):
+        x = Log(self.page)
+        x.submit("agendamento_consulta",id,tipo,"user")
+
 
     def deletar(self,id):
         '''Deleta o dado da Tabela'''
@@ -145,6 +156,7 @@ class TabelaAgendamento(ft.UserControl):
         self.checa = Checagem(self.page,f"Deseja deletar a consulta agendada do {dados[4]} {dados[5]} do dia {dados[1]} as {dados[2]}?")
         resultado = self.checa.checar()
 
+        deletarNoBD = [False,'']
         #### Se True => Ele Excluirá
         if(resultado):
 
@@ -158,7 +170,9 @@ class TabelaAgendamento(ft.UserControl):
                 sleep(0.5)
                 ag.delete(id)
                 sleep(0.5)
-                
+
+                #### Deletado ####
+                deletarNoBD = [True,id]
                 #### Atualiza a Tabela ####
                 self.dados = ag.pesquisaData(strftime("%Y-%m-%d"))
                 self.montaTabela()
@@ -166,3 +180,11 @@ class TabelaAgendamento(ft.UserControl):
 
             self.carregamentoExcluir.closeCarregamento(self)
             self.painelEditar.openPopUp("Cadastro deletado com Sucesso!", ft.colors.GREEN_700)
+
+        sleep(1)
+        if deletarNoBD[0]:
+            self.awdEnvido("Delete",deletarNoBD[1])
+
+    def awdEnvido(self,tipo,id):
+        x = Log(self.page)
+        x.submit("agendamento_consulta",id,tipo,"user")
