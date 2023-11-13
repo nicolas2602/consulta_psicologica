@@ -18,7 +18,7 @@ class GraficosDashboard(ft.UserControl):
         self.graf2 = GraficosGanhoFuturos(self.page)
         self.graf3 = GraficosMediaGanhoMes(self.page)
         self.graf4 = GraficosValorNaoPago(self.page)
-        self.graf5 = GraficosStatusMes("Julho","Janeiro")
+        self.graf5 = GraficosStatusMes(self.page)
 
         self.cabecalhoGrafico = ft.Row([self.graf1.build(),self.graf2.build(),self.graf3.build(),self.graf4.build()])
 
@@ -43,7 +43,7 @@ class GraficosDashboard(ft.UserControl):
         self.graf2.setValue(f"{ano}",f"{self.dados.totalAnoAndamento(ano)}")
         self.graf3.setValue(f"{self.dados.mediaAno(ano)}")
         self.graf4.setValue(f"{self.dados.totalAnoPendente(ano)}")
-
+        self.graf5.setValue('junho', 'julho')
         self.grafLinhas.setValue(ano)
         self.grafPizza.setValue(ano)
         #self.page.update()

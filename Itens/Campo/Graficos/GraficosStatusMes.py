@@ -1,7 +1,9 @@
 import flet as ft
 
 class GraficosStatusMes(ft.UserControl):
-    def __init__(self,mesMaior, mesMenor):
+    def __init__(self,page):
+
+        self.page = page
 
         self.corBom = ft.colors.GREEN_900
         self.corRuin = ft.colors.RED_900
@@ -12,8 +14,8 @@ class GraficosStatusMes(ft.UserControl):
         self.icone1 = ft.Icon(ft.icons.CALENDAR_MONTH,size=30,color=self.corBom)
         self.icone2 = ft.Icon(ft.icons.CALENDAR_MONTH,size=30,color=self.corRuin)
 
-        self.textoMesMaior = ft.Text(value=f"{mesMaior}",color= self.corBom,size=25,weight=ft.FontWeight.BOLD)
-        self.textoMesMenor = ft.Text(value=f"{mesMenor}",color= self.corRuin,size=25,weight=ft.FontWeight.BOLD)
+        self.textoMesMaior = ft.Text(value="-----",color= self.corBom,size=25,weight=ft.FontWeight.BOLD)
+        self.textoMesMenor = ft.Text(value="-----",color= self.corRuin,size=25,weight=ft.FontWeight.BOLD)
         
         self.designer = ft.Row([
 
@@ -32,3 +34,8 @@ class GraficosStatusMes(ft.UserControl):
 
     def build(self):
         return ft.Container(content=self.designer,width=450,height=120,padding=10,border=ft.border.all(2, ft.colors.GREY),border_radius=10, bgcolor=ft.colors.BLUE_GREY_50)
+
+    def setValue(self, mesMaior, mesMenor):
+        self.textoMesMaior.value = mesMaior
+        self.textoMesMenor.value = mesMenor
+        self.page.update()

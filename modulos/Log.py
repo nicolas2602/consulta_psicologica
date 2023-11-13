@@ -48,7 +48,7 @@ class Log:
                 
         except requests.exceptions.RequestException as erro_conexao:
             logging.critical("Error no logging! Tente novamente...")
-            obj.setMsg("ERRO - Dados de Login da AWS Incorretos!",ft.colors.RED_300)
+            obj.setMsg("ERRO - Não foi possivel conectar com a AWS!",ft.colors.RED_300)
             obj.show_banner()
     
     def submit(self, table, pk, crud, user):
