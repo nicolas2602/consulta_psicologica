@@ -38,10 +38,10 @@ class ConfigPagamento(ft.UserControl):
                 ft.Row([ft.Icon(ft.icons.MONEY_ROUNDED,color=ft.colors.GREEN_800),ft.Text("Valor da Consulta",style=ft.TextThemeStyle.HEADLINE_SMALL)]),
                 ft.Row([self.valorDaConsulta.build()]),
                 self.designerBotaoValor,
-                ft.Row([ft.Icon(ft.icons.CREDIT_CARD,color=ft.colors.GREEN_800),ft.Text("Formas de pagamento",style=ft.TextThemeStyle.HEADLINE_SMALL)]),
-                ft.Row([self.AddFormaPagamento.build()]),
-                ft.Row([self.listaFormaPagamento.build()]),
-                self.designerBotaoFormaPag
+                # ft.Row([ft.Icon(ft.icons.CREDIT_CARD,color=ft.colors.GREEN_800),ft.Text("Formas de pagamento",style=ft.TextThemeStyle.HEADLINE_SMALL)]),
+                # ft.Row([self.AddFormaPagamento.build()]),
+                # ft.Row([self.listaFormaPagamento.build()]),
+                #self.designerBotaoFormaPag
             ],alignment="Center",width=300,
         )
 

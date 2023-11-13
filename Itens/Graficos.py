@@ -13,7 +13,8 @@ class Graficos(ft.UserControl):
         self.dados = DadosGraficos()
         
         self.anos = CampoDrop('Anos',self.listaAnos())
-        self.botao = ActionButton("Selecionar",ft.colors.GREEN_800,ft.icons.PLAY_ARROW,funcao=self.setGrafico)
+        self.anos.setOnChange(self.setGrafico)
+        #self.botao = ActionButton("Selecionar",ft.colors.GREEN_800,ft.icons.PLAY_ARROW,funcao=self.setGrafico)
         #self.anos.setValue('2023')
 
         #self.graficos = GraficosColunas()
@@ -24,7 +25,7 @@ class Graficos(ft.UserControl):
             controls=[
                 Titulo('Gráficos de Ganhos',ft.icons.QUERY_STATS).build(),
                 ft.Divider(color=ft.colors.GREEN_900),
-                ft.Row([self.anos.build(),self.botao.build()]),
+                ft.Row([self.anos.build()]),
                 ft.Divider(color=ft.colors.GREEN_900),
                 ft.Row([self.graficos.build()],expand=True,alignment="Center",vertical_alignment=ft.CrossAxisAlignment.START)
             ],expand=True

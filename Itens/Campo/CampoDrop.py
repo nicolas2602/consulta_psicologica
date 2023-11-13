@@ -45,3 +45,6 @@ class CampoDrop(ft.UserControl):
         self.__lista = lista
         self.__desiner.options = []
         self.addlista()
+
+    def setOnChange(self,funcao):
+        self.__desiner.on_change = funcao
