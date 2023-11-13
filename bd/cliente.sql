@@ -26,7 +26,10 @@ ALTER TABLE cliente
 
 INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Nicolas', 'Yonekawa', 'nicolas@gmail.com', '11996274706', 2);
 INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Gabriel', 'Martins', 'gabriel@gmail.com', '19999553848', 2);
-
+INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Eduardo', 'Silva', 'eduardo@gmail.com', '19972307863', 2);
+INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Lucas', 'Lima', 'lucas@gmail.com', '19988623318', 2);
+INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Olivia', 'Sampaio', 'olivia@gmail.com', '15998616231', 2);
+INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Caio', 'Gabriel', 'caio@gmail.com', '11984241158', 2);
 -- Exibir todos os dados da tabela cliente
 
 SELECT * FROM cliente;
