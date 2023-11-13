@@ -80,3 +80,32 @@ def qntStatusPagamento(ano):
     resultado = con.cursor.fetchall()
     
     return resultado
+
+
+
+
+def melhorMes(ano):
+    setLanguange()
+    con.cursor.execute(f"SELECT MONTHNAME(dataPagamento), SUM(valorPagamento + valorAcrescimo - valorDesconto) AS totalPagamentoMensal \
+        FROM pagamento AS pg \
+        INNER JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag \
+        WHERE YEAR(dataPagamento) = '{ano}' \
+        GROUP BY YEAR(dataPagamento), MONTHNAME(dataPagamento) \
+        ORDER BY totalPagamentoMensal DESC LIMIT 1;")
+    
+    resultado = con.cursor.fetchall()
+    
+    return resultado
+
+def piorMes(ano):
+    setLanguange()
+    con.cursor.execute(f"SELECT MONTHNAME(dataPagamento), SUM(valorPagamento + valorAcrescimo - valorDesconto) AS totalPagamentoMensal \
+        FROM pagamento AS pg \
+        INNER JOIN forma_pagamento AS fm ON pg.fk_IdFormaPag = fm.IdFormaPag\
+        WHERE YEAR(dataPagamento) = '{ano}'\
+        GROUP BY YEAR(dataPagamento), MONTHNAME(dataPagamento)\
+        ORDER BY totalPagamentoMensal ASC LIMIT 1;")
+    
+    resultado = con.cursor.fetchall()
+    
+    return resultado

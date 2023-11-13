@@ -40,6 +40,16 @@ class DadosGraficos:
 
     def _qntStatusPagamentoAno(self,ano):
         return bdDados.qntStatusPagamento(ano)
+
+    def _statusMes(self,ano):
+        melhor = bdDados.melhorMes(ano)
+        pior = bdDados.piorMes(ano)
+        if len(melhor) != 0:
+            melhor = melhor[0][0]
+        if len(pior) != 0:
+             pior = pior[0][0]
+
+        return [melhor, pior]
     
     def mediaAno(self,ano):
         qntMes = self.valorMesesConcluido(ano)
@@ -90,3 +100,18 @@ class DadosGraficos:
 
         return resultado
         # em dev
+
+    def melhorMes(self,ano):
+        mes = self._statusMes(ano)
+
+        if mes[0] == []:
+            return "----"
+        else:
+            return mes[0]
+    def piorMes(self,ano):
+        mes = self._statusMes(ano)
+
+        if mes[1] == []:
+            return "----"
+        else:
+            return mes[1]

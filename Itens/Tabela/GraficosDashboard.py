@@ -43,7 +43,7 @@ class GraficosDashboard(ft.UserControl):
         self.graf2.setValue(f"{ano}",f"{self.dados.totalAnoAndamento(ano)}")
         self.graf3.setValue(f"{self.dados.mediaAno(ano)}")
         self.graf4.setValue(f"{self.dados.totalAnoPendente(ano)}")
-        self.graf5.setValue('junho', 'julho')
+        self.graf5.setValue(f"{self.dados.melhorMes(ano)}", f"{self.dados.piorMes(ano)}")
         self.grafLinhas.setValue(ano)
         self.grafPizza.setValue(ano)
         #self.page.update()
