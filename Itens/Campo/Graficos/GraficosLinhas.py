@@ -62,6 +62,28 @@ class GraficosLinhas(ft.UserControl):
                 color=self.cor1,
                 curved=False,
                 stroke_cap_round=True,
+            ),
+
+            # Media
+            ft.LineChartData(
+                data_points=[
+                    # ft.LineChartDataPoint(0, 3000,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(1, 3440,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(2, 3440,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(3, 3440,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(4, 3440,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(5, 3440,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(6, 10000,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(7, 4000,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(8, 4000,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(9, 4000,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(10, 4000,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                    # ft.LineChartDataPoint(11, 4000,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),
+                ],
+                stroke_width=1.5,
+                color=ft.colors.ORANGE_400,
+                curved=False,
+                stroke_cap_round=True,
             )
         ]
 
@@ -368,6 +390,7 @@ class GraficosLinhas(ft.UserControl):
 
         self.setGrafico1(f'{anoAnterior}')
         self.setGrafico2(ano)
+        self.setGraficoMedia(ano)
         self.page.update()
 
     def setGrafico1(self,ano):
@@ -397,7 +420,15 @@ class GraficosLinhas(ft.UserControl):
             except KeyError:
                 self.data_1[1].data_points.append(ft.LineChartDataPoint(i, 0,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),)
                 
+    def setGraficoMedia(self,ano):
+        valorMes = self.dados.mediaAno(ano)
+        
+        if len(self.data_1[2].data_points) != 0:
+            self.data_1[2].data_points = []
 
+        for i in range(0,12):
+            self.data_1[2].data_points.append(ft.LineChartDataPoint(i, valorMes,tooltip_style=ft.TextStyle(weight=ft.FontWeight.BOLD)),)
+     
 
     def _selecionaMes(self, numeroMes):
 
