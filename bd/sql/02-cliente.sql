@@ -25,7 +25,7 @@ ALTER TABLE cliente
 -- Inserir dados na tabela cliente
 
 INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Nicolas', 'Yonekawa', 'nicolas@gmail.com', '11996274706', 2);
-INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Gabriel', 'Martins', 'gabriel@gmail.com', '19999553848', 2);
+INSERT INTO cliente(nomeCliente, sobrenomeCliente, emailCliente, telefoneCliente, fk_IdUsuario) VALUES ('Lucas', 'Martins', "lucas_martins@gmail.com", "19999553848", 2);
 
 -- Exibir todos os dados da tabela cliente
 

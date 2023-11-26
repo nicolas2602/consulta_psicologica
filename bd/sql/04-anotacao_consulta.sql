@@ -1,3 +1,4 @@
+-- Active: 1691770896943@@0.0.0.0@3306@consulta_psicologica
 -- SQLBook: Code
 
 -- Criar o banco de dados
