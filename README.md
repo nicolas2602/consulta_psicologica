@@ -1,44 +1,68 @@
-# PsicoTech - Sistema de consulta psicológica
+**Título:**
+# PsicoTech - Sistema de Gestão para Consultórios Psicológicos
 
-Sistema de consulta psicológica desenvolvida na linguagem de programação Python com o banco de dados MySQL.
+**linguagem de programação:**
+Python com o Banco de dados MySQL
 
-__1. Tela de Login__
+**Descrição do Projeto:**
+O software foi desenvolvido como parte de um projeto Interdisciplinar requisitado no 4º semestre durante o curso de Sistemas de Informação na Faculdade UNASP Hortolândia-SP, no ano de 2023. A seguir estão detalhadas as funcionalidades do sistema:
+
+1. **Tela de Login:**
 <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/d6e8a0f4-f2d2-4cf5-927e-e0345a0b24e5">
+   - Permite que os usuários façam login de forma segura para acessar o sistema.
 
-
-__2. Cadastro de pacientes__
+2. **Cadastro de Pacientes:**
 <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/4c8bf6ed-4b00-4ee5-9fd9-2257e15595ea">
+   - Permite adicionar novos pacientes ao sistema.
+   - Oferece funcionalidade de busca e pesquisa de pacientes por nome.
+   - Permite visualizar e editar informações como nome, e-mail e telefone de cada paciente.
+   - Permite a exclusão de pacientes.
 
-
-__3. Agendamento de consultas__
+3. **Agendamento de Consultas:**
 <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/ea94c030-3456-4208-9bda-7a64d1444cae">
+   - Permite agendar consultas para os pacientes.
+   - Oferece recursos de busca, filtragem e pesquisa de consultas por nome do paciente e data.
+   - Exibe informações como identificador da consulta, data, hora e nome do paciente.
+   - Permite a edição e exclusão de consultas agendadas.
 
-
-__4. Anotações__
+4. **Anotações:**
 <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/562c60d7-f2c8-4c37-a4e8-2f01645eff9e">
+   - Permite realizar anotações relacionadas aos pacientes.
+   - Oferece recursos de busca, filtragem e pesquisa de anotações por nome do paciente e data.
+   - Exibe informações como identificador da anotação, data, hora, nome do paciente e título da anotação.
+   - Permite visualizar e editar as anotações.
 
-
-__5. Pagamentos__
+5. **Pagamentos:**
 <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/4c20f5c5-b91b-4056-8bac-fff6958d9601">
+   - Permite registrar os pagamentos realizados pelos pacientes.
+   - Oferece recursos de busca e filtragem por nome do paciente e intervalo de datas.
+   - Exibe informações como status do pagamento, data, hora, nome do paciente, valor, desconto, acréscimo e tipo de pagamento.
+   - Permite a edição de pagamentos registrados.
 
-__6. Gráficos__
+6. **Gráficos:**
 ![image](https://github.com/nicolas2602/consulta_psicologica/assets/69517285/e74b103d-ca57-48c6-844e-bc7bfa228cd6)
+   - Apresenta gráficos estatísticos para visualizar o total de ganhos, ganhos futuros, média mensal e valor em débitos.
 
-
-__7. Configurações__
-- Horário
+7. **Configurações:**
   <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/e3cbad4d-655e-4934-8028-fd95eccdd1ce">
+   - Permite configurar o horário de trabalho, horário de pausa e tempo de consulta.
+   - Permite configurar valores relacionados aos pagamentos, como o valor da consulta.
 
-
-- Pagamentos
-  <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/54439ae9-7ddf-4607-89fd-e5bd1549d108">
-
-
-- Senhas
+8. **Senhas:**
   <img width="960" alt="image" src="https://github.com/nicolas2602/consulta_psicologica/assets/69517285/73f196c5-5c12-4631-9e05-8e8e48488fc6">
+   - Oferece funcionalidade para gerenciar as informações de login dos usuários.
+   - Permite a edição dos dados de login, incluindo redefinição de senha.
 
-
-- Sobre
+**Sobre:**
   ![image](https://github.com/nicolas2602/consulta_psicologica/assets/69517285/dcdd6e7b-d957-438c-be24-935e6c252206)
 
+- Integrantes do projeto: 
+ Lucas Lima - https://github.com/opZywl
+ Caio Gabriel - https://github.com/Wayne5421
+ Eduardo Silva - https://github.com/eduardoSilvaf91
+ Olivia Prestes - https://github.com/whxoli
+ Gabriel Martins -
+ Nicolas Yonekawa - https://github.com/nicolas2602
 
+**Proteção de Dados Pessoais:**
+- O sistema adere aos padrões de proteção de dados pessoais para garantir a segurança e privacidade das informações dos pacientes.
