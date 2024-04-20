@@ -56,7 +56,7 @@ O software foi desenvolvido como parte de um projeto Interdisciplinar requisitad
 **Sobre:**
   ![image](https://github.com/nicolas2602/consulta_psicologica/assets/69517285/dcdd6e7b-d957-438c-be24-935e6c252206)
 
-- Integrantes do projeto: 
+- Integrantes do projeto:
  Lucas Lima - https://github.com/opZywl
  Caio Gabriel - https://github.com/Wayne5421
  Eduardo Silva - https://github.com/eduardoSilvaf91
